@@ -3,9 +3,14 @@ package s08IntroducaoOO;
 import java.util.Locale;
 import java.util.Scanner;
 
+import s08entidades.Aluno;
+import s08entidades.Calculator;
 import s08entidades.Circulo;
-import s08util.Calculator;
-import s08util.CurrencyConverter;
+import s08entidades.CurrencyConverter;
+import s08entidades.Funcionario;
+import s08entidades.Product;
+import s08entidades.Retangulo;
+import s08entidades.Triangulo;
 
 public class Program {
 
@@ -15,6 +20,18 @@ public class Program {
 
 		Scanner input = new Scanner(System.in);
 
+//		aula64_exemplo01(input);
+//
+//		aula65_exemplo01(input);
+//
+//		aula66_exemplo01(input);
+//
+//		aula67_exemplo01(input);
+//
+//		aula68_exercicio01(input);
+//		aula68_exercicio02(input);
+//		aula68_exercicio03(input);
+//		
 //		aula69_exemplo01(input);
 //		aula69_exemplo02(input);
 //		aula69_exemplo03(input);
@@ -100,6 +117,176 @@ public class Program {
 
 	public static double volume(double raio) {
 		return 4 * PI * Math.pow(raio, 3.0) / 3;
+	}
+	
+	public static void aula68_exercicio03(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 68 - EXERCICIO 03\n");
+
+		Aluno novoAluno = new Aluno();
+		System.out.println("Digite os dados do aluno a seguir: ");
+		System.out.printf("Nome do aluno: ");
+		novoAluno.setNomeAluno(input.nextLine());
+		System.out.printf("Nota do primeiro trimestre: ");
+		novoAluno.setNotaTrimestre1(input.nextDouble());
+		System.out.printf("Nota do segundo trimestre: ");
+		novoAluno.setNotaTrimestre2(input.nextDouble());
+		System.out.printf("Nota do terceiro trimestre: ");
+		novoAluno.setNotaTrimestre3(input.nextDouble());
+
+		System.out.println(novoAluno);
+
+	}
+
+	public static void aula68_exercicio02(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 68 - EXERCICIO 02\n");
+
+		Funcionario novoFuncionario = new Funcionario();
+		System.out.println("Digite os dados do funcionário a seguir: ");
+		System.out.printf("Nome: ");
+		novoFuncionario.setNomeFuncionario(input.nextLine());
+		System.out.printf("Salário Bruto: ");
+		novoFuncionario.setSalarioBruto(input.nextDouble());
+		System.out.printf("Impostos: ");
+		novoFuncionario.setImpostos(input.nextDouble());
+
+		System.out.println("\nFuncionário: " + novoFuncionario);
+
+		System.out.printf("\nQual o percentual de aumento de salário para o funcionário? ");
+		novoFuncionario.aumentarSalario(input.nextDouble() / 100);
+		System.out.println("Dados do funcionário atualizados com sucesso: " + novoFuncionario);
+
+	}
+
+	public static void aula68_exercicio01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 68 - EXERCICIO 01\n");
+
+		System.out.printf("Digite a ALTURA e LARGURA do retângulo: ");
+		Retangulo novoRetangulo = new Retangulo();
+		novoRetangulo.setAltura(input.nextDouble());
+		novoRetangulo.setLargura(input.nextDouble());
+
+		System.out.println("AREA = " + novoRetangulo.area());
+		System.out.println("PERÍMETRO = " + novoRetangulo.perimetro());
+		System.out.println("DIAGONAL = " + novoRetangulo.diagonal());
+
+	}
+
+	public static void aula67_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 67 - EXEMPLO 01\n");
+
+		Product novoProduto = new Product();
+		System.out.println("Enter product data: ");
+		System.out.printf("    name: ");
+		novoProduto.name = input.nextLine();
+		System.out.printf("   price: ");
+		novoProduto.price = input.nextDouble();
+		System.out.printf("quantity: ");
+		novoProduto.quantity = input.nextInt();
+
+		System.out.println("\nProduct data: " + novoProduto);
+
+		System.out.printf("Enter the number of products to be added in stock: ");
+		novoProduto.addProducts(input.nextInt());
+		System.out.println("Updated product: " + novoProduto);
+
+		System.out.printf("Enter the number of products to be removed from stock: ");
+		novoProduto.removeProducts(input.nextInt());
+		System.out.println("Updated product: " + novoProduto);
+
+	}
+
+	public static void aula66_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 66 - EXEMPLO 01\n");
+
+		Product novoProduto = new Product();
+		System.out.println("Enter product data: ");
+		System.out.printf("    name: ");
+		novoProduto.name = input.nextLine();
+		System.out.printf("   price: ");
+		novoProduto.price = input.nextDouble();
+		System.out.printf("quantity: ");
+		novoProduto.quantity = input.nextInt();
+
+		System.out.println(novoProduto);
+
+	}
+
+	public static void aula65_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 65 - EXEMPLO 01\n");
+
+		Product novoProduto = new Product();
+		System.out.println("Enter product data: ");
+		System.out.printf("    name: ");
+		novoProduto.name = input.nextLine();
+		System.out.printf("   price: ");
+		novoProduto.price = input.nextDouble();
+		System.out.printf("quantity: ");
+		novoProduto.quantity = input.nextInt();
+
+		System.out.println(novoProduto.name + ", " + novoProduto.price + ", " + novoProduto.quantity);
+
+	}
+
+	public static void aula64_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n---------------------------");
+		System.out.println("AULA 64 - EXEMPLO 01");
+
+		Triangulo x = new Triangulo();
+		System.out.printf("Digite os valores de A,B e C do triângulo X: ");
+		x.a = input.nextDouble();
+		x.b = input.nextDouble();
+		x.c = input.nextDouble();
+
+		Triangulo y = new Triangulo();
+		System.out.printf("Digite os valores de A,B e C do triângulo X: ");
+		y.a = input.nextDouble();
+		y.b = input.nextDouble();
+		y.c = input.nextDouble();
+
+		System.out.printf("Área do triângulo X = %.4f\n", x.calcularArea());
+		System.out.printf("Área do triângulo Y = %.4f\n", y.calcularArea());
+
+		System.out.print("Triângulo com maior é: ");
+		if (x.calcularArea() >= y.calcularArea()) {
+			System.out.printf("X");
+		} else {
+			System.out.printf("Y");
+		}
+
 	}
 
 }

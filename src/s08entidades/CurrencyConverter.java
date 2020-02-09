@@ -1,4 +1,4 @@
-package s08util;
+package s08entidades;
 
 public class CurrencyConverter {
 
