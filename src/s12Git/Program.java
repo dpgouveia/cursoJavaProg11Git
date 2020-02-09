@@ -11,8 +11,24 @@ public class Program {
 
 		aula107_exemplo01(input);
 		
+		aula109_exemplo01(input);
+		
 		input.close();
 
+	}
+	
+	public static void aula109_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+		
+		System.out.println("\n----------------------------");
+		System.out.println("AULA 109 - EXEMPLOE 01");
+		System.out.println("----------------------------\n");
+		
+		System.out.println("Bom dia!!!!");
+		System.out.println("Boa tarde!!!");
+		
 	}
 	
 	public static void aula107_exemplo01(Scanner input) {
