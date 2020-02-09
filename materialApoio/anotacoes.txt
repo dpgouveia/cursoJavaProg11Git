@@ -1,0 +1,49 @@
+#### 
+#### minhas anotações
+####
+
+
+###
+### PARA O DIA A DIA
+### 
+
+
+### acessar projeto java11 no git
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+
+
+### restaurar projeto do GIT
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/
+git clone https://github.com/dpgouveia/cursoJavaProg11Git.git
+
+
+### pushar ultima versao do projeto no github
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git pull origin master
+
+
+### commitar todos os componentes do projeto localmente
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git status
+git add .
+git commit -m "Adicao do arquivo de anotacoes que contem os principais comandos e anotacoes de meu interesse ao longo do curso"
+
+
+### transferindo os ajustes para github
+git pull
+
+
+
+###
+### INCOMUM
+###
+
+
+### restaurar ultimo commit no git
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git clean -df
+git checkout -- .
+
+
+
+
