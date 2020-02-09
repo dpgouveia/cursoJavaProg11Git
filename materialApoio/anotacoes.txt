@@ -22,15 +22,23 @@ cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Gi
 git pull origin master
 
 
+### verificar se teve componentes alterados no projeto
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git status
+git log --oneline
+
+
 ### commitar todos os componentes do projeto localmente
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git status
 git add .
 git commit -m "Adicao do arquivo de anotacoes que contem os principais comandos e anotacoes de meu interesse ao longo do curso"
+git log --oneline
 
 
 ### transferindo os ajustes para github
-git pull
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git push
 
 
 
