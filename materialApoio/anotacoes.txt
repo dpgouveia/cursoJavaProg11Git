@@ -53,5 +53,10 @@ git clean -df
 git checkout -- .
 
 
+### trocar a "revision" do projeto
+### para saber qual revision ir, utilizar o comando
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git log --oneline
+git checkout <nome_revision>
 
 
