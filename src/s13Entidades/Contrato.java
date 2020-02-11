@@ -1,21 +1,18 @@
 package s13Entidades;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ContratoPorTempoServico {
+public class Contrato {
 
 	private Date dataInicio;
 	private Double valorHora;
 	private Integer horasTrabalhadas;
 
 	// construtores
-	public ContratoPorTempoServico() {
-
-	}
-
-	public ContratoPorTempoServico(Date dataInicio, Double valorHora, Integer horasTrabalhadas) {
-
+	public Contrato(Date dataInicio, Double valorHora, Integer horasTrabalhadas) {
+		this.setDataInicio(dataInicio);
+		this.setValorHora(valorHora);
+		this.setHorasTrabalhadas(horasTrabalhadas);
 	}
 
 	// getters e setters
@@ -44,11 +41,8 @@ public class ContratoPorTempoServico {
 	}
 
 	// métodos específicos da classe
-	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return "dataInicio: [" + sdf.format(this.getDataInicio()) + "], valorHora: ["
-				+ String.format("%.2f", this.getValorHora()) + "], horasTrabalhadas: [" + this.getHorasTrabalhadas()
-				+ "]\n";
+	public Double valorTotal() {
+		return this.getHorasTrabalhadas() * this.getValorHora();
 	}
 
 }
