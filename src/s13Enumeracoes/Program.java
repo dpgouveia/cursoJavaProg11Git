@@ -8,10 +8,12 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import myUtils.MyUtils;
+import s13Entidades.Comment;
 import s13Entidades.Contrato;
 import s13Entidades.Departamento;
 import s13Entidades.Funcionario;
 import s13Entidades.Pedido;
+import s13Entidades.Post;
 import s13Entidades.Enum.StatusPedido;
 
 public class Program {
@@ -24,9 +26,38 @@ public class Program {
 
 //		aula112_exemplo02(input);
 
-		aula115_exercicio01(input);
+//		aula115_exercicio01(input);
+
+		aula116_exercicio01(input);
 
 		input.close();
+
+	}
+
+	public static void aula116_exercicio01(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n--------------------------------");
+		System.out.println("AULA 116 - EXERCICIO 01");
+		System.out.println("--------------------------------\n");
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Post post1 = new Post(sdf.parse("21/06/2018 13:05:44"), "Traveling to New Zealand",
+				"I'm going to visit this wonderful country!", 12);
+		post1.addComent(new Comment("Have a nice trip"));
+		post1.addComent(new Comment("Wow that's awesome!"));
+
+		Post post2 = new Post(sdf.parse("27/08/2018 23:14:19"), "Good night guys", "See you tomorrow", 5);
+		post2.addComent(new Comment("Good night"));
+		post2.addComent(new Comment("May the force be with you"));
+
+		System.out.println();
+		System.out.println(post1);
+
+		System.out.println();
+		System.out.println(post2);
 
 	}
 
