@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Post {
 
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 	private Date moment;
 	private String title;
 	private String content;
@@ -67,14 +69,26 @@ public class Post {
 		this.comments.add(comment);
 	}
 
+//	public String toString() {
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		String output = this.getTitle() + "\n" + this.getLikes() + " Likes - " + sdf.format(this.getMoment()) + "\n"
+//				+ this.getContent() + "\n" + "Comments:\n";
+//		for (Comment comment : this.getComments()) {
+//			output += comment.getText() + "\n";
+//		}
+//		return output;
+//	}
+
 	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		String output = this.getTitle() + "\n" + this.getLikes() + " Likes - " + sdf.format(this.getMoment()) + "\n"
-				+ this.getContent() + "\n" + "Comments:\n";
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getTitle() + "\n");
+		sb.append(this.getLikes() + " Likes - " + sdf.format(this.getMoment()) + "\n");
+		sb.append(this.getContent() + "\n");
+		sb.append("Comments:\n");
 		for (Comment comment : this.getComments()) {
-			output += comment.getText() + "\n";
+			sb.append(comment.getText() + "\n");
 		}
-		return output;
+		return sb.toString();
 	}
 
 }

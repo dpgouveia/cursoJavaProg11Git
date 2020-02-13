@@ -11,26 +11,18 @@ public class MyUtils {
 		input.reset();
 
 		String stringNumber;
+		boolean invalidString = true;
 		do {
 			stringNumber = input.nextLine().trim();
-		} while (stringNumber.isEmpty() || stringNumber.isBlank()
-				|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("-[0-9]*")));
+			invalidString = stringNumber.isEmpty() || stringNumber.isBlank()
+					|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("-[0-9]*"));
+		} while (invalidString);
 
 		return Integer.parseInt(stringNumber);
 	}
 
 	public static Integer readInteger(Scanner input) {
-
-		Locale.setDefault(Locale.US);
-		input.reset();
-
-		String stringNumber;
-		do {
-			stringNumber = input.nextLine().trim();
-		} while (stringNumber.isEmpty() || stringNumber.isBlank()
-				|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("-[0-9]*")));
-
-		return Integer.valueOf(stringNumber);
+		return MyUtils.readInt(input);
 	}
 
 	public static double readDouble(Scanner input) {
@@ -39,12 +31,14 @@ public class MyUtils {
 		input.reset();
 
 		String stringNumber;
+		boolean invalidString = true;
 		do {
-			stringNumber = input.nextLine().trim();
-		} while (stringNumber.isEmpty() || stringNumber.isBlank()
-				|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("[0-9]*.[0-9]*")
-						|| stringNumber.matches(".[0-9]*") || stringNumber.matches("-[0-9]*")
-						|| stringNumber.matches("-[0-9]*.[0-9]*") || stringNumber.matches("-.[0-9]*")));
+			stringNumber = input.nextLine().trim().replace(",", ".");
+			invalidString = stringNumber.isEmpty() || stringNumber.isBlank()
+					|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("[0-9]*.[0-9]*")
+							|| stringNumber.matches(".[0-9]*") || stringNumber.matches("-[0-9]*")
+							|| stringNumber.matches("-[0-9]*.[0-9]*") || stringNumber.matches("-.[0-9]*"));
+		} while (invalidString);
 
 		return Double.parseDouble(stringNumber);
 	}
@@ -55,9 +49,11 @@ public class MyUtils {
 		input.reset();
 
 		String string;
+		boolean invalidString = true;
 		do {
 			string = input.nextLine();
-		} while (string.isEmpty() || string.isBlank());
+			invalidString = string.isEmpty() || string.isBlank();
+		} while (invalidString);
 
 		return string;
 	}
@@ -68,14 +64,17 @@ public class MyUtils {
 		input.reset();
 
 		String string;
+		boolean invalidString = true;
 		if (regex.isBlank() || regex.isEmpty()) {
 			do {
 				string = input.nextLine();
-			} while (string.isEmpty() || string.isBlank());
+				invalidString = string.isEmpty() || string.isBlank();
+			} while (invalidString);
 		} else {
 			do {
 				string = input.nextLine();
-			} while (string.isEmpty() || string.isBlank() || !string.matches(regex));
+				invalidString = string.isEmpty() || string.isBlank() || !string.matches(regex);
+			} while (invalidString);
 		}
 
 		return string;

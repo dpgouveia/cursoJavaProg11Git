@@ -8,12 +8,17 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import myUtils.MyUtils;
+import s13Entidades.Client;
 import s13Entidades.Comment;
 import s13Entidades.Contrato;
 import s13Entidades.Departamento;
 import s13Entidades.Funcionario;
+import s13Entidades.Order;
+import s13Entidades.OrderItem;
 import s13Entidades.Pedido;
 import s13Entidades.Post;
+import s13Entidades.Product;
+import s13Entidades.Enum.OrderStatus;
 import s13Entidades.Enum.StatusPedido;
 
 public class Program {
@@ -28,19 +33,88 @@ public class Program {
 
 //		aula115_exercicio01(input);
 
-		aula116_exercicio01(input);
+//		aula117_exercicio01(input);
+
+		aula118_exercicio01(input);
 
 		input.close();
 
 	}
 
-	public static void aula116_exercicio01(Scanner input) throws ParseException {
+	public static void aula118_exercicio01(Scanner input) throws ParseException {
 
 		Locale.setDefault(Locale.US);
 		input.reset();
 
 		System.out.println("\n--------------------------------");
-		System.out.println("AULA 116 - EXERCICIO 01");
+		System.out.println("AULA 118 - EXERCICIO 01");
+		System.out.println("--------------------------------\n");
+
+		// Client data
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		System.out.println("Enter client data: ");
+		System.out.print("Name: ");
+		String clientName = MyUtils.readString(input);
+		System.out.print("Email: ");
+		String clientEmail = MyUtils.readString(input);
+		System.out.print("Birth Date (DD/MM/YYYY): ");
+		Date clientBirthDate = sdf.parse(MyUtils.readString(input));
+
+		// Order data
+		System.out.println();
+		System.out.println("Enter order data: ");
+		String orderStatus = "";
+		boolean orderStatusCheck = true;
+		do {
+			System.out.print("Order Status: ");
+			orderStatus = MyUtils.readString(input);
+			orderStatusCheck = orderStatus.isBlank() || orderStatus.isEmpty()
+					|| !(orderStatus.toUpperCase().equals("PENDING_PAYEMENT")
+							|| orderStatus.toUpperCase().equals("PROCESSING")
+							|| orderStatus.toUpperCase().equals("SHIPPED")
+							|| orderStatus.toUpperCase().equals("DELIVERED"));
+			if (orderStatusCheck) {
+				System.out.println("Invalid Order Status!!!");
+			}
+		} while (orderStatusCheck);
+		Order order = new Order(new Date(), OrderStatus.valueOf(orderStatus),
+				new Client(clientName, clientEmail, clientBirthDate));
+
+		// Item and order item data
+		Integer orderQuantity;
+		do {
+			System.out.println();
+			System.out.printf("How many items to this order: ");
+			orderQuantity = MyUtils.readInteger(input);
+			if (orderQuantity <= 0) {
+				System.out.println("Order quantity MUST BE GREATER THAN ZERO");
+			}
+		} while (orderQuantity <= 0);
+		for (int i = 1; i <= orderQuantity; i++) {
+			System.out.println();
+			System.out.println("Enter #" + i + " item data: ");
+			System.out.print("Product name: ");
+			String productName = MyUtils.readString(input);
+			System.out.print("Product price: ");
+			Double productPrice = MyUtils.readDouble(input);
+			System.out.print("Product quantity: ");
+			Integer productQuantity = MyUtils.readInteger(input);
+			order.addItem(new OrderItem(new Product(productName, productPrice), productQuantity));
+		}
+
+		// report order summary
+		System.out.println();
+		System.out.println(order);
+
+	}
+
+	public static void aula117_exercicio01(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n--------------------------------");
+		System.out.println("AULA 117 - EXERCICIO 01");
 		System.out.println("--------------------------------\n");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
