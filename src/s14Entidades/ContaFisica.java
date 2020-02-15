@@ -41,7 +41,7 @@ public class ContaFisica {
 		return saldoConta;
 	}
 
-	public void setSaldoConta(Double saldoConta) {
+	private void setSaldoConta(Double saldoConta) {
 		this.saldoConta = saldoConta;
 	}
 
@@ -58,8 +58,8 @@ public class ContaFisica {
 
 	@Override
 	public String toString() {
-		return "ContaFisica [numeroConta=" + numeroConta + ", nomeTitular=" + nomeTitular + ", saldoConta=" + saldoConta
-				+ "]";
+		return "ContaFisica [numeroConta=" + this.getNumeroConta() + ", nomeTitular=" + this.getNomeTitular()
+				+ ", saldoConta=" + this.getSaldoConta() + "]";
 	}
 
 }

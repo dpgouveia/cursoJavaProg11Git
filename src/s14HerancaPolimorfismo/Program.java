@@ -30,7 +30,7 @@ public class Program {
 		System.out.println();
 		System.out.println(cf);
 
-		ContaJuridica cj = new ContaJuridica(15180, "KÉLIA CHAGAS", 400.00);
+		ContaJuridica cj = new ContaJuridica(15180, "KÉLIA CHAGAS", 100.00, 600.00);
 		System.out.println();
 		System.out.println(cj);
 
