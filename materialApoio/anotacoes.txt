@@ -38,7 +38,7 @@ git log --oneline
 
 ### transferindo os ajustes para github
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
-git push
+git push origin master
 
 
 
