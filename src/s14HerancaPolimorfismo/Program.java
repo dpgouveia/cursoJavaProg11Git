@@ -1,6 +1,8 @@
 package s14HerancaPolimorfismo;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -10,11 +12,14 @@ import s14Entidades.Account;
 import s14Entidades.BusinessAcount;
 import s14Entidades.Funcionario;
 import s14Entidades.FuncionarioTercerizado;
+import s14Entidades.Produto;
+import s14Entidades.ProdutoImportado;
+import s14Entidades.ProdutoUsado;
 import s14Entidades.SavingsAccount;
 
 public class Program {
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws ParseException {
 
 		Scanner input = new Scanner(System.in);
 
@@ -28,12 +33,93 @@ public class Program {
 
 //		aula125_exemplo01(input);
 
-		aula126_exemplo01(input);
+//		aula126_exercicio01(input);
+
+		aula127_exercicio01(input);
 
 		input.close();
 	}
 
-	public static void aula126_exemplo01(Scanner input) {
+	public static void aula127_exercicio01(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 127 - EXERCÍCIO 01");
+		System.out.println("-------------------------\n");
+
+//		Codigo de teste antes de iniciar a codificacao do exercicio
+//		Produto prod1 = new Produto("Impressora BrazuCanion", 699.00);
+//		System.out.println(prod1);
+//		
+//		Produto prod2 = new ProdutoImportado("Impressora Chenox", 299.00, 69.00);
+//		System.out.println(prod2);
+//		
+//		Produto prod3 = new ProdutoUsado("Impressora Agape", 499.00, ProdutoUsado.sdf.parse("16/02/2018"));
+//		System.out.println(prod3);
+
+		System.out.println("-----------------------------------------------------");
+		Integer quantidadeProdutos;
+		do {
+			System.out.print("Digite a quantidade de produtos a serem cadastrados: ");
+			quantidadeProdutos = MyUtils.readInteger(input);
+			if (quantidadeProdutos <= 0) {
+				System.out.println("Quantidade de produtos deve ser MAIOR QUE ZERO!!!");
+			}
+		} while (quantidadeProdutos <= 0);
+		List<Produto> listaProdutos = new ArrayList<Produto>();
+
+		for (int i = 1; i <= quantidadeProdutos; i++) {
+			System.out.println();
+			System.out.println("-----------------------------------------------------");
+			System.out.println("Tipo de produto a ser cadastrado: ");
+			System.out.println("1) Novo Nacional");
+			System.out.println("2) Importado");
+			System.out.println("3) Usado");
+			System.out.print("Escolha o tipo de produto a ser cadastrado: ");
+			Integer tipoProduto;
+			do {
+				tipoProduto = MyUtils.readInteger(input);
+			} while (tipoProduto != 1 && tipoProduto != 2 && tipoProduto != 3);
+
+			System.out.println();
+			System.out.print("Nome: ");
+			String nome = MyUtils.readString(input);
+			System.out.print("Preço: ");
+			Double preco;
+			do {
+				preco = MyUtils.readDouble(input);
+			} while (preco <= 0);
+
+			if (tipoProduto == 1) {
+				listaProdutos.add(new Produto(nome, preco));
+			} else if (tipoProduto == 2) {
+				System.out.print("Taxa de Alfandega: ");
+				Double taxaAlfandega;
+				do {
+					taxaAlfandega = MyUtils.readDouble(input);
+				} while (taxaAlfandega < 0);
+				listaProdutos.add(new ProdutoImportado(nome, preco, taxaAlfandega));
+			} else {
+				System.out.print("Data de fabricação: ");
+				Date dataFabricacao = ProdutoUsado.sdf.parse(MyUtils.readString(input));
+				listaProdutos.add(new ProdutoUsado(nome, preco, dataFabricacao));
+			}
+		}
+
+		StringBuffer sb = new StringBuffer();
+		for (Produto prod : listaProdutos) {
+			sb.append(prod.toString());
+		}
+		System.out.println();
+		System.out.println("-----------------------------------------------------");
+		System.out.println("Lista de produtos cadastrados: ");
+		System.out.println(sb.toString());
+
+	}
+
+	public static void aula126_exercicio01(Scanner input) {
 
 		Locale.setDefault(Locale.US);
 		input.reset();
@@ -71,7 +157,9 @@ public class Program {
 			System.out.println("1) Funcionário");
 			System.out.println("2) Terceiro");
 			System.out.print("Que tipo de funcionário será cadastrado: ");
-			do { tipoFuncionario = MyUtils.readInteger(input); } while (tipoFuncionario != 1 && tipoFuncionario != 2);
+			do {
+				tipoFuncionario = MyUtils.readInteger(input);
+			} while (tipoFuncionario != 1 && tipoFuncionario != 2);
 			System.out.println();
 			System.out.println("------------------------------");
 			String nome;
@@ -80,15 +168,21 @@ public class Program {
 			System.out.printf("Digite o nome do funcionário: ");
 			nome = MyUtils.readString(input);
 			System.out.printf("Digite a carga horário total do funcionário: ");
-			do { quantidadeHoras = MyUtils.readInteger(input); } while(quantidadeHoras <= 0);
+			do {
+				quantidadeHoras = MyUtils.readInteger(input);
+			} while (quantidadeHoras <= 0);
 			System.out.printf("Digite o valor hora do funcionário: ");
-			do { valorHora = MyUtils.readDouble(input); } while(valorHora <= 0); 
+			do {
+				valorHora = MyUtils.readDouble(input);
+			} while (valorHora <= 0);
 			if (tipoFuncionario == 1) {
 				listaFuncionarios.add(new Funcionario(nome, quantidadeHoras, valorHora));
 			} else {
 				System.out.printf("Digite a despesa adicional do funcionário: ");
 				Double despesaAdicional;
-				do { despesaAdicional = MyUtils.readDouble(input); } while (despesaAdicional < 0);
+				do {
+					despesaAdicional = MyUtils.readDouble(input);
+				} while (despesaAdicional < 0);
 				listaFuncionarios.add(new FuncionarioTercerizado(nome, quantidadeHoras, valorHora, despesaAdicional));
 			}
 		}

@@ -9,6 +9,7 @@
 
 
 ### acessar projeto java11 no git
+cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 
 
@@ -16,14 +17,24 @@ cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Gi
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/
 git clone https://github.com/dpgouveia/cursoJavaProg11Git.git
 
+cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
+git clone https://github.com/dpgouveia/cursoJavaProg11Git.git
+
 
 ### pushar ultima versao do projeto no github
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git pull origin master
 
+cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
+git pull origin master
+
 
 ### verificar se teve componentes alterados no projeto
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
+git status
+git log --oneline
+
+cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
 git status
 git log --oneline
 
@@ -35,11 +46,19 @@ git add .
 git commit -m "mensagem"
 git log --oneline
 
+cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
+git status
+git add .
+git commit -m "mensagem"
+git log --oneline
+
 
 ### transferindo os ajustes para github
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git push origin master
 
+cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
+git push origin master
 
 
 ###
@@ -58,5 +77,3 @@ git checkout -- .
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git log --oneline
 git checkout <nome_revision>
-
-
