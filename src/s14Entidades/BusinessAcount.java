@@ -3,7 +3,7 @@ package s14Entidades;
 public class BusinessAcount extends Account {
 
 	// atributos estaticos
-	private static final double BUSINESS_VAT = 2.0;
+	private static final double VAT = 2.0;
 
 	// atributos base
 	private Double loanLimit;
@@ -39,15 +39,14 @@ public class BusinessAcount extends Account {
 	public void withdraw(Double amount) {
 		if (this.balance > amount) {
 			super.withdraw(amount);
-			this.balance -= BusinessAcount.BUSINESS_VAT;
+			this.balance -= BusinessAcount.VAT;
 		}
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Account [number=" + this.getNumber() + ", holder=" + this.getHolder() + ", balance="
-				+ String.format("%.2f", this.balance) + "]\n");
+		sb.append(super.toString());
 		sb.append("BusinessAcount [loanLimit=" + String.format("%.2f", this.loanLimit) + "]\n");
 		return sb.toString();
 	}

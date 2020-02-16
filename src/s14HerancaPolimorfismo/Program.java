@@ -17,9 +17,52 @@ public class Program {
 
 //		aula122_exemplo01(input);
 
-		aula123_exemplo01(input);
+//		aula123_exemplo01(input);
+
+//		aula124_exemplo01(input);
+
+		aula125_exemplo01(input);
 
 		input.close();
+	}
+
+	public static void aula125_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 125 - EXEMPLO 01");
+		System.out.println("-------------------------\n");
+
+		Account x = new Account(1200, "Alex", 1000.00);
+		Account y = new SavingsAccount(1203, "Maria", 1000.00, 0.01);
+
+		x.withdraw(50.0);
+		y.withdraw(50.0);
+
+		System.out.println(x);
+		System.out.println(y);
+	}
+
+	public static void aula124_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 124 - EXEMPLO 01");
+		System.out.println("-------------------------\n");
+
+		System.out.println(
+				"Descomentar as linhas de código da classe \"SavingsAccount\" e verificar impactos via Eclipse na classe \"SavingsAccountPlus\"");
+
+//		public final void withdraw(Double amount) {
+//		public void withdraw(Double amount) {
+
+//		public final class SavingsAccount extends Account {
+//		public class SavingsAccount extends Account {
+
 	}
 
 	public static void aula123_exemplo01(Scanner input) {
@@ -31,42 +74,42 @@ public class Program {
 		System.out.println("AULA 123 - EXEMPLO 01");
 		System.out.println("-------------------------\n");
 
-//		Account acc = new Account(1001, "Alex", 0.00);
-//		System.out.println(acc);
-//		acc.deposit(100.00);
-//		System.out.println(acc);
-//		acc.withdraw(15.0);
-//		System.out.println(acc);
+		Account acc = new Account(1001, "Alex", 0.00);
+		System.out.println(acc);
+		acc.deposit(100.00);
+		System.out.println(acc);
+		acc.withdraw(15.0);
+		System.out.println(acc);
+
+		System.out.println();
+		SavingsAccount sacc = new SavingsAccount(1002, "Maria", 100.0, 0.1);
+		System.out.println(sacc);
+		sacc.withdraw(15.0);
+		System.out.println(sacc);
+		sacc.updateBalance();
+		System.out.println(sacc);
+
+		System.out.println();
+		BusinessAcount bacc = new BusinessAcount(1003, "Bob", 0.0, 500.00);
+		System.out.println(bacc);
+		bacc.deposit(100.0);
+		System.out.println(bacc);
+		bacc.withdraw(15.00);
+		System.out.println(bacc);
+		bacc.loan(50.00);
+		System.out.println(bacc);
+
+//		Account acc1 = new Account(1001, "Alex", 1000.00);
+//		acc1.withdraw(200.0);
+//		System.out.println(acc1);
 //
-//		System.out.println();
-//		SavingsAccount sacc = new SavingsAccount(1002, "Maria", 100.0, 0.1);
-//		System.out.println(sacc);
-//		sacc.withdraw(15.0);
-//		System.out.println(sacc);
-//		sacc.updateBalance();
-//		System.out.println(sacc);
-
-//		System.out.println();
-//		BusinessAcount bacc = new BusinessAcount(1003, "Bob", 0.0, 500.00);
-//		System.out.println(bacc);
-//		bacc.deposit(100.0);
-//		System.out.println(bacc);
-//		bacc.withdraw(15.00);
-//		System.out.println(bacc);
-//		bacc.loan(50.00);
-//		System.out.println(bacc);
-
-		Account acc1 = new Account(1001, "Alex", 1000.00);
-		acc1.withdraw(200.0);
-		System.out.println(acc1);
-
-		Account acc2 = new SavingsAccount(1002, "Maria", 1000.00, 0.01);
-		acc2.withdraw(200.0);
-		System.out.println(acc2);
-
-		Account acc3 = new BusinessAcount(1003, "Bob", 1000.0, 500.0);
-		acc3.withdraw(200.0);
-		System.out.println(acc3);
+//		Account acc2 = new SavingsAccount(1002, "Maria", 1000.00, 0.01);
+//		acc2.withdraw(200.0);
+//		System.out.println(acc2);
+//
+//		Account acc3 = new BusinessAcount(1003, "Bob", 1000.0, 500.0);
+//		acc3.withdraw(200.0);
+//		System.out.println(acc3);
 
 	}
 

@@ -1,5 +1,6 @@
 package s14Entidades;
 
+//public final class SavingsAccount extends Account {
 public class SavingsAccount extends Account {
 
 	// atributos base
@@ -27,6 +28,7 @@ public class SavingsAccount extends Account {
 
 	// metodos
 	@Override
+//	public final void withdraw(Double amount) {
 	public void withdraw(Double amount) {
 		if (this.balance > amount) {
 			this.balance -= amount;
@@ -40,8 +42,7 @@ public class SavingsAccount extends Account {
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Account [number=" + this.getNumber() + ", holder=" + this.getHolder() + ", balance="
-				+ String.format("%.2f", this.balance) + "]\n");
+		sb.append(super.toString());
 		sb.append("SavingsAccount [interestRate=" + String.format("%.2f", this.interestRate) + "]\n");
 		return sb.toString();
 	}
