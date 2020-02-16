@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import s14Entidades.Account;
 import s14Entidades.BusinessAcount;
+import s14Entidades.Funcionario;
 import s14Entidades.SavingsAccount;
 
 public class Program {
@@ -21,9 +22,27 @@ public class Program {
 
 //		aula124_exemplo01(input);
 
-		aula125_exemplo01(input);
+//		aula125_exemplo01(input);
+
+		aula126_exemplo01(input);
 
 		input.close();
+	}
+
+	public static void aula126_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 126 - EXERCÍCIO 01");
+		System.out.println("-------------------------\n");
+		
+		Funcionario func = new Funcionario("Alex", 40, 29.9);
+		System.out.println(func);
+		System.out.println(func.pagamento());
+		
+
 	}
 
 	public static void aula125_exemplo01(Scanner input) {
