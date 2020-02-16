@@ -32,7 +32,7 @@ git log --oneline
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git status
 git add .
-git commit -m "Adicao do arquivo de anotacoes que contem os principais comandos e anotacoes de meu interesse ao longo do curso"
+git commit -m "mensagem"
 git log --oneline
 
 

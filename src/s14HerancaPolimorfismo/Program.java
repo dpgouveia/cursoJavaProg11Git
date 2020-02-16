@@ -1,11 +1,15 @@
 package s14HerancaPolimorfismo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import myUtils.MyUtils;
 import s14Entidades.Account;
 import s14Entidades.BusinessAcount;
 import s14Entidades.Funcionario;
+import s14Entidades.FuncionarioTercerizado;
 import s14Entidades.SavingsAccount;
 
 public class Program {
@@ -37,11 +41,66 @@ public class Program {
 		System.out.println("\n-------------------------");
 		System.out.println("AULA 126 - EXERCÍCIO 01");
 		System.out.println("-------------------------\n");
-		
-		Funcionario func = new Funcionario("Alex", 40, 29.9);
-		System.out.println(func);
-		System.out.println(func.pagamento());
-		
+
+//		Testando metodos antes de comecar a codificar o exercicio de fato
+//		Funcionario func1 = new Funcionario("Alex", 40, 30.0);
+//		System.out.println(func1);
+//		System.out.println(func1.pagamento());
+//
+//		Funcionario func2 = new FuncionarioTercerizado("Maria", 40, 30.0, 3.0);
+//		System.out.println(func2);
+//		System.out.println(func2.pagamento());
+
+		System.out.print("------------------------------");
+		Integer numeroFuncionarios;
+		do {
+			System.out.println();
+			System.out.printf("Digite quantos funcionários deseja cadastrar: ");
+			numeroFuncionarios = MyUtils.readInteger(input);
+			if (numeroFuncionarios <= 0) {
+				System.out.println("O número de funcionários deve ser MAIOR QUE ZERO!!!");
+			}
+		} while (numeroFuncionarios <= 0);
+		List<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
+
+		for (int i = 1; i <= numeroFuncionarios; i++) {
+
+			Integer tipoFuncionario;
+			System.out.println();
+			System.out.println("------------------------------");
+			System.out.println("1) Funcionário");
+			System.out.println("2) Terceiro");
+			System.out.print("Que tipo de funcionário será cadastrado: ");
+			do { tipoFuncionario = MyUtils.readInteger(input); } while (tipoFuncionario != 1 && tipoFuncionario != 2);
+			System.out.println();
+			System.out.println("------------------------------");
+			String nome;
+			Integer quantidadeHoras;
+			Double valorHora;
+			System.out.printf("Digite o nome do funcionário: ");
+			nome = MyUtils.readString(input);
+			System.out.printf("Digite a carga horário total do funcionário: ");
+			do { quantidadeHoras = MyUtils.readInteger(input); } while(quantidadeHoras <= 0);
+			System.out.printf("Digite o valor hora do funcionário: ");
+			do { valorHora = MyUtils.readDouble(input); } while(valorHora <= 0); 
+			if (tipoFuncionario == 1) {
+				listaFuncionarios.add(new Funcionario(nome, quantidadeHoras, valorHora));
+			} else {
+				System.out.printf("Digite a despesa adicional do funcionário: ");
+				Double despesaAdicional;
+				do { despesaAdicional = MyUtils.readDouble(input); } while (despesaAdicional < 0);
+				listaFuncionarios.add(new FuncionarioTercerizado(nome, quantidadeHoras, valorHora, despesaAdicional));
+			}
+		}
+
+		StringBuffer sb = new StringBuffer();
+		for (Funcionario func : listaFuncionarios) {
+			sb.append(func.getNome() + ": $ " + String.format("%.2f", func.pagamento()) + "\n");
+		}
+		System.out.println();
+		System.out.println("------------------------------");
+		System.out.println("Lista de pagamento de funcionários: ");
+		System.out.println(sb.toString());
 
 	}
 
