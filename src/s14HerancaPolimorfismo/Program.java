@@ -9,13 +9,20 @@ import java.util.Scanner;
 
 import myUtils.MyUtils;
 import s14Entidades.Account;
+import s14Entidades.Account2;
 import s14Entidades.BusinessAcount;
+import s14Entidades.BusinessAcount2;
+import s14Entidades.Circulo;
+import s14Entidades.FiguraGeometrica;
 import s14Entidades.Funcionario;
 import s14Entidades.FuncionarioTercerizado;
 import s14Entidades.Produto;
 import s14Entidades.ProdutoImportado;
 import s14Entidades.ProdutoUsado;
+import s14Entidades.Retangulo;
 import s14Entidades.SavingsAccount;
+import s14Entidades.SavingsAccount2;
+import s14Entidades.Enum.Cor;
 
 public class Program {
 
@@ -35,9 +42,154 @@ public class Program {
 
 //		aula126_exercicio01(input);
 
-		aula127_exercicio01(input);
+//		aula127_exercicio01(input);
+
+//		aula128_exemplo01(input);
+//		aula128_exemplo02(input);
+
+		aula129_exemplo01(input);
 
 		input.close();
+	}
+
+	public static void aula129_exemplo01(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 129 - EXEMPLO 01");
+		System.out.println("-------------------------\n");
+
+//		teste de metodos dos objetos
+//		Retangulo ret = new Retangulo(Cor.AZUL, 5.0, 10.0);
+//		System.out.println(ret);
+//		System.out.println(ret.area());
+//		
+//		Circulo circ = new Circulo(Cor.PRETO, 3.0);
+//		System.out.println(circ);
+//		System.out.println(circ.area());
+
+		System.out.println();
+		System.out.println("---------------------------");
+		System.out.print("Digite o numero de figuras a serem cadastrados: ");
+		Integer numeroFiguras;
+		do {
+			numeroFiguras = MyUtils.readInteger(input);
+			if (numeroFiguras <= 0) {
+				System.out.println("Numero de figuras deve ser MAIOR QUE ZERO!!!!");
+			}
+		} while (numeroFiguras <= 0);
+
+		List<FiguraGeometrica> listaFiguras = new ArrayList<FiguraGeometrica>();
+		for (int i = 1; i <= numeroFiguras; i++) {
+			System.out.println();
+			System.out.println("---------------------------");
+			System.out.println("Dados da Figura Geometrica " + i + ":");
+			System.out.print("Circulo ou Retangulo (c/C/r/R)? ");
+			char figuraGeometrica = MyUtils.readChar(input, "^c|^C|^r|^R").trim().toLowerCase().charAt(0);
+
+			System.out.print("Cor (AZUL/PRETO/VERMELHO)? ");
+			String cor;
+			boolean corInvalida = true;
+			do {
+				cor = MyUtils.readString(input).trim().toUpperCase();
+				corInvalida = cor.isBlank() || cor.isEmpty()
+						|| !(cor.equals("AZUL") || cor.equals("PRETO") || cor.equals("VERMELHO"));
+			} while (corInvalida);
+
+			if (figuraGeometrica == 'c') {
+				System.out.print("Raio: ");
+				Double raio;
+				do {
+					raio = MyUtils.readDouble(input);
+				} while (raio < 0);
+				listaFiguras.add(new Circulo(Cor.valueOf(cor), raio));
+			} else {
+				Double largura, altura;
+				System.out.print("Largura: ");
+				do {
+					largura = MyUtils.readDouble(input);
+				} while (largura < 0);
+				System.out.print("Altura: ");
+				do {
+					altura = MyUtils.readDouble(input);
+				} while (altura < 0);
+				listaFiguras.add(new Retangulo(Cor.valueOf(cor), largura, altura));
+			}
+		}
+
+		System.out.println();
+		System.out.println("---------------------------");
+		System.out.println("Apresentando a área das figuras geométricas cadastradas: ");
+		StringBuffer sb = new StringBuffer();
+		for (FiguraGeometrica fg : listaFiguras) {
+			if (fg instanceof Circulo) {
+				sb.append("CIRCULO: " + String.format("%.2f", fg.area()) + "\n");
+			} else {
+				sb.append("RETANGULO: " + String.format("%.2f", fg.area()) + "\n");
+			}
+		}
+		System.out.println(sb.toString());
+
+	}
+
+	public static void aula128_exemplo02(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 128 - EXEMPLO 02");
+		System.out.println("-------------------------\n");
+
+		List<Account2> list = new ArrayList<Account2>();
+		list.add(new SavingsAccount2(1001, "Alex", 500.00, 0.01));
+		list.add(new BusinessAcount2(1002, "Maria", 1000.0, 400.0));
+		list.add(new SavingsAccount2(1003, "Bob", 300.0, 0.01));
+		list.add(new BusinessAcount2(1004, "Ana", 500.0, 500.0));
+
+		Double soma = 0.0;
+		for (Account2 acc : list) {
+			soma += acc.getBalance();
+		}
+		System.out.println();
+		System.out.println("--------------------------------");
+		System.out.println("Saldo total das contas: $ " + String.format("%.2f", soma));
+
+		System.out.println();
+		System.out.println("--------------------------------");
+		for (Account2 acc : list) {
+			acc.deposit(10.0);
+			System.out.println("Valor do saldo atual da conta " + acc.getHolder() + ": $"
+					+ String.format("%.2f", acc.getBalance()));
+		}
+
+		System.out.println();
+		System.out.println("--------------------------------");
+		for (Account2 acc : list) {
+			if (acc instanceof SavingsAccount2) {
+				((SavingsAccount2) acc).updateBalance();
+				System.out.println("Valor do saldo atual da poupança  " + acc.getHolder() + " é $"
+						+ String.format("%.2f", acc.getBalance()));
+			}
+
+		}
+
+	}
+
+	public static void aula128_exemplo01(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 128 - EXEMPLO 01");
+		System.out.println("-------------------------\n");
+
+//		Account2 acc1 = new Account2(1001, "Alex", 1000.00); // vai dar problema pois Account2 nao pode ser instanciada!!!
+		Account2 acc2 = new SavingsAccount2(1002, "Maria", 1000.00, 0.01);
+		Account2 acc3 = new BusinessAcount2(1003, "Bob", 1000.0, 500.0);
 	}
 
 	public static void aula127_exercicio01(Scanner input) throws ParseException {
