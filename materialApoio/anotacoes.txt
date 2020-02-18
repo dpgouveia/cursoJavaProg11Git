@@ -43,13 +43,13 @@ git log --oneline
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git status
 git add .
-git commit -m "mensagem"
+git commit
 git log --oneline
 
 cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
 git status
 git add .
-git commit -m "mensagem"
+git commit -m
 git log --oneline
 
 
@@ -77,3 +77,22 @@ git checkout -- .
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git log --oneline
 git checkout <nome_revision>
+
+
+###
+### RECOMENDAÇÕES
+###
+Assim que terminar de realizar nossas aulas um livro que recomendo como evolução é sobre a temática 
+de design patterns:
+
+"Padrões de Projetos: Soluções Reutilizáveis de Software Orientados a Objetos." 
+
+Que não é de Java mas é uma recomendação que dou!
+
+
+
+
+
+
+
+

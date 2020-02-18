@@ -13,9 +13,12 @@ import s14Entidades.Account2;
 import s14Entidades.BusinessAcount;
 import s14Entidades.BusinessAcount2;
 import s14Entidades.Circulo;
+import s14Entidades.Contribuinte;
 import s14Entidades.FiguraGeometrica;
 import s14Entidades.Funcionario;
 import s14Entidades.FuncionarioTercerizado;
+import s14Entidades.PessoaFisica;
+import s14Entidades.PessoaJuridica;
 import s14Entidades.Produto;
 import s14Entidades.ProdutoImportado;
 import s14Entidades.ProdutoUsado;
@@ -47,9 +50,112 @@ public class Program {
 //		aula128_exemplo01(input);
 //		aula128_exemplo02(input);
 
-		aula129_exemplo01(input);
+//		aula129_exemplo01(input);
+
+		aula130_exercicio01(input);
 
 		input.close();
+	}
+
+	public static void aula130_exercicio01(Scanner input) throws ParseException {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-------------------------");
+		System.out.println("AULA 130 - EXERCICIO 01");
+		System.out.println("-------------------------\n");
+
+//		test code for debug purposes
+//		Contribuinte c1 = new PessoaFisica("Alex", 10000.0, 0.0);
+//		System.out.println(c1);
+//		System.out.println(c1.calcularImposto());
+//		
+//		Contribuinte c2 = new PessoaFisica("Bob", 100000.0, 0.0);
+//		System.out.println(c2);
+//		System.out.println(c2.calcularImposto());
+//		
+//		Contribuinte c3 = new PessoaFisica("Ana", 100000.0, 5000.0);
+//		System.out.println(c3);
+//		System.out.println(c3.calcularImposto());
+//		
+//		Contribuinte c4 = new PessoaJuridica("Maria", 10000.0, 5);
+//		System.out.println(c4);
+//		System.out.println(c4.calcularImposto());
+//		
+//		Contribuinte c5 = new PessoaJuridica("Jon", 100000.0, 10);
+//		System.out.println(c5);
+//		System.out.println(c5.calcularImposto());
+//		
+//		Contribuinte c6 = new PessoaJuridica("Rebeca", 100000.0, 15);
+//		System.out.println(c6);
+//		System.out.println(c6.calcularImposto());
+
+		System.out.println();
+		System.out.println("-------------------------");
+		System.out.print("Digite a quantidade de contribuintes que deseja cadastrar: ");
+		Integer numeroContribuintes;
+		do {
+			numeroContribuintes = MyUtils.readInteger(input);
+			if (numeroContribuintes <= 0) {
+				System.out.println("O numero de contribuintes deve ser MAIOR QUE ZERO!!!");
+			}
+		} while (numeroContribuintes <= 0);
+		List<Contribuinte> listaContribuintes = new ArrayList<Contribuinte>();
+
+		for (int i = 1; i <= numeroContribuintes; i++) {
+			System.out.println();
+			System.out.println("-------------------------");
+			System.out.print("Pessoa Física ou Jurídica (f/F/j/J): ");
+			char tipoPessoa = MyUtils.readChar(input, "^f|^F|^j|^J").trim().toLowerCase().charAt(0);
+
+			System.out.println("Digite os dados do contribuinte: ");
+			System.out.print("Nome: ");
+			String nome = MyUtils.readString(input).trim().toUpperCase();
+
+			System.out.print("Renda Anual: ");
+			Double rendaAnual;
+			do {
+				rendaAnual = MyUtils.readDouble(input);
+			} while (rendaAnual < 0);
+
+			if (tipoPessoa == 'f') {
+				System.out.print("Gastos com serviços de saúde: ");
+				Double gastosSaude;
+				do {
+					gastosSaude = MyUtils.readDouble(input);
+				} while (gastosSaude < 0);
+
+				listaContribuintes.add(new PessoaFisica(nome, rendaAnual, gastosSaude));
+			} else {
+				System.out.print("Número de funcionários: ");
+				Integer numeroFuncionarios;
+				do {
+					numeroFuncionarios = MyUtils.readInteger(input);
+				} while (numeroFuncionarios <= 0);
+
+				listaContribuintes.add(new PessoaJuridica(nome, rendaAnual, numeroFuncionarios));
+			}
+		}
+
+		System.out.println();
+		System.out.println("-------------------------");
+		System.out.println("Relatório do imposto de renda arrecadado: ");
+		Double impostoTotalArrecadado = 0.0;
+		StringBuffer sb = new StringBuffer();
+		for (Contribuinte cont : listaContribuintes) {
+			if (cont instanceof PessoaFisica) {
+				sb.append("PESSOA FÍSICA   | Contribuinte: [" + cont.getNome() + "], Imposto Arrecadado: [ $"
+						+ String.format("%.2f", cont.calcularImposto()) + "]\n");
+			} else {
+				sb.append("PESSOA JURÍDICA | Contribuinte: [" + cont.getNome() + "], Imposto Arrecadado: [ $"
+						+ String.format("%.2f", cont.calcularImposto()) + "]\n");
+			}
+			impostoTotalArrecadado += cont.calcularImposto();
+		}
+		sb.append("IMPOSTO TOTAL ARRECADADO: [ $ " + String.format("%.2f", impostoTotalArrecadado) + "]\n");
+		System.out.println(sb.toString());
+
 	}
 
 	public static void aula129_exemplo01(Scanner input) throws ParseException {
