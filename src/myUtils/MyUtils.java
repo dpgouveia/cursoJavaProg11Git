@@ -1,5 +1,7 @@
 package myUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -78,6 +80,33 @@ public class MyUtils {
 		}
 
 		return string;
+	}
+
+	public static Date readDate(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		sdf.setLenient(false);
+
+		String string;
+		Date output = null;
+		boolean invalidDate;
+		do {
+			invalidDate = false;
+			string = input.nextLine().trim().toLowerCase();
+			if (string.replace('/', ' ').replace(' ', '0').chars().allMatch(Character::isDigit)) {
+				try {
+					output = sdf.parse(string);
+				} catch (Exception e) {
+					invalidDate = true;
+				}
+			} else {
+				invalidDate = true;
+			}
+		} while (invalidDate);
+		return output;
 	}
 
 }

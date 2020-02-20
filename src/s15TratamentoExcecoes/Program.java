@@ -1,9 +1,13 @@
 package s15TratamentoExcecoes;
 
 import java.io.File;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
+
+import myUtils.MyUtils;
+import s15model.entities.Reserva;
 
 public class Program {
 
@@ -17,9 +21,80 @@ public class Program {
 //		aula135_exemplo01_method02(input);
 //		aula135_exemplo01(input);
 
-		aula136_exemplo01();
+//		aula136_exemplo01();
+
+		aula137_exemplo01(input);
 
 		input.close();
+	}
+
+	public static void aula137_exemplo01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-----------------------------------");
+		System.out.println("AULA 137 - EXEMPLO 01 --- (MUITO RUIM)");
+		System.out.println("-----------------------------------\n");
+
+//		try {
+//			Reserva res1 = new Reserva(1001, Reserva.sdf.parse("23/09/2019"), Reserva.sdf.parse("26/10/2019"));
+//			System.out.println(res1);
+//			
+//			res1.atualizarReserva(Reserva.sdf.parse("23/09/2020"), Reserva.sdf.parse("23/10/2020"));
+//			System.out.println(res1);
+//			
+//			System.out.println(res1.duracao());
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+
+		Integer numeroQuarto;
+		do {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.println("Digite o numero do quarto");
+			numeroQuarto = MyUtils.readInteger(input);
+		} while (numeroQuarto < 0);
+
+		boolean invalidString;
+		Date checkIn = null, checkOut = null;
+		do {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.println("Digite a data de CHECK-IN (dd/MM/yyyy): ");
+			try {
+				invalidString = false;
+				checkIn = MyUtils.readDate(input);
+			} catch (Exception e) {
+				invalidString = true;
+			}
+		} while (invalidString);
+
+		invalidString = false;
+		do {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.println("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
+			try {
+				invalidString = false;
+				checkOut = MyUtils.readDate(input);
+			} catch (Exception e) {
+				invalidString = true;
+			}
+		} while (invalidString);
+
+		Reserva reserva = new Reserva(numeroQuarto, checkIn, checkOut);
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("RESERVA: " + reserva);
+
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("FIM DO PROGRAMA");
+		System.out.println("---------------------------------------");
+
 	}
 
 	public static void aula136_exemplo01() {
