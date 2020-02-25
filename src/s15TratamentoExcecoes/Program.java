@@ -26,12 +26,14 @@ public class Program {
 
 //		aula136_exemplo01();
 
-		aula137_exemplo01(input);
+//		aula138_exemplo01_MuitoRuim(input);
+		
+		aula139_exemplo01_Ruim(input);
 
 		input.close();
 	}
 
-	public static boolean aula137_validaReserva(Reserva reserva, Date checkIn, Date checkOut) {
+	public static boolean aula139_validaReserva(Reserva reserva, Date checkIn, Date checkOut) {
 //		boolean output = (	(reserva == null && checkIn.getTime() < checkOut.getTime()) ||
 //							(checkIn.getTime() < checkOut.getTime() && checkIn.getTime() > reserva.getCheckIn().getTime() && checkOut.getTime() > reserva.getCheckOut().getTime())) 
 //							? true : false;
@@ -78,13 +80,13 @@ public class Program {
 		return output;
 	}
 
-	public static void aula137_exemplo01(Scanner input) {
+	public static void aula139_exemplo01_Ruim(Scanner input) {
 
 		Locale.setDefault(Locale.US);
 		input.reset();
 
 		System.out.println("\n-----------------------------------");
-		System.out.println("AULA 137 - EXEMPLO 01 --- (MUITO RUIM)");
+		System.out.println("AULA 139 - EXEMPLO 01 --- (RUIM)");
 		System.out.println("-----------------------------------\n");
 
 		// cadastrando a reserva
@@ -108,7 +110,7 @@ public class Program {
 			System.out.print("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
 			checkOut = MyUtils.readDate(input);
 
-		} while (!aula137_validaReserva(null, checkIn, checkOut));
+		} while (!aula139_validaReserva(null, checkIn, checkOut));
 
 		Reserva reserva = new Reserva(numeroQuarto, checkIn, checkOut);
 		System.out.println();
@@ -129,7 +131,7 @@ public class Program {
 			System.out.print("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
 			checkOut = MyUtils.readDate(input);
 
-		} while (!aula137_validaReserva(reserva, checkIn, checkOut));
+		} while (!aula139_validaReserva(reserva, checkIn, checkOut));
 		reserva.atualizarReserva(checkIn, checkOut);
 		System.out.println();
 		System.out.println("---------------------------------------");
@@ -140,7 +142,89 @@ public class Program {
 		System.out.println("---------------------------------------");
 		System.out.println("FIM DO PROGRAMA");
 		System.out.println("---------------------------------------");
+	}
 
+	public static void aula138_exemplo01_MuitoRuim(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-----------------------------------");
+		System.out.println("AULA 138 - EXEMPLO 01 --- (MUITO RUIM)");
+		System.out.println("-----------------------------------\n");
+
+		// cadastrando a reserva
+		Integer numeroQuarto;
+		do {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite o numero do quarto: ");
+			numeroQuarto = MyUtils.readInteger(input);
+		} while (numeroQuarto < 0);
+
+		boolean reservaInvalida;
+		Date checkIn = null, checkOut = null;
+		do {
+
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-IN (dd/MM/yyyy): ");
+			checkIn = MyUtils.readDate(input);
+
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
+			checkOut = MyUtils.readDate(input);
+
+			reservaInvalida = true;
+			if (checkOut.before(checkIn)) {
+				System.out.println("A data de CHECK-OUT deve ser futura a data de CHECK-IN");
+			} else {
+				reservaInvalida = false;
+			}
+
+		} while (reservaInvalida);
+
+		Reserva reserva = new Reserva(numeroQuarto, checkIn, checkOut);
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("RESERVA: " + reserva);
+
+		// atualizando a reserva
+		System.out.println("Digite os dados para atualizar a reserva");
+		do {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-IN (dd/MM/yyyy): ");
+			checkIn = MyUtils.readDate(input);
+
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
+			checkOut = MyUtils.readDate(input);
+
+			reservaInvalida = true;
+			if (checkOut.before(checkIn)) {
+				System.out.println("A data de CHECK-OUT deve ser futura a data de CHECK-IN");
+			} else if (checkIn.before(reserva.getCheckIn())) {
+				System.out.println("A data de CHECK-IN deve ser futura a data de CHECK-IN da reserva");
+			} else if (checkOut.before(reserva.getCheckOut())) {
+				System.out.println("A data de CHECK-OUT deve ser futura a data de CHECK-OUT da reserva");
+			} else {
+				reservaInvalida = false;
+			}
+
+		} while (reservaInvalida);
+		reserva.atualizarReserva(checkIn, checkOut);
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("RESERVA: " + reserva);
+
+		// fim do programa
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("FIM DO PROGRAMA");
+		System.out.println("---------------------------------------");
 	}
 
 	public static void aula136_exemplo01() {
