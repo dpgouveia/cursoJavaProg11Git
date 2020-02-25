@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 import myUtils.MyUtils;
 import s15model.entities.Reserva;
+import s15model.entities.ReservaComException;
+import s15model.exceptions.BusinessException;
 
 public class Program {
 
@@ -27,10 +29,75 @@ public class Program {
 //		aula136_exemplo01();
 
 //		aula138_exemplo01_MuitoRuim(input);
+
+//		aula139_exemplo01_Ruim(input);
 		
-		aula139_exemplo01_Ruim(input);
+		aula140_exemplo01_Boa(input);
 
 		input.close();
+	}
+
+	public static void aula140_exemplo01_Boa(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-----------------------------------");
+		System.out.println("AULA 140 - EXEMPLO 01 --- (BOA)");
+		System.out.println("-----------------------------------\n");
+
+		// cadastrando a reserva
+		Integer numeroQuarto;
+		do {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite o numero do quarto: ");
+			numeroQuarto = MyUtils.readInteger(input);
+		} while (numeroQuarto < 0);
+
+		try {
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-IN (dd/MM/yyyy): ");
+			Date checkIn = MyUtils.readDate(input);
+
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
+			Date checkOut = MyUtils.readDate(input);
+
+			ReservaComException reserva = new ReservaComException(numeroQuarto, checkIn, checkOut);
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.println("RESERVA: " + reserva);
+
+			// atualizando a reserva
+			System.out.println("Digite os dados para atualizar a reserva");
+
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-IN (dd/MM/yyyy): ");
+			checkIn = MyUtils.readDate(input);
+
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("Digite a data de CHECK-OUT (dd/MM/yyyy): ");
+			checkOut = MyUtils.readDate(input);
+
+			reserva.atualizarReserva(checkIn, checkOut);
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.println("RESERVA: " + reserva);
+			
+		} catch (BusinessException e) {
+			System.out.println(e);
+		}
+
+		// fim do programa
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("FIM DO PROGRAMA");
+		System.out.println("---------------------------------------");
 	}
 
 	public static boolean aula139_validaReserva(Reserva reserva, Date checkIn, Date checkOut) {
