@@ -58,8 +58,8 @@ public class Reserva {
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Reserva [numeroQuarto=" + numeroQuarto + ", checkIn=" + sdf.format(checkIn) + ", checkOut="
-				+ sdf.format(checkOut) + "]\n");
+		sb.append("Quarto: " + this.numeroQuarto + ", Check-In: " + sdf.format(this.checkIn) + ", Check-Out: "
+				+ sdf.format(this.checkOut) + ", " + this.duracao() + " noite(s)\n");
 		return sb.toString();
 	}
 
