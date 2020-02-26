@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import s16.ChessSystem.BoardGame.Board;
 import s16.ChessSystem.BoardGame.Position;
+import s16.ChessSystem.BoardGame.Exceptions.BoardException;
 import s16.ChessSystem.Chess.ChessMatch;
 
 public class Program {
@@ -15,8 +16,14 @@ public class Program {
 //		
 //		Board board = new Board(8,8);
 
-		ChessMatch cm = new ChessMatch();
-		ChessUI.printBoard(cm.getPieces());
+		try {
+			ChessMatch cm = new ChessMatch();
+			ChessUI.printBoard(cm.getPieces());
+		} catch (BoardException e) {
+			System.out.println(e);
+		} catch (Exception e)  {
+			System.out.println(e);
+		}
 
 	}
 
