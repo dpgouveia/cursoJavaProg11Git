@@ -1,9 +1,5 @@
 package s16.ChessSystem.Application;
 
-import java.util.Scanner;
-
-import s16.ChessSystem.BoardGame.Board;
-import s16.ChessSystem.BoardGame.Position;
 import s16.ChessSystem.BoardGame.Exceptions.BoardException;
 import s16.ChessSystem.Chess.ChessMatch;
 
