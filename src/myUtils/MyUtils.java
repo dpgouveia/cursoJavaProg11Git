@@ -7,17 +7,31 @@ import java.util.Scanner;
 
 public class MyUtils {
 
+	// for test purposes
+//	public static void main(String args[]) {
+//		Scanner input = new Scanner(System.in);
+//
+//		Date data = MyUtils.readDate(input);
+//		System.out.println(data);
+//
+//		input.close();
+//	}
+
 	public static int readInt(Scanner input) {
 
 		Locale.setDefault(Locale.US);
 		input.reset();
 
-		String stringNumber;
-		boolean invalidString = true;
+		String stringNumber = "";
+		boolean invalidString;
 		do {
-			stringNumber = input.nextLine().trim();
-			invalidString = stringNumber.isEmpty() || stringNumber.isBlank()
-					|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("-[0-9]*"));
+			invalidString = true;
+			try {
+				stringNumber = input.nextLine().trim();
+				Integer.parseInt(stringNumber);
+				invalidString = false;
+			} catch (Exception e) {
+			}
 		} while (invalidString);
 
 		return Integer.parseInt(stringNumber);
@@ -32,14 +46,17 @@ public class MyUtils {
 		Locale.setDefault(Locale.US);
 		input.reset();
 
-		String stringNumber;
-		boolean invalidString = true;
+		String stringNumber = "";
+		boolean invalidString;
 		do {
-			stringNumber = input.nextLine().trim().replace(",", ".");
-			invalidString = stringNumber.isEmpty() || stringNumber.isBlank()
-					|| !(stringNumber.matches("[0-9]*") || stringNumber.matches("[0-9]*.[0-9]*")
-							|| stringNumber.matches(".[0-9]*") || stringNumber.matches("-[0-9]*")
-							|| stringNumber.matches("-[0-9]*.[0-9]*") || stringNumber.matches("-.[0-9]*"));
+			invalidString = true;
+			try {
+				stringNumber = input.nextLine().trim().replace(",", ".");
+				Double.parseDouble(stringNumber);
+				invalidString = false;
+			} catch (Exception e) {
+
+			}
 		} while (invalidString);
 
 		return Double.parseDouble(stringNumber);
@@ -50,13 +67,19 @@ public class MyUtils {
 		Locale.setDefault(Locale.US);
 		input.reset();
 
-		String string;
-		boolean invalidString = true;
+		String string = "";
+		boolean invalidString;
 		do {
-			string = input.nextLine();
-			invalidString = string.isEmpty() || string.isBlank();
+			invalidString = true;
+			try {
+				string = input.nextLine();
+				if (string == null || string.isBlank() || string.isEmpty()) {
+					throw new Exception("String is NULL, EMPTY or BLANK");
+				}
+				invalidString = false;
+			} catch (Exception e) {
+			}
 		} while (invalidString);
-
 		return string;
 	}
 
@@ -65,20 +88,20 @@ public class MyUtils {
 		Locale.setDefault(Locale.US);
 		input.reset();
 
-		String string;
-		boolean invalidString = true;
-		if (regex.isBlank() || regex.isEmpty()) {
-			do {
-				string = input.nextLine();
-				invalidString = string.isEmpty() || string.isBlank();
-			} while (invalidString);
-		} else {
-			do {
-				string = input.nextLine();
-				invalidString = string.isEmpty() || string.isBlank() || !string.matches(regex);
-			} while (invalidString);
-		}
+		String string = "";
+		boolean invalidString;
 
+		do {
+			invalidString = true;
+			try {
+				string = input.nextLine();
+				if (string == null || string.isEmpty() || string.isBlank() || !string.matches(regex)) {
+					throw new Exception("String is NULL, EMPTY, BLANK or DOESNT MATCH WITH REGEX PATTERN");
+				}
+				invalidString = false;
+			} catch (Exception e) {
+			}
+		} while (invalidString);
 		return string;
 	}
 
@@ -93,17 +116,16 @@ public class MyUtils {
 		String string;
 		Date output = null;
 		boolean invalidDate;
+
 		do {
-			invalidDate = false;
+			invalidDate = true;
 			string = input.nextLine().trim().toLowerCase();
 			if (string.replace('/', ' ').replace(' ', '0').chars().allMatch(Character::isDigit)) {
 				try {
 					output = sdf.parse(string);
+					invalidDate = false;
 				} catch (Exception e) {
-					invalidDate = true;
 				}
-			} else {
-				invalidDate = true;
 			}
 		} while (invalidDate);
 		return output;

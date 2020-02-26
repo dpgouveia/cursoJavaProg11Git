@@ -10,9 +10,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import myUtils.MyUtils;
+import s15model.entities.Account;
 import s15model.entities.Reserva;
 import s15model.entities.ReservaComException;
 import s15model.entities.ReservaComRuntimeException;
+import s15model.exceptions.AccountException;
 import s15model.exceptions.BusinessException;
 import s15model.exceptions.BusinessRuntimeException;
 
@@ -35,9 +37,91 @@ public class Program {
 //		aula139_exemplo01_Ruim(input);
 
 //		aula140_exemplo01_Boa(input);
-		aula140_exemplo02_Boa(input);
+//		aula140_exemplo02_Boa(input);
+
+		aula141_exercicio01(input);
 
 		input.close();
+	}
+
+	public static void aula141_exercicio01(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		System.out.println("\n-----------------------------------");
+		System.out.println("AULA 141 - EXERCÍCIO 01");
+		System.out.println("-----------------------------------\n");
+
+		try {
+
+//			debug code
+//			System.out.println();
+//			System.out.println("--------------------");
+//			Account conta = new Account(1001, "Alex", 0.0, 200.00);
+//			Account conta = new Account(-1001, "Alex", 0.0, 200.00);
+//			Account conta = new Account(1001, "", 0.0, 200.00);
+//			Account conta = new Account(1001, null, 0.0, 200.00);
+//			Account conta = new Account(1001, "Alex", -100.00, 200.00);
+//			Account conta = new Account(1001, "Alex", 0.00, 0.0);
+//			Account conta = new Account(1001, "Alex", 0.00, -100.0);
+//			System.out.println(conta);
+//
+//			System.out.println();
+//			System.out.println("--------------------");
+//			conta.deposit(500.0);
+//			System.out.println(conta);
+//
+//			System.out.println();
+//			System.out.println("--------------------");
+//			conta.withdraw(200.0);
+//			System.out.println(conta);
+//			
+//			System.out.println();
+//			System.out.println("--------------------");
+//			conta.withdraw(200.0);
+//			System.out.println(conta);
+//			
+//			System.out.println();
+//			System.out.println("--------------------");
+//			conta.withdraw(200.0);
+//			System.out.println(conta);
+//
+//			System.out.println();
+//			System.out.println("--------------------");
+//			conta.withdraw(300.0);
+//			System.out.println(conta);
+
+			// cadastrando os dados da conta bancária
+			System.out.println();
+			System.out.println("-----------------------------------");
+			System.out.println("Digite os dados da conta bancária");
+			System.out.print("Numero da conta: ");
+			Integer number = MyUtils.readInteger(input);
+			System.out.print("Nome do proprietário da conta: ");
+			String holder = MyUtils.readString(input);
+			System.out.print("Saldo inicial da conta: ");
+			Double balance = MyUtils.readDouble(input);
+			System.out.print("Limite máximo para saque da conta: ");
+			Double withdrawLimit = MyUtils.readDouble(input);
+			Account conta = new Account(number, holder, balance, withdrawLimit);
+			
+			// realizando saque da conta
+			System.out.println();
+			System.out.println("-----------------------------------");
+			System.out.print("Digite o valor de saque da conta: ");
+			Double amount = MyUtils.readDouble(input);
+			conta.withdraw(amount);
+			System.out.println("Novo saldo da conta: " + conta.getBalance());
+
+		} catch (AccountException e) {
+			System.out.println(e);
+		} catch (RuntimeException e) {
+			System.out.println(e);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 	}
 
 	public static void aula140_exemplo02_Boa(Scanner input) {
