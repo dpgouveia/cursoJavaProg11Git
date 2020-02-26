@@ -31,5 +31,16 @@ public class Board {
 	public void setColumns(Integer columns) {
 		this.columns = columns;
 	}
+	
+	// metodos
+	public Piece piece(Integer row, Integer column) {
+		return this.pieces[row][column];
+	}
+	
+	public Piece piece(Position position) {
+		return this.pieces[position.getRow()][position.getColumn()];
+	}
+	
+	
 
 }
