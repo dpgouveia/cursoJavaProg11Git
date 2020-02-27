@@ -1,6 +1,8 @@
 package s16.ChessSystem.Chess.Exceptions;
 
-public class ChessException extends RuntimeException {
+import s16.ChessSystem.BoardGame.Exceptions.BoardException;
+
+public class ChessException extends BoardException {
 
 	// atributos estaticos
 	private static final long serialVersionUID = 1L;

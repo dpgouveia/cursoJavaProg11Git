@@ -1,6 +1,12 @@
 package s16.ChessSystem.Application;
 
+import java.util.InputMismatchException;
+import java.util.Locale;
+import java.util.Scanner;
+
+import common.myUtils.MyUtils;
 import s16.ChessSystem.Chess.ChessPiece;
+import s16.ChessSystem.Chess.ChessPosition;
 
 public class ChessUI {
 
@@ -25,6 +31,17 @@ public class ChessUI {
 			System.out.print(piece);
 		}
 		System.out.print(" ");
+	}
+
+	public static ChessPosition readChessPosition(Scanner input) {
+
+		try {
+			String position = MyUtils.readString(input);
+			return new ChessPosition(position.trim().toLowerCase().charAt(0), Integer.parseInt(position.substring(1)));
+		} catch (RuntimeException e) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are a1 to h8.");
+		}
+
 	}
 
 }
