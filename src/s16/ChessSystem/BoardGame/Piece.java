@@ -18,7 +18,4 @@ public class Piece {
 		return board;
 	}
 
-	// metodos
-
-
 }
