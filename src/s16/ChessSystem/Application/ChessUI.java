@@ -1,7 +1,7 @@
 package s16.ChessSystem.Application;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 
 import common.myUtils.MyUtils;
@@ -42,6 +42,14 @@ public class ChessUI {
 			throw new InputMismatchException("Error reading ChessPosition. Valid values are a1 to h8.");
 		}
 
+	}
+	
+	public static void clearScreen() throws IOException {
+//		System.out.println("\033[H\033[2J");
+//		System.out.flush();
+		
+//		Runtime.getRuntime().exec("cls");
+		
 	}
 
 }

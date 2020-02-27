@@ -24,6 +24,7 @@ public class Program {
 			ChessMatch cm = new ChessMatch();
 			
 			while(true) {
+				ChessUI.clearScreen();
 				ChessUI.printBoard(cm.getPieces());
 				System.out.println();
 				System.out.print("Source: ");
@@ -35,10 +36,6 @@ public class Program {
 				cm.performChessMove(source, target);
 				
 			}
-			
-			
-			
-			
 			
 		} catch (BoardException e) {
 			System.out.println(e);
