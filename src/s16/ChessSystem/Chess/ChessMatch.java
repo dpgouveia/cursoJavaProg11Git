@@ -34,16 +34,21 @@ public class ChessMatch {
 		Position source = sourceMove.toPosition();
 		Position target = targetPosition.toPosition();
 
-		if (!board.thereIsAPiece(source)) {
+		if (!this.board.thereIsAPiece(source)) {
 			throw new ChessException("No piece found on position " + source);
 		}
 
-		if (!board.piece(source).isThereAnyPossibleMove()) {
+		if (!this.board.piece(source).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for chosen piece");
 		}
 
-		Piece piece = this.makeMove(source, target);
-		return (ChessPiece) piece;
+		if (!this.board.piece(source).possibleMove(target)) {
+			throw new ChessException("It is not possible to move the piece [" + this.board.piece(source) + "] from "
+					+ ChessPosition.fromPosition(source) + " to " + ChessPosition.fromPosition(target));
+		}
+
+		Piece capturedPiece = this.makeMove(source, target);
+		return (ChessPiece) capturedPiece;
 
 	}
 
@@ -73,6 +78,13 @@ public class ChessMatch {
 		this.placeNewPiece('e', 7, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('e', 8, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('d', 8, new King(this.board, Color.BLACK));
+
+//		exemplo do desenho do professor
+//		this.placeNewPiece('d', 1, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('f', 1, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('d', 6, new Rook(this.board, Color.BLACK));
+
+//		this.placeNewPiece('d', 4, new Rook(this.board, Color.WHITE));
 
 	}
 

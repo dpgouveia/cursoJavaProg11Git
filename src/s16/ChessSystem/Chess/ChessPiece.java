@@ -2,6 +2,7 @@ package s16.ChessSystem.Chess;
 
 import s16.ChessSystem.BoardGame.Board;
 import s16.ChessSystem.BoardGame.Piece;
+import s16.ChessSystem.BoardGame.Position;
 import s16.ChessSystem.Chess.Enum.Color;
 
 public abstract class ChessPiece extends Piece {
@@ -22,6 +23,12 @@ public abstract class ChessPiece extends Piece {
 	}
 
 	// metodos abstratos
-	public abstract Boolean[][] possibleMoves();
+	public abstract boolean[][] possibleMoves();
+
+	// metodos
+	protected Boolean isThereOpponentPiece(Position position) {
+		ChessPiece piece = (ChessPiece) this.getBoard().piece(position);
+		return piece != null && this.getColor() != piece.getColor();
+	}
 
 }

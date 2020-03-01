@@ -19,18 +19,18 @@ public abstract class Piece {
 	}
 
 	// metodos abstratos
-	public abstract Boolean[][] possibleMoves();
+	public abstract boolean[][] possibleMoves();
 
 	// metodos
 	public Boolean possibleMove(Position position) {
 		return this.possibleMoves()[position.getRow()][position.getColumn()];
 	}
 
-	public Boolean isThereAnyPossibleMove() {
-		Boolean possibleMoves[][] = this.possibleMoves();
-		for (Boolean i[] : possibleMoves) {
-			for (Boolean j : i) {
-				if (j != null && j) {
+	public boolean isThereAnyPossibleMove() {
+		boolean possibleMoves[][] = this.possibleMoves();
+		for (boolean i[] : possibleMoves) {
+			for (boolean j : i) {
+				if (j) {
 					return true;
 				}
 			}
