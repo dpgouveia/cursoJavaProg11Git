@@ -12,6 +12,7 @@ public class King extends ChessPiece {
 		// TODO Auto-generated constructor stub
 	}
 
+	// metodos
 	@Override
 	public String toString() {
 		if (this.getColor() == Color.WHITE) {
@@ -19,6 +20,12 @@ public class King extends ChessPiece {
 		} else {
 			return " BK ";
 		}
+	}
+
+	@Override
+	public Boolean[][] possibleMoves() {
+		Boolean possibleMoves[][] = new Boolean[this.getBoard().getRows()][this.getBoard().getColumns()];
+		return possibleMoves;
 	}
 
 }

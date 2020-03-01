@@ -47,6 +47,9 @@ public class Program {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+			System.out.println();
+			System.out.println("--------------------");
+			System.out.println("FIM DO PROGRAMA");
 			input.hasNextLine();
 		} finally {
 			input.close();

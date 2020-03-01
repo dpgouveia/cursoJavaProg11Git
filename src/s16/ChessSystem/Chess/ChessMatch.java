@@ -33,16 +33,20 @@ public class ChessMatch {
 
 		Position source = sourceMove.toPosition();
 		Position target = targetPosition.toPosition();
-		
-		if(!board.thereIsAPiece(source)) {
+
+		if (!board.thereIsAPiece(source)) {
 			throw new ChessException("No piece found on position " + source);
 		}
-		
+
+		if (!board.piece(source).isThereAnyPossibleMove()) {
+			throw new ChessException("There is no possible moves for chosen piece");
+		}
+
 		Piece piece = this.makeMove(source, target);
 		return (ChessPiece) piece;
 
 	}
-	
+
 	private Piece makeMove(Position source, Position target) {
 		Piece pieceSource = this.board.removePiece(source);
 		Piece pieceTarget = this.board.removePiece(target);
