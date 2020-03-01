@@ -1,12 +1,12 @@
 package s16.ChessSystem.Application;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import common.myUtils.MyUtils;
 import s16.ChessSystem.Chess.ChessPiece;
 import s16.ChessSystem.Chess.ChessPosition;
+import s16.ChessSystem.Chess.Exceptions.ChessException;
 
 public class ChessUI {
 
@@ -24,6 +24,16 @@ public class ChessUI {
 
 	}
 
+	public static void clearScreen() throws IOException {
+		try {
+			if (System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			else
+				Runtime.getRuntime().exec("clear");
+		} catch (IOException | InterruptedException ex) {
+		}
+	}
+
 	private static void printPiece(ChessPiece piece) {
 		if (piece == null) {
 			System.out.print("----");
@@ -39,19 +49,9 @@ public class ChessUI {
 			String position = MyUtils.readString(input);
 			return new ChessPosition(position.trim().toLowerCase().charAt(0), Integer.parseInt(position.substring(1)));
 		} catch (RuntimeException e) {
-			throw new InputMismatchException("Error reading ChessPosition. Valid values are a1 to h8.");
+			throw new ChessException("Error reading ChessPosition. Valid values are a1 to h8.");
 		}
 
-	}
-
-	public static void clearScreen() throws IOException {
-		try {
-			if (System.getProperty("os.name").contains("Windows"))
-				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-			else
-				Runtime.getRuntime().exec("clear");
-		} catch (IOException | InterruptedException ex) {
-		}
 	}
 
 }

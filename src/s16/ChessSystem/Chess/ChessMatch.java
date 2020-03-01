@@ -3,7 +3,6 @@ package s16.ChessSystem.Chess;
 import s16.ChessSystem.BoardGame.Board;
 import s16.ChessSystem.BoardGame.Piece;
 import s16.ChessSystem.BoardGame.Position;
-import s16.ChessSystem.BoardGame.Exceptions.BoardException;
 import s16.ChessSystem.Chess.Enum.Color;
 import s16.ChessSystem.Chess.Exceptions.ChessException;
 import s16.ChessSystem.Chess.Pieces.King;
