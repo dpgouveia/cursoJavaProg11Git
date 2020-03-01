@@ -22,31 +22,36 @@ public class Program {
 
 		ChessMatch cm = new ChessMatch();
 
-		while (true) {
-			try {
+		try {
+			while (true) {
+				try {
 
-				ChessUI.clearScreen();
-				ChessUI.printBoard(cm.getPieces());
-				System.out.println();
-				System.out.print("Source: ");
-				ChessPosition source = ChessUI.readChessPosition(input);
+					ChessUI.clearScreen();
+					ChessUI.printBoard(cm.getPieces());
+					System.out.println();
+					System.out.print("Source: ");
+					ChessPosition source = ChessUI.readChessPosition(input);
 
-				System.out.print("Target: ");
-				ChessPosition target = ChessUI.readChessPosition(input);
+					System.out.print("Target: ");
+					ChessPosition target = ChessUI.readChessPosition(input);
 
-				cm.performChessMove(source, target);
+					cm.performChessMove(source, target);
 
-			} catch (ChessException e) {
-				System.out.println(e);
-				input.hasNextLine();
-			} catch (IOException e) {
-				System.out.println(e);
-				input.hasNextLine();
-			} catch (RuntimeException e) {
-				System.out.println(e);
-				input.hasNextLine();
+				} catch (ChessException e) {
+					System.out.println(e);
+					input.hasNextLine();
+				} catch (IOException e) {
+					System.out.println(e);
+					input.hasNextLine();
+				}
 			}
+		} catch (Exception e) {
+			System.out.println(e);
+			input.hasNextLine();
+		} finally {
+			input.close();
 		}
+
 	}
 
 }

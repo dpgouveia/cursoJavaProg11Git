@@ -11,6 +11,16 @@ import s16.ChessSystem.Chess.Exceptions.ChessException;
 public class ChessUI {
 
 	// metodos estaticos
+	public static void clearScreen() throws IOException {
+		try {
+			if (System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			else
+				Runtime.getRuntime().exec("clear");
+		} catch (IOException | InterruptedException ex) {
+		}
+	}
+
 	public static void printBoard(ChessPiece pieces[][]) {
 
 		for (int i = 0; i < pieces.length; i++) {
@@ -22,16 +32,6 @@ public class ChessUI {
 		}
 		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
 
-	}
-
-	public static void clearScreen() throws IOException {
-		try {
-			if (System.getProperty("os.name").contains("Windows"))
-				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-			else
-				Runtime.getRuntime().exec("clear");
-		} catch (IOException | InterruptedException ex) {
-		}
 	}
 
 	private static void printPiece(ChessPiece piece) {
