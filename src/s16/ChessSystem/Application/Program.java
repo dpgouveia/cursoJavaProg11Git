@@ -1,6 +1,5 @@
 package s16.ChessSystem.Application;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -25,12 +24,20 @@ public class Program {
 		try {
 			while (true) {
 				try {
-
 					ChessUI.clearScreen();
 					ChessUI.printBoard(cm.getPieces());
 					System.out.println();
 					System.out.print("Source: ");
 					ChessPosition source = ChessUI.readChessPosition(input);
+					
+					if(!cm.isThereAnyPossibleMove(source)) {
+						throw new ChessException("There are not possible moves for the chosen piece");
+					}
+					
+					boolean possibleMoves[][] = cm.possibleMoves(source);
+
+					ChessUI.clearScreen();
+					ChessUI.printBoard(cm.getPieces(), possibleMoves);
 
 					System.out.print("Target: ");
 					ChessPosition target = ChessUI.readChessPosition(input);
@@ -38,9 +45,6 @@ public class Program {
 					cm.performChessMove(source, target);
 
 				} catch (ChessException e) {
-					System.out.println(e);
-					input.hasNextLine();
-				} catch (IOException e) {
 					System.out.println(e);
 					input.hasNextLine();
 				}

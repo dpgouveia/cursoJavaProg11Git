@@ -17,7 +17,8 @@ public class ChessUI {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 			else
 				Runtime.getRuntime().exec("clear");
-		} catch (IOException | InterruptedException ex) {
+		} catch (IOException e) {
+		} catch (InterruptedException e) {
 		}
 	}
 
@@ -26,21 +27,43 @@ public class ChessUI {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + "  ");
 			for (int j = 0; j < pieces[i].length; j++) {
-				ChessUI.printPiece(pieces[i][j]);
+				ChessUI.printPiece(pieces[i][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
 
 	}
-
-	private static void printPiece(ChessPiece piece) {
-		if (piece == null) {
-			System.out.print("----");
-		} else {
-			System.out.print(piece);
+	
+	public static void printBoard(ChessPiece pieces[][], boolean possibleMoves[][]) {
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print((8 - i) + "  ");
+			for (int j = 0; j < pieces[i].length; j++) {
+				ChessUI.printPiece(pieces[i][j], possibleMoves[i][j]);
+			}
+			System.out.println();
 		}
-		System.out.print(" ");
+		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
+
+	}
+	
+	private static void printPiece(ChessPiece piece, boolean possibleMove) {
+		
+		if(possibleMove) {
+			if (piece == null) {
+				System.out.print("[--]");
+			} else {
+				System.out.print("[" + piece + "]");
+			}
+			System.out.print(" ");
+		} else {
+			if (piece == null) {
+				System.out.print("----");
+			} else {
+				System.out.print(" " + piece + " ");
+			}
+			System.out.print(" ");
+		}
 	}
 
 	public static ChessPosition readChessPosition(Scanner input) {
