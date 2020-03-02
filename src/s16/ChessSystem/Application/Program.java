@@ -30,10 +30,6 @@ public class Program {
 					System.out.print("Source: ");
 					ChessPosition source = ChessUI.readChessPosition(input);
 					
-					if(!cm.isThereAnyPossibleMove(source)) {
-						throw new ChessException("There are not possible moves for the chosen piece");
-					}
-					
 					boolean possibleMoves[][] = cm.possibleMoves(source);
 
 					ChessUI.clearScreen();
@@ -47,7 +43,7 @@ public class Program {
 				} catch (ChessException e) {
 					System.out.println(e);
 					input.hasNextLine();
-				}
+				} 
 			}
 		} catch (Exception e) {
 			System.out.println(e);

@@ -29,14 +29,14 @@ public class ChessMatch {
 		return mat;
 	}
 
-	public boolean isThereAnyPossibleMove(ChessPosition position) {
-		return this.board.piece(position.toPosition()).isThereAnyPossibleMove();
-	}
-	
 	public boolean[][] possibleMoves(ChessPosition position) {
-
+	
 		if (!this.board.thereIsAPiece(position.toPosition())) {
 			throw new ChessException("There is no piece at specified position " + position);
+		}
+		
+		if (!this.board.piece(position.toPosition()).isThereAnyPossibleMove()) {
+			throw new ChessException("There is no possible moves for chosen piece");
 		}
 
 		return this.board.piece(position.toPosition()).possibleMoves();
@@ -83,7 +83,7 @@ public class ChessMatch {
 		this.placeNewPiece('d', 2, new Rook(this.board, Color.WHITE));
 		this.placeNewPiece('e', 2, new Rook(this.board, Color.WHITE));
 		this.placeNewPiece('e', 1, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('d', 1, new Rook(this.board, Color.WHITE));
+		this.placeNewPiece('d', 1, new King(this.board, Color.WHITE));
 
 		this.placeNewPiece('c', 8, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('c', 7, new Rook(this.board, Color.BLACK));
