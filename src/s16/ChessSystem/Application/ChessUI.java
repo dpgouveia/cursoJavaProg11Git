@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import common.myUtils.MyUtils;
+import s16.ChessSystem.Chess.ChessMatch;
 import s16.ChessSystem.Chess.ChessPiece;
 import s16.ChessSystem.Chess.ChessPosition;
 import s16.ChessSystem.Chess.Exceptions.ChessException;
@@ -22,6 +23,14 @@ public class ChessUI {
 		}
 	}
 
+	public static void printMatch(ChessMatch chessMatch) {
+		ChessUI.printBoard(chessMatch.getPieces());
+		System.out.println();
+		System.out.println("Turn: " + chessMatch.getTurn());
+		System.out.println("Waiting Player: " + chessMatch.getCurrentPlayer());
+		System.out.println();
+	}
+
 	public static void printBoard(ChessPiece pieces[][]) {
 
 		for (int i = 0; i < pieces.length; i++) {
@@ -34,7 +43,7 @@ public class ChessUI {
 		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
 
 	}
-	
+
 	public static void printBoard(ChessPiece pieces[][], boolean possibleMoves[][]) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + "  ");
@@ -46,10 +55,10 @@ public class ChessUI {
 		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
 
 	}
-	
+
 	private static void printPiece(ChessPiece piece, boolean possibleMove) {
-		
-		if(possibleMove) {
+
+		if (possibleMove) {
 			if (piece == null) {
 				System.out.print("[--]");
 			} else {

@@ -25,8 +25,7 @@ public class Program {
 			while (true) {
 				try {
 					ChessUI.clearScreen();
-					ChessUI.printBoard(cm.getPieces());
-					System.out.println();
+					ChessUI.printMatch(cm);
 					System.out.print("Source: ");
 					ChessPosition source = ChessUI.readChessPosition(input);
 					

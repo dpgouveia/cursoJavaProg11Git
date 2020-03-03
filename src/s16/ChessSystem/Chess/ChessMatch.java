@@ -12,10 +12,24 @@ public class ChessMatch {
 
 	// atributos base
 	private Board board;
+	private Integer turn;
+	private Color currentPlayer;
 
+	// construtores
 	public ChessMatch() {
 		board = new Board(8, 8);
+		this.turn = 1;
+		this.currentPlayer = Color.WHITE;
 		this.initialSetup();
+	}
+
+	// getters e setters
+	public Integer getTurn() {
+		return turn;
+	}
+
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 
 	// metodos
@@ -30,11 +44,15 @@ public class ChessMatch {
 	}
 
 	public boolean[][] possibleMoves(ChessPosition position) {
-	
+
 		if (!this.board.thereIsAPiece(position.toPosition())) {
 			throw new ChessException("There is no piece at specified position " + position);
 		}
-		
+
+		if (!this.getCurrentPlayer().equals(((ChessPiece) this.board.piece(position.toPosition())).getColor())) {
+			throw new ChessException("You cannot move an opponent piece");
+		}
+
 		if (!this.board.piece(position.toPosition()).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for chosen piece");
 		}
@@ -50,6 +68,10 @@ public class ChessMatch {
 		if (!this.board.thereIsAPiece(source)) {
 			throw new ChessException("No piece found on position " + source);
 		}
+		
+		if (!this.getCurrentPlayer().equals(((ChessPiece) this.board.piece(source)).getColor())) {
+			throw new ChessException("You cannot move an opponent piece");
+		}
 
 		if (!this.board.piece(source).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible moves for chosen piece");
@@ -61,6 +83,7 @@ public class ChessMatch {
 		}
 
 		Piece capturedPiece = this.makeMove(source, target);
+		this.nextTurn();
 		return (ChessPiece) capturedPiece;
 
 	}
@@ -70,6 +93,11 @@ public class ChessMatch {
 		Piece pieceTarget = this.board.removePiece(target);
 		this.board.placePiece(pieceSource, target);
 		return pieceTarget;
+	}
+
+	private void nextTurn() {
+		this.turn++;
+		this.currentPlayer = currentPlayer.equals(Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 
 	private void placeNewPiece(Character column, int row, ChessPiece piece) {
