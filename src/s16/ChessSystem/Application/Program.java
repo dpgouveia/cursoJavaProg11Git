@@ -19,25 +19,25 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner input = new Scanner(System.in);
 
-		ChessMatch cm = new ChessMatch();
+		ChessMatch chessMatch = new ChessMatch();
 
 		try {
 			while (true) {
 				try {
 					ChessUI.clearScreen();
-					ChessUI.printMatch(cm);
+					ChessUI.printMatch(chessMatch);
 					System.out.print("Source: ");
 					ChessPosition source = ChessUI.readChessPosition(input);
 					
-					boolean possibleMoves[][] = cm.possibleMoves(source);
+					boolean possibleMoves[][] = chessMatch.possibleMoves(source);
 
 					ChessUI.clearScreen();
-					ChessUI.printBoard(cm.getPieces(), possibleMoves);
+					ChessUI.printBoard(chessMatch.getPieces(), possibleMoves);
 
 					System.out.print("Target: ");
 					ChessPosition target = ChessUI.readChessPosition(input);
 
-					cm.performChessMove(source, target);
+					chessMatch.performChessMove(source, target);
 
 				} catch (ChessException e) {
 					System.out.println(e);

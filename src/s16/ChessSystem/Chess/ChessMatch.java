@@ -1,5 +1,8 @@
 package s16.ChessSystem.Chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import s16.ChessSystem.BoardGame.Board;
 import s16.ChessSystem.BoardGame.Piece;
 import s16.ChessSystem.BoardGame.Position;
@@ -14,12 +17,16 @@ public class ChessMatch {
 	private Board board;
 	private Integer turn;
 	private Color currentPlayer;
+	private List<ChessPiece> capturedPieces;
+	private List<ChessPiece> piecesOnBoard;
 
 	// construtores
 	public ChessMatch() {
 		board = new Board(8, 8);
 		this.turn = 1;
 		this.currentPlayer = Color.WHITE;
+		this.capturedPieces = new ArrayList<ChessPiece>();
+		this.piecesOnBoard = new ArrayList<ChessPiece>();
 		this.initialSetup();
 	}
 
@@ -30,6 +37,14 @@ public class ChessMatch {
 
 	public Color getCurrentPlayer() {
 		return currentPlayer;
+	}
+	
+	public List<ChessPiece> getCapturedPieces() {
+		return capturedPieces;
+	}
+	
+	public List<ChessPiece> getPiecesOnTheBoard() {
+		return piecesOnBoard;
 	}
 
 	// metodos
@@ -60,7 +75,7 @@ public class ChessMatch {
 		return this.board.piece(position.toPosition()).possibleMoves();
 	}
 
-	public ChessPiece performChessMove(ChessPosition sourceMove, ChessPosition targetPosition) {
+	public void performChessMove(ChessPosition sourceMove, ChessPosition targetPosition) {
 
 		Position source = sourceMove.toPosition();
 		Position target = targetPosition.toPosition();
@@ -68,7 +83,7 @@ public class ChessMatch {
 		if (!this.board.thereIsAPiece(source)) {
 			throw new ChessException("No piece found on position " + source);
 		}
-		
+
 		if (!this.getCurrentPlayer().equals(((ChessPiece) this.board.piece(source)).getColor())) {
 			throw new ChessException("You cannot move an opponent piece");
 		}
@@ -82,17 +97,19 @@ public class ChessMatch {
 					+ ChessPosition.fromPosition(source) + " to " + ChessPosition.fromPosition(target));
 		}
 
-		Piece capturedPiece = this.makeMove(source, target);
+		this.makeMove(source, target);
 		this.nextTurn();
-		return (ChessPiece) capturedPiece;
-
 	}
 
-	private Piece makeMove(Position source, Position target) {
+	private void makeMove(Position source, Position target) {
 		Piece pieceSource = this.board.removePiece(source);
 		Piece pieceTarget = this.board.removePiece(target);
 		this.board.placePiece(pieceSource, target);
-		return pieceTarget;
+		
+		if(pieceTarget != null) {
+			this.capturedPieces.add((ChessPiece) pieceTarget);
+			this.piecesOnBoard.remove((ChessPiece) pieceTarget);
+		}
 	}
 
 	private void nextTurn() {
@@ -101,7 +118,8 @@ public class ChessMatch {
 	}
 
 	private void placeNewPiece(Character column, int row, ChessPiece piece) {
-		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		this.piecesOnBoard.add(piece);
 	}
 
 	private void initialSetup() {

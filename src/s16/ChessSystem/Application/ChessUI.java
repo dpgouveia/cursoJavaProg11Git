@@ -1,12 +1,14 @@
 package s16.ChessSystem.Application;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 import common.myUtils.MyUtils;
 import s16.ChessSystem.Chess.ChessMatch;
 import s16.ChessSystem.Chess.ChessPiece;
 import s16.ChessSystem.Chess.ChessPosition;
+import s16.ChessSystem.Chess.Enum.Color;
 import s16.ChessSystem.Chess.Exceptions.ChessException;
 
 public class ChessUI {
@@ -23,11 +25,63 @@ public class ChessUI {
 		}
 	}
 
+	public static void printPiecesOnTheBoard(List<ChessPiece> list) {
+		System.out.println("Pieces on the board: ");
+		if (list == null) {
+			System.out.println("White: [ ]");
+			System.out.println("Black: [ ]");
+		} else {
+			System.out.print("White: [ ");
+			for (ChessPiece piece : list) {
+				if (piece.getColor().equals(Color.WHITE)) {
+					System.out.print(piece + " ");
+				}
+			}
+			System.out.println("]");
+
+			System.out.print("Black: [ ");
+			for (ChessPiece piece : list) {
+				if (piece.getColor().equals(Color.BLACK)) {
+					System.out.print(piece + " ");
+				}
+			}
+			System.out.println("]");
+		}
+	}
+
+	public static void printCapturedPieces(List<ChessPiece> list) {
+		System.out.println("Captured pieces: ");
+		if (list == null) {
+			System.out.println("White: [ ]");
+			System.out.println("Black: [ ]");
+		} else {
+			System.out.print("White: [ ");
+			for (ChessPiece piece : list) {
+				if (piece.getColor().equals(Color.BLACK)) {
+					System.out.print(piece + " ");
+				}
+			}
+			System.out.println("]");
+
+			System.out.print("Black: [ ");
+			for (ChessPiece piece : list) {
+				if (piece.getColor().equals(Color.WHITE)) {
+					System.out.print(piece + " ");
+				}
+			}
+			System.out.println("]");
+		}
+	}
+
 	public static void printMatch(ChessMatch chessMatch) {
 		ChessUI.printBoard(chessMatch.getPieces());
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
 		System.out.println("Waiting Player: " + chessMatch.getCurrentPlayer());
+		System.out.println();
+		ChessUI.printPiecesOnTheBoard(chessMatch.getPiecesOnTheBoard());
+		System.out.println();
+		ChessUI.printCapturedPieces(chessMatch.getCapturedPieces());
 		System.out.println();
 	}
 
