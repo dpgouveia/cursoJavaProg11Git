@@ -83,6 +83,11 @@ public class ChessUI {
 		System.out.println();
 		ChessUI.printCapturedPieces(chessMatch.getCapturedPieces());
 		System.out.println();
+
+		if (chessMatch.getCheck()) {
+			System.out.println("CHECK!");
+		}
+
 	}
 
 	public static void printBoard(ChessPiece pieces[][]) {

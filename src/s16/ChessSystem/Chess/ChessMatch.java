@@ -51,6 +51,10 @@ public class ChessMatch {
 		return piecesOnBoard;
 	}
 
+	public Boolean getCheck() {
+		return check;
+	}
+
 	// metodos
 	public ChessPiece[][] getPieces() {
 		ChessPiece mat[][] = new ChessPiece[board.getRows()][board.getColumns()];
@@ -101,7 +105,15 @@ public class ChessMatch {
 					+ ChessPosition.fromPosition(source) + " to " + ChessPosition.fromPosition(target));
 		}
 
-		this.makeMove(source, target);
+		Piece capturedPiece = this.makeMove(source, target);
+
+		if (this.testCheck(this.currentPlayer)) {
+			this.undoMove(source, target, capturedPiece);
+			throw new ChessException("You can not put yourself in CHECK");
+		}
+
+		this.check = this.testCheck(this.opponent(this.currentPlayer)) ? true : false;
+
 		this.nextTurn();
 	}
 
@@ -149,9 +161,9 @@ public class ChessMatch {
 
 		List<ChessPiece> list = this.piecesOnBoard.stream().filter(x -> color.equals(x.getColor()))
 				.collect(Collectors.toList());
-		for (ChessPiece piece : list) {
-			if (piece instanceof King) {
-				return piece;
+		for (ChessPiece chessPiece : list) {
+			if (chessPiece instanceof King) {
+				return chessPiece;
 			}
 		}
 
@@ -165,6 +177,33 @@ public class ChessMatch {
 //		}
 
 		throw new IllegalStateException("There is no " + color + " king on the board!!");
+	}
+
+	private boolean testCheck(Color color) {
+		// testar se todos os movimentos possiveis da peca adversaria podem "atacar" o
+		// seu rei
+		// caso positivo voce esta em xeque
+
+		Position position = new Position(0, 0);
+		List<ChessPiece> oppositePieces = this.piecesOnBoard.stream().filter(x -> !color.equals(this.opponent(color)))
+				.collect(Collectors.toList());
+
+		for (ChessPiece piece : oppositePieces) {
+			if (piece.isThereAnyPossibleMove()) {
+				boolean piecePossibleMoves[][] = piece.possibleMoves();
+				for (int i = 0; i < piecePossibleMoves.length; i++) {
+					for (int j = 0; j < piecePossibleMoves[i].length; j++) {
+						if (piecePossibleMoves[i][j]) {
+							position.setValues(i, j);
+							if (this.board.thereIsAPiece(position) && this.board.piece(position).equals(king(color))) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	private void initialSetup() {
