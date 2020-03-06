@@ -91,7 +91,8 @@ Que não é de Java mas é uma recomendação que dou!
 
 
 
-
+### Exception ou RunTimeException???
+https://pt.stackoverflow.com/questions/55624/exception-vs-runtimeexception-quando-utilizar-um-ou-outro
 
 
 
