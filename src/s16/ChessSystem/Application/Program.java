@@ -22,13 +22,13 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 
 		try {
-			while (true) {
+			while (!chessMatch.getCheckMate()) {
 				try {
 					ChessUI.clearScreen();
 					ChessUI.printMatch(chessMatch);
 					System.out.print("Source: ");
 					ChessPosition source = ChessUI.readChessPosition(input);
-					
+
 					boolean possibleMoves[][] = chessMatch.possibleMoves(source);
 
 					ChessUI.clearScreen();
@@ -42,16 +42,19 @@ public class Program {
 				} catch (ChessException e) {
 					System.out.println(e);
 					input.hasNextLine();
-				} 
+				}
 			}
+
+			ChessUI.clearScreen();
+			ChessUI.printMatch(chessMatch);
+
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
+		} finally {
+			input.close();
 			System.out.println();
 			System.out.println("--------------------");
 			System.out.println("FIM DO PROGRAMA");
-			input.hasNextLine();
-		} finally {
-			input.close();
 		}
 
 	}
