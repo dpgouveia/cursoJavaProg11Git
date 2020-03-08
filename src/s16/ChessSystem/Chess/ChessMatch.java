@@ -2,7 +2,6 @@ package s16.ChessSystem.Chess;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import s16.ChessSystem.BoardGame.Board;
@@ -119,19 +118,20 @@ public class ChessMatch {
 		}
 
 		this.check = this.testCheck(this.opponent(this.currentPlayer)) ? true : false;
-		
-		if(this.testCheckMate(this.opponent(currentPlayer))) {
+
+		if (this.testCheckMate(this.opponent(currentPlayer))) {
 			this.checkMate = true;
 		} else {
 			this.nextTurn();
 		}
-		
+
 	}
 
 	private Piece makeMove(Position source, Position target) {
 		Piece pieceSource = this.board.removePiece(source);
 		Piece pieceTarget = this.board.removePiece(target);
 		this.board.placePiece(pieceSource, target);
+		((ChessPiece) pieceSource).increaseMoveCount();
 
 		if (pieceTarget != null) {
 			this.capturedPieces.add((ChessPiece) pieceTarget);
@@ -145,6 +145,7 @@ public class ChessMatch {
 
 		Piece pieceSource = this.board.removePiece(target);
 		this.board.placePiece(pieceSource, source);
+		((ChessPiece) pieceSource).decreaseMoveCount();
 
 		if (capturedPiece != null) {
 			this.board.placePiece(capturedPiece, target);

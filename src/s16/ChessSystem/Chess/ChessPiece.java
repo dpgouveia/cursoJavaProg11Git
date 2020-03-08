@@ -15,11 +15,16 @@ public abstract class ChessPiece extends Piece {
 	public ChessPiece(Board board, Color color) {
 		super(board);
 		this.color = color;
+		this.moveCount = 0;
 	}
 
 	// getters e setters
 	public Color getColor() {
 		return color;
+	}
+	
+	public Integer getMoveCount() {
+		return moveCount;
 	}
 
 	// metodos abstratos
@@ -34,5 +39,13 @@ public abstract class ChessPiece extends Piece {
 	public ChessPosition getChessPosition() {
 		return ChessPosition.fromPosition(this.position);
 	}
-
+	
+	protected void increaseMoveCount() {
+		moveCount++;
+	}
+	
+	protected void decreaseMoveCount() {
+		moveCount--;
+	}
+	
 }
