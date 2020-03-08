@@ -10,7 +10,7 @@ import s16.ChessSystem.BoardGame.Position;
 import s16.ChessSystem.Chess.Enum.Color;
 import s16.ChessSystem.Chess.Exceptions.ChessException;
 import s16.ChessSystem.Chess.Pieces.King;
-import s16.ChessSystem.Chess.Pieces.Rook;
+import s16.ChessSystem.Chess.Pieces.Pawn;
 
 public class ChessMatch {
 
@@ -274,12 +274,25 @@ public class ChessMatch {
 //		this.placeNewPiece('d', 4, new Rook(this.board, Color.WHITE));
 
 //		teste cheque mate
-		this.placeNewPiece('h', 7, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('d', 1, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('h', 7, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('d', 1, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('e', 1, new King(this.board, Color.WHITE));
+//
+//		this.placeNewPiece('b', 8, new Rook(this.board, Color.BLACK));
+//		this.placeNewPiece('a', 8, new King(this.board, Color.BLACK));
+		
+		// teste movimento e ataque de peao
 		this.placeNewPiece('e', 1, new King(this.board, Color.WHITE));
-
-		this.placeNewPiece('b', 8, new Rook(this.board, Color.BLACK));
 		this.placeNewPiece('a', 8, new King(this.board, Color.BLACK));
+		
+		this.placeNewPiece('d', 2, new Pawn(this.board, Color.WHITE));
+		this.placeNewPiece('e', 3, new Pawn(this.board, Color.WHITE));
+		this.placeNewPiece('c', 3, new Pawn(this.board, Color.BLACK));
+		this.placeNewPiece('f', 7, new Pawn(this.board, Color.BLACK));
+		this.placeNewPiece('d', 3, new Pawn(this.board, Color.BLACK));
+		
+		
+		
 
 	}
 
