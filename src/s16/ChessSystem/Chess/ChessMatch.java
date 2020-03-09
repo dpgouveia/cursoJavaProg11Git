@@ -9,6 +9,7 @@ import s16.ChessSystem.BoardGame.Piece;
 import s16.ChessSystem.BoardGame.Position;
 import s16.ChessSystem.Chess.Enum.Color;
 import s16.ChessSystem.Chess.Exceptions.ChessException;
+import s16.ChessSystem.Chess.Pieces.Bishop;
 import s16.ChessSystem.Chess.Pieces.King;
 import s16.ChessSystem.Chess.Pieces.Pawn;
 import s16.ChessSystem.Chess.Pieces.Rook;
@@ -255,7 +256,9 @@ public class ChessMatch {
 
 		// BLACK PIECES
 		this.placeNewPiece('a', 8, new Rook(this.board, Color.BLACK));
+		this.placeNewPiece('c', 8, new Bishop(this.board, Color.BLACK));
 		this.placeNewPiece('e', 8, new King(this.board, Color.BLACK));
+		this.placeNewPiece('f', 8, new Bishop(this.board, Color.BLACK));
 		this.placeNewPiece('h', 8, new Rook(this.board, Color.BLACK));
 		
 		this.placeNewPiece('a', 7, new Pawn(this.board, Color.BLACK));
@@ -269,7 +272,9 @@ public class ChessMatch {
 		
 		// WHITE PIECES 
 		this.placeNewPiece('a', 1, new Rook(this.board, Color.WHITE));
+		this.placeNewPiece('c', 1, new Bishop(this.board, Color.WHITE));
 		this.placeNewPiece('e', 1, new King(this.board, Color.WHITE));
+		this.placeNewPiece('f', 1, new Bishop(this.board, Color.WHITE));
 		this.placeNewPiece('h', 1, new Rook(this.board, Color.WHITE));
 		
 		this.placeNewPiece('a', 2, new Pawn(this.board, Color.WHITE));

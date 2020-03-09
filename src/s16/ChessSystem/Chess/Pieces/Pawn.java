@@ -16,10 +16,7 @@ public class Pawn extends ChessPiece {
 	// metodos
 	@Override
 	public boolean[][] possibleMoves() {
-
 		boolean possibleMoves[][] = new boolean[this.getBoard().getRows()][this.getBoard().getColumns()];
-
-		// obter a posicao do peao no tabuleiro
 		Position evalMove = new Position(0, 0);
 
 		if (this.getColor() == Color.WHITE) {
@@ -38,13 +35,13 @@ public class Pawn extends ChessPiece {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
 			}
 
-			// NE
+			// NW
 			evalMove.setValues(this.position.getRow() - 1, this.position.getColumn() - 1);
 			if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
 			}
 
-			// NW
+			// NE
 			evalMove.setValues(this.position.getRow() - 1, this.position.getColumn() + 1);
 			if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
@@ -66,13 +63,13 @@ public class Pawn extends ChessPiece {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
 			}
 
-			// SE
+			// SW
 			evalMove.setValues(this.position.getRow() + 1, this.position.getColumn() - 1);
 			if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
 			}
 
-			// SW
+			// SE
 			evalMove.setValues(this.position.getRow() + 1, this.position.getColumn() + 1);
 			if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
