@@ -53,7 +53,7 @@ public class Queen extends ChessPiece {
 		evalMove.setValues(this.position.getRow() + 1, this.position.getColumn() + 1);
 		while (this.getBoard().positionExists(evalMove) && !this.getBoard().thereIsAPiece(evalMove)) {
 			possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
-			evalMove.setValues(evalMove.getRow() - 1, evalMove.getColumn());
+			evalMove.setValues(evalMove.getRow() + 1, evalMove.getColumn() + 1);
 		}
 		if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 			possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
@@ -90,10 +90,10 @@ public class Queen extends ChessPiece {
 		}
 
 		// NE
-		evalMove.setValues(this.position.getRow() + 1, this.position.getColumn() - 1);
+		evalMove.setValues(this.position.getRow() - 1, this.position.getColumn() - 1);
 		while (this.getBoard().positionExists(evalMove) && !this.getBoard().thereIsAPiece(evalMove)) {
 			possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
-			evalMove.setValues(evalMove.getRow() + 1, evalMove.getColumn() - 1);
+			evalMove.setValues(evalMove.getRow() - 1, evalMove.getColumn() - 1);
 		}
 		if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 			possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;

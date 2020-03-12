@@ -96,10 +96,11 @@ public class ChessUI {
 	public static void printBoard(ChessPiece pieces[][]) {
 
 		for (int i = 0; i < pieces.length; i++) {
-			System.out.print((8 - i) + "  ");
+			System.out.print((8 - i) + " | ");
 			for (int j = 0; j < pieces[i].length; j++) {
 				ChessUI.printPiece(pieces[i][j], false);
 			}
+			System.out.print(" | " + (8 - i));
 			System.out.println();
 		}
 		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
@@ -108,10 +109,11 @@ public class ChessUI {
 
 	public static void printBoard(ChessPiece pieces[][], boolean possibleMoves[][]) {
 		for (int i = 0; i < pieces.length; i++) {
-			System.out.print((8 - i) + "  ");
+			System.out.print((8 - i) + " | ");
 			for (int j = 0; j < pieces[i].length; j++) {
 				ChessUI.printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
+			System.out.print(" | " + (8 - i));
 			System.out.println();
 		}
 		System.out.println("   " + "  A  " + "  B  " + "  C  " + "  D  " + "  E  " + "  F  " + "  G  " + "  H  ");
