@@ -3,6 +3,7 @@ package s16.ChessSystem.Application;
 import java.util.Locale;
 import java.util.Scanner;
 
+import common.myUtils.MyUtils;
 import s16.ChessSystem.Chess.ChessMatch;
 import s16.ChessSystem.Chess.ChessPosition;
 import s16.ChessSystem.Chess.Exceptions.ChessException;
@@ -38,6 +39,12 @@ public class Program {
 					ChessPosition target = ChessUI.readChessPosition(input);
 
 					chessMatch.performChessMove(source, target);
+
+					if (chessMatch.getPromoted() != null) {
+						System.out.print("Enter piece for promotion (B/N/R/Q): ");
+						String type = MyUtils.readString(input);
+						chessMatch.replacePromotedPiece(type);
+					}
 
 				} catch (ChessException e) {
 					System.out.println(e);

@@ -1,5 +1,6 @@
 package s16.ChessSystem.Chess;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class ChessMatch {
 	private Boolean check;
 	private Boolean checkMate;
 	private ChessPiece enPassantVulnerable;
+	private ChessPiece promoted;
 
 	// construtores
 	public ChessMatch() {
@@ -38,6 +40,7 @@ public class ChessMatch {
 		check = false;
 		checkMate = false;
 		enPassantVulnerable = null;
+		promoted = null;
 		this.initialSetup();
 	}
 
@@ -70,6 +73,10 @@ public class ChessMatch {
 		return enPassantVulnerable;
 	}
 
+	public ChessPiece getPromoted() {
+		return promoted;
+	}
+
 	// metodos
 	public ChessPiece[][] getPieces() {
 		ChessPiece mat[][] = new ChessPiece[board.getRows()][board.getColumns()];
@@ -98,6 +105,40 @@ public class ChessMatch {
 		return board.piece(position.toPosition()).possibleMoves();
 	}
 
+	public ChessPiece replacePromotedPiece(String type) {
+
+		if (promoted == null) {
+			throw new IllegalStateException("There is no piece to be promoted!");
+		}
+
+		if (!type.toUpperCase().equals("Q") && !type.toUpperCase().equals("N") && !type.toUpperCase().equals("R")
+				&& !type.toUpperCase().equals("B")) {
+			throw new InvalidParameterException("Invalid type for promotion");
+		}
+
+		Position promotedPosition = promoted.getChessPosition().toPosition();
+		Piece piece = board.removePiece(promotedPosition);
+		piecesOnBoard.remove(piece);
+		ChessPiece newPiece = newPiece(type, promoted.getColor());
+		board.placePiece(newPiece, promotedPosition);
+		piecesOnBoard.add(newPiece);
+		return newPiece;
+	}
+
+	private ChessPiece newPiece(String type, Color color) {
+		if (type.toUpperCase().equals("Q")) {
+			return new Queen(board, color);
+		}
+		if (type.toUpperCase().equals("N")) {
+			return new Knight(board, color);
+		}
+		if (type.toUpperCase().equals("R")) {
+			return new Rook(board, color);
+		} else {
+			return new Bishop(board, color);
+		}
+	}
+
 	public void performChessMove(ChessPosition sourceMove, ChessPosition targetPosition) {
 
 		Position source = sourceMove.toPosition();
@@ -121,13 +162,23 @@ public class ChessMatch {
 		}
 
 		Piece capturedPiece = makeMove(source, target);
+		ChessPiece movedPiece = (ChessPiece) board.piece(target);
+
+		// movimento especial: promotion
+		promoted = null;
+		if (movedPiece instanceof Pawn)
+			if (movedPiece.getColor() == Color.WHITE && target.getRow() == 0
+					|| movedPiece.getColor() == Color.BLACK && target.getRow() == 7) {
+				promoted = (ChessPiece) board.piece(target);
+				promoted = replacePromotedPiece("Q"); // fica esquisito no teste unitario porque o rei sempre fica em
+														// cheque por causa da rainha fake
+			}
 
 		if (testCheck(currentPlayer)) {
 			undoMove(source, target, capturedPiece);
 			throw new ChessException("You can not put yourself in CHECK");
 		}
 
-		ChessPiece movedPiece = (ChessPiece) board.piece(target);
 		check = testCheck(opponent(currentPlayer)) ? true : false;
 
 		if (testCheckMate(opponent(currentPlayer))) {
@@ -416,40 +467,40 @@ public class ChessMatch {
 	private void initialSetup() {
 
 		// BLACK PIECES
-		this.placeNewPiece('a', 8, new Rook(this.board, Color.BLACK));
-		this.placeNewPiece('b', 8, new Knight(this.board, Color.BLACK));
-		this.placeNewPiece('c', 8, new Bishop(this.board, Color.BLACK));
-		this.placeNewPiece('d', 8, new Queen(this.board, Color.BLACK));
+//		this.placeNewPiece('a', 8, new Rook(this.board, Color.BLACK));
+//		this.placeNewPiece('b', 8, new Knight(this.board, Color.BLACK));
+//		this.placeNewPiece('c', 8, new Bishop(this.board, Color.BLACK));
+//		this.placeNewPiece('d', 8, new Queen(this.board, Color.BLACK));
 		this.placeNewPiece('e', 8, new King(this.board, Color.BLACK, this));
-		this.placeNewPiece('f', 8, new Bishop(this.board, Color.BLACK));
-		this.placeNewPiece('g', 8, new Knight(this.board, Color.BLACK));
-		this.placeNewPiece('h', 8, new Rook(this.board, Color.BLACK));
-		this.placeNewPiece('a', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('b', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('c', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('d', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('e', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('f', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('g', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('h', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('f', 8, new Bishop(this.board, Color.BLACK));
+//		this.placeNewPiece('g', 8, new Knight(this.board, Color.BLACK));
+//		this.placeNewPiece('h', 8, new Rook(this.board, Color.BLACK));
+//		this.placeNewPiece('a', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('b', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('c', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('d', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('e', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('f', 7, new Pawn(this.board, Color.BLACK, this));
+//		this.placeNewPiece('g', 7, new Pawn(this.board, Color.BLACK, this));
+		this.placeNewPiece('h', 2, new Pawn(this.board, Color.BLACK, this));
 
 		// WHITE PIECES
-		this.placeNewPiece('a', 1, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('b', 1, new Knight(this.board, Color.WHITE));
-		this.placeNewPiece('c', 1, new Bishop(this.board, Color.WHITE));
-		this.placeNewPiece('d', 1, new Queen(this.board, Color.WHITE));
+//		this.placeNewPiece('a', 1, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('b', 1, new Knight(this.board, Color.WHITE));
+//		this.placeNewPiece('c', 1, new Bishop(this.board, Color.WHITE));
+//		this.placeNewPiece('d', 1, new Queen(this.board, Color.WHITE));
 		this.placeNewPiece('e', 1, new King(this.board, Color.WHITE, this));
-		this.placeNewPiece('f', 1, new Bishop(this.board, Color.WHITE));
-		this.placeNewPiece('g', 1, new Knight(this.board, Color.WHITE));
-		this.placeNewPiece('h', 1, new Rook(this.board, Color.WHITE));
-		this.placeNewPiece('a', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('b', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('c', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('d', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('e', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('f', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('g', 2, new Pawn(this.board, Color.WHITE, this));
-		this.placeNewPiece('h', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('f', 1, new Bishop(this.board, Color.WHITE));
+//		this.placeNewPiece('g', 1, new Knight(this.board, Color.WHITE));
+//		this.placeNewPiece('h', 1, new Rook(this.board, Color.WHITE));
+//		this.placeNewPiece('a', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('b', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('c', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('d', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('e', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('f', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('g', 2, new Pawn(this.board, Color.WHITE, this));
+//		this.placeNewPiece('h', 2, new Pawn(this.board, Color.WHITE, this));
 
 	}
 
