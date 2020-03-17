@@ -2,14 +2,19 @@ package s16.ChessSystem.Chess.Pieces;
 
 import s16.ChessSystem.BoardGame.Board;
 import s16.ChessSystem.BoardGame.Position;
+import s16.ChessSystem.Chess.ChessMatch;
 import s16.ChessSystem.Chess.ChessPiece;
 import s16.ChessSystem.Chess.Enum.Color;
 
 public class Pawn extends ChessPiece {
 
+	// atributos
+	private ChessMatch chessMatch;
+
 	// construtores
-	public Pawn(Board board, Color color) {
+	public Pawn(Board board, Color color, ChessMatch chessMatch) {
 		super(board, color);
+		this.chessMatch = chessMatch;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,7 +52,26 @@ public class Pawn extends ChessPiece {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
 			}
 
-		} else {
+			// movimento especial: white enPassant
+			if (position.getRow() == 3) {
+				Position left = new Position(position.getRow(), position.getColumn() - 1);
+				Position targetLeft = new Position(position.getRow() - 1, position.getColumn() - 1);
+				if (getBoard().positionExists(left) && isThereOpponentPiece(left)
+						&& getBoard().piece(left) == chessMatch.getEnPassantVulnerable()) {
+					possibleMoves[targetLeft.getRow()][targetLeft.getColumn()] = true;
+				}
+
+				Position right = new Position(position.getRow(), position.getColumn() + 1);
+				Position targetRight = new Position(position.getRow() - 1, position.getColumn() + 1);
+				if (getBoard().positionExists(right) && isThereOpponentPiece(right)
+						&& getBoard().piece(right) == chessMatch.getEnPassantVulnerable()) {
+					possibleMoves[targetRight.getRow()][targetRight.getColumn()] = true;
+				}
+			}
+
+		} else
+
+		{
 
 			// S
 			boolean validLastMove = false;
@@ -73,6 +97,23 @@ public class Pawn extends ChessPiece {
 			evalMove.setValues(this.position.getRow() + 1, this.position.getColumn() + 1);
 			if (this.getBoard().positionExists(evalMove) && this.isThereOpponentPiece(evalMove)) {
 				possibleMoves[evalMove.getRow()][evalMove.getColumn()] = true;
+			}
+
+			// movimento especial: black enPassant
+			if (position.getRow() == 4) {
+				Position left = new Position(position.getRow(), position.getColumn() - 1);
+				Position targetLeft = new Position(position.getRow() + 1, position.getColumn() - 1);
+				if (getBoard().positionExists(left) && isThereOpponentPiece(left)
+						&& getBoard().piece(left) == chessMatch.getEnPassantVulnerable()) {
+					possibleMoves[targetLeft.getRow()][targetLeft.getColumn()] = true;
+				}
+
+				Position right = new Position(position.getRow(), position.getColumn() + 1);
+				Position targetRight = new Position(position.getRow() + 1, position.getColumn() + 1);
+				if (getBoard().positionExists(right) && isThereOpponentPiece(right)
+						&& getBoard().piece(right) == chessMatch.getEnPassantVulnerable()) {
+					possibleMoves[targetRight.getRow()][targetRight.getColumn()] = true;
+				}
 			}
 
 		}
