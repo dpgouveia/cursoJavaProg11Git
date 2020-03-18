@@ -122,6 +122,10 @@ public class ChessMatch {
 		ChessPiece newPiece = newPiece(type, promoted.getColor());
 		board.placePiece(newPiece, promotedPosition);
 		piecesOnBoard.add(newPiece);
+		
+		// retestando a condicao de cheque para "anular" falsos check mates em decorrencia da rainha fake
+		check = testCheck(currentPlayer) ? true : false;
+		
 		return newPiece;
 	}
 
@@ -166,13 +170,14 @@ public class ChessMatch {
 
 		// movimento especial: promotion
 		promoted = null;
-		if (movedPiece instanceof Pawn)
+		if (movedPiece instanceof Pawn) {
 			if (movedPiece.getColor() == Color.WHITE && target.getRow() == 0
 					|| movedPiece.getColor() == Color.BLACK && target.getRow() == 7) {
 				promoted = (ChessPiece) board.piece(target);
 				promoted = replacePromotedPiece("Q"); // fica esquisito no teste unitario porque o rei sempre fica em
-														// cheque por causa da rainha fake
+				  									  // cheque por causa da rainha fake
 			}
+		}
 
 		if (testCheck(currentPlayer)) {
 			undoMove(source, target, capturedPiece);

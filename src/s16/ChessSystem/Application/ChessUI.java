@@ -78,7 +78,6 @@ public class ChessUI {
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
 		System.out.println("Waiting Player: " + chessMatch.getCurrentPlayer());
-		
 		if (chessMatch.getCheckMate()) {
 			System.out.println("CHECK MATE!");
 			System.out.println("WINNER: " + chessMatch.getCurrentPlayer());
