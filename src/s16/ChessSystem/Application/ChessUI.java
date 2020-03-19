@@ -80,7 +80,11 @@ public class ChessUI {
 		System.out.println("Waiting Player: " + chessMatch.getCurrentPlayer());
 		if (chessMatch.getCheckMate()) {
 			System.out.println("CHECK MATE!");
-			System.out.println("WINNER: " + chessMatch.getCurrentPlayer());
+			if(chessMatch.getCurrentPlayer() == Color.WHITE) {
+				System.out.println("WINNER: BLACK");
+			} else {
+				System.out.println("WINNER: WHITE");
+			}
 		} else if (chessMatch.getCheck()) {
 			System.out.println("CHECK!");
 		}

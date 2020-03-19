@@ -122,10 +122,14 @@ public class ChessMatch {
 		ChessPiece newPiece = newPiece(type, promoted.getColor());
 		board.placePiece(newPiece, promotedPosition);
 		piecesOnBoard.add(newPiece);
-		
-		// retestando a condicao de cheque para "anular" falsos check mates em decorrencia da rainha fake
+
+		// retestando a condicao de cheque para "anular" falsos check mates em
+		// decorrencia da rainha fake
 		check = testCheck(currentPlayer) ? true : false;
-		
+
+		// vai que deu check mate na hora de promover?
+		checkMate = testCheckMate(currentPlayer) ? true : false;
+
 		return newPiece;
 	}
 
@@ -174,8 +178,8 @@ public class ChessMatch {
 			if (movedPiece.getColor() == Color.WHITE && target.getRow() == 0
 					|| movedPiece.getColor() == Color.BLACK && target.getRow() == 7) {
 				promoted = (ChessPiece) board.piece(target);
-				promoted = replacePromotedPiece("Q"); // fica esquisito no teste unitario porque o rei sempre fica em
-				  									  // cheque por causa da rainha fake
+//				promoted = replacePromotedPiece("Q"); // fica esquisito no teste unitario porque o rei sempre fica em
+//				  									  // cheque por causa da rainha fake
 			}
 		}
 
@@ -471,41 +475,58 @@ public class ChessMatch {
 
 	private void initialSetup() {
 
-		// BLACK PIECES
-//		this.placeNewPiece('a', 8, new Rook(this.board, Color.BLACK));
-//		this.placeNewPiece('b', 8, new Knight(this.board, Color.BLACK));
-//		this.placeNewPiece('c', 8, new Bishop(this.board, Color.BLACK));
-//		this.placeNewPiece('d', 8, new Queen(this.board, Color.BLACK));
-		this.placeNewPiece('e', 8, new King(this.board, Color.BLACK, this));
-//		this.placeNewPiece('f', 8, new Bishop(this.board, Color.BLACK));
-//		this.placeNewPiece('g', 8, new Knight(this.board, Color.BLACK));
-//		this.placeNewPiece('h', 8, new Rook(this.board, Color.BLACK));
-//		this.placeNewPiece('a', 7, new Pawn(this.board, Color.BLACK, this));
-//		this.placeNewPiece('b', 7, new Pawn(this.board, Color.BLACK, this));
-//		this.placeNewPiece('c', 7, new Pawn(this.board, Color.BLACK, this));
-//		this.placeNewPiece('d', 7, new Pawn(this.board, Color.BLACK, this));
-//		this.placeNewPiece('e', 7, new Pawn(this.board, Color.BLACK, this));
-//		this.placeNewPiece('f', 7, new Pawn(this.board, Color.BLACK, this));
-//		this.placeNewPiece('g', 7, new Pawn(this.board, Color.BLACK, this));
-		this.placeNewPiece('h', 2, new Pawn(this.board, Color.BLACK, this));
+//		// BLACK PIECES
+//		placeNewPiece('a', 8, new Rook(this.board, Color.BLACK));
+//		placeNewPiece('b', 8, new Knight(this.board, Color.BLACK));
+//		placeNewPiece('c', 8, new Bishop(this.board, Color.BLACK));
+//		placeNewPiece('d', 8, new Queen(this.board, Color.BLACK));
+//		placeNewPiece('e', 8, new King(this.board, Color.BLACK, this));
+//		placeNewPiece('f', 8, new Bishop(this.board, Color.BLACK));
+//		placeNewPiece('g', 8, new Knight(this.board, Color.BLACK));
+//		placeNewPiece('h', 8, new Rook(this.board, Color.BLACK));
+//		placeNewPiece('a', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('b', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('c', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('d', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('e', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('f', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('g', 7, new Pawn(this.board, Color.BLACK, this));
+//		placeNewPiece('h', 7, new Pawn(this.board, Color.BLACK, this));
+//
+//		// WHITE PIECES
+//		placeNewPiece('a', 1, new Rook(this.board, Color.WHITE));
+//		placeNewPiece('b', 1, new Knight(this.board, Color.WHITE));
+//		placeNewPiece('c', 1, new Bishop(this.board, Color.WHITE));
+//		placeNewPiece('d', 1, new Queen(this.board, Color.WHITE));
+//		placeNewPiece('e', 1, new King(this.board, Color.WHITE, this));
+//		placeNewPiece('f', 1, new Bishop(this.board, Color.WHITE));
+//		placeNewPiece('g', 1, new Knight(this.board, Color.WHITE));
+//		placeNewPiece('h', 1, new Rook(this.board, Color.WHITE));
+//		placeNewPiece('a', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('b', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('c', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('d', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('e', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('f', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('g', 2, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('h', 2, new Pawn(this.board, Color.WHITE, this));
 
-		// WHITE PIECES
-//		this.placeNewPiece('a', 1, new Rook(this.board, Color.WHITE));
-//		this.placeNewPiece('b', 1, new Knight(this.board, Color.WHITE));
-//		this.placeNewPiece('c', 1, new Bishop(this.board, Color.WHITE));
-//		this.placeNewPiece('d', 1, new Queen(this.board, Color.WHITE));
-		this.placeNewPiece('e', 1, new King(this.board, Color.WHITE, this));
-//		this.placeNewPiece('f', 1, new Bishop(this.board, Color.WHITE));
-//		this.placeNewPiece('g', 1, new Knight(this.board, Color.WHITE));
-//		this.placeNewPiece('h', 1, new Rook(this.board, Color.WHITE));
-//		this.placeNewPiece('a', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('b', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('c', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('d', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('e', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('f', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('g', 2, new Pawn(this.board, Color.WHITE, this));
-//		this.placeNewPiece('h', 2, new Pawn(this.board, Color.WHITE, this));
+		// debug promote check mate
+		placeNewPiece('e', 8, new King(this.board, Color.BLACK, this));
+		placeNewPiece('e', 1, new King(this.board, Color.WHITE, this));
+		placeNewPiece('d', 6, new Pawn(this.board, Color.WHITE, this));
+		placeNewPiece('e', 6, new Pawn(this.board, Color.WHITE, this));
+		placeNewPiece('f', 6, new Pawn(this.board, Color.WHITE, this));
+		placeNewPiece('h', 7, new Pawn(this.board, Color.WHITE, this));
+		placeNewPiece('a', 7, new Rook(this.board, Color.WHITE));
+
+//		// debug promote check
+//		placeNewPiece('f', 8, new King(this.board, Color.BLACK, this));
+//		placeNewPiece('e', 1, new King(this.board, Color.WHITE, this));
+//		placeNewPiece('d', 6, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('e', 6, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('h', 7, new Pawn(this.board, Color.WHITE, this));
+//		placeNewPiece('a', 7, new Pawn(this.board, Color.WHITE, this));
 
 	}
 
