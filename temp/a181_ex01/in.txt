@@ -1,0 +1,9 @@
+produto01,19.99,100
+produto01,19.99,50
+produto02,29.99,100
+produto03,39.99,100
+produto04,49.99,100
+produto05,59.99,100
+produto02,29.99,200
+produto02,29.99,500
+produto06,99.99,10
