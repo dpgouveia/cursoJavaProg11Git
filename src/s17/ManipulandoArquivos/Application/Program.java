@@ -43,7 +43,7 @@ public class Program {
 		System.out.println("================================");
 
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
+		String path = "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
 
 		// lendo os registros do arquivos e montando a lista de produtos
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -79,22 +79,34 @@ public class Program {
 			System.out.println("Erro: " + e.getMessage());
 		}
 
-		// imprimindo o valor total de cada produto cadastro na lista
-
 		// criando diretorio e o arquivo de output
 		File inputFile = new File(path);
 		File outputDir = new File(inputFile.getParent() + "\\out");
-		File outputFile = new File(outputDir.getPath() + "summary.csv");
+		File outputFile = new File(outputDir.getPath() + "\\summary.csv");
 		try {
 
 			if (!outputDir.exists()) {
 				if (outputDir.mkdir()) {
 					outputFile.createNewFile();
+				} else {
+					throw new IOException("Nao é possível criar a pasta \"out\"!");
 				}
-			} else if (outputDir.canWrite() && outputFile.exists() && !outputFile.canWrite()) {
+
+			} else if (outputDir.canWrite() && !outputFile.canWrite()) {
 				throw new IOException("Nao é possível escrever no arquivo existente da pasta output!");
 			}
 
+		} catch (IOException e) {
+			System.out.println("Erro: " + e.getMessage());
+		}
+
+		// imprimindo o valor total de cada produto cadastro na lista
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))) {
+			for (Produto produto : listaProdutos) {
+				String line = "[" + produto.getNome() + "],[$" + String.format("%.2f", produto.valorTotal()) + "]";
+				bw.write(line);
+				bw.newLine();
+			}
 		} catch (IOException e) {
 			System.out.println("Erro: " + e.getMessage());
 		}
