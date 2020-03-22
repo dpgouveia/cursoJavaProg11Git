@@ -4,19 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class MyUtils {
 
-	// for test purposes
-//	public static void main(String args[]) {
-//		Scanner input = new Scanner(System.in);
-//
-//		Date data = MyUtils.readDate(input);
-//		System.out.println(data);
-//
-//		input.close();
-//	}
+	// atributos estaticos
+	public static final SimpleDateFormat timeStampToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	public static final SimpleDateFormat stringToDate = new SimpleDateFormat("dd/MM/yyyy");
 
+	// metodos estaticos
 	public static int readInt(Scanner input) {
 
 		Locale.setDefault(Locale.US);
@@ -130,5 +126,46 @@ public class MyUtils {
 		} while (invalidDate);
 		return output;
 	}
+
+	public static long dateDiff(Date source, Date target, TimeUnit timeUnit) {
+		long diffMiliseconds = target.getTime() - source.getTime();
+		return timeUnit.convert(diffMiliseconds, TimeUnit.MILLISECONDS);
+	}
+	
+	public static Date readTimeStamp(Scanner input) {
+
+		Locale.setDefault(Locale.US);
+		input.reset();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		sdf.setLenient(false);
+
+		String string;
+		Date output = null;
+		boolean invalidDate;
+
+		do {
+			invalidDate = true;
+			string = input.nextLine().trim().toLowerCase();
+			if (string.replace('/', ' ').replace(':', ' ').replace(' ', '0').chars().allMatch(Character::isDigit)) {
+				try {
+					output = sdf.parse(string);
+					invalidDate = false;
+				} catch (Exception e) {
+				}
+			}
+		} while (invalidDate);
+		return output;
+	}
+
+	// for test purposes
+//	public static void main(String args[]) {
+//		Scanner input = new Scanner(System.in);
+//
+//		Date data = MyUtils.readTimeStamp(input);
+//		System.out.println(data);
+//
+//		input.close();
+//	}
 
 }
