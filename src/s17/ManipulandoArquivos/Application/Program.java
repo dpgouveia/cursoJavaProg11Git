@@ -43,7 +43,9 @@ public class Program {
 		System.out.println("================================");
 
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-		String path = "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
+		// String path =
+		// "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
+		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
 
 		// lendo os registros do arquivos e montando a lista de produtos
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -51,25 +53,35 @@ public class Program {
 			String line = br.readLine();
 			while (line != null) {
 				String camposProduto[] = line.split(",");
-				Produto registroArquivo = new Produto(camposProduto[0], Double.parseDouble(camposProduto[1]),
-						Integer.parseInt(camposProduto[2]));
 
-				if (listaProdutos.isEmpty()) {
-					listaProdutos.add(registroArquivo);
-				} else {
-					boolean produtoEncontrado = false;
-					for (Produto produto : listaProdutos) {
-						if (produto.getNome().equals(registroArquivo.getNome())
-								&& produto.getPrecoUnitario() == registroArquivo.getPrecoUnitario()) {
-							produto.incrementarQuantidade(registroArquivo.getQuantidade());
-							produtoEncontrado = true;
-						}
-					}
+				// se o registro tiver menos de 3 campos, ignora o registro carregado e parte para o proximo
+				if (camposProduto.length >= 3) {
+					Produto registroArquivo = new Produto(camposProduto[0].trim(), Double.parseDouble(camposProduto[1].trim()),
+							Integer.parseInt(camposProduto[2].trim()));
 
-					if (!produtoEncontrado) {
+					if (listaProdutos.isEmpty()) {
 						listaProdutos.add(registroArquivo);
-					}
+					} else {
+						boolean produtoEncontrado = false;
+						for (Produto produto : listaProdutos) {
+							if (produto.getNome().equals(registroArquivo.getNome())
+									&& produto.getPrecoUnitario() == registroArquivo.getPrecoUnitario()) {
+								produto.incrementarQuantidade(registroArquivo.getQuantidade());
+								produtoEncontrado = true;
+							}
+						}
 
+						if (!produtoEncontrado) {
+							listaProdutos.add(registroArquivo);
+						}
+
+					}
+				} else {
+					System.out.println("Registro com dados incompletos: ");
+					for(String str : camposProduto) {
+						System.out.print("[" + str + "] | ");
+					}
+					System.out.println();
 				}
 
 				line = br.readLine();

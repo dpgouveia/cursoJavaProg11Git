@@ -1,9 +1,6 @@
-produto01,19.99,100
-produto01,19.99,50
-produto02,29.99,100
-produto03,39.99,100
-produto04,49.99,100
-produto05,59.99,100
-produto02,29.99,200
-produto02,29.99,500
-produto06,99.99,10
+TV LED,1290.99,1
+Video Game Chair,350.50,3
+Iphone X,900.00,2
+Samsung Galaxy 9,850.00,2
+Mia 9, 55.00, 10
+Mia 10, 4000.00 
