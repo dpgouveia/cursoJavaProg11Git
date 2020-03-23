@@ -32,8 +32,8 @@ public class ContratoLocacao {
 	// metodos
 	public String gerarNotaPagamento() {
 
-		long qtdHorasLocacao = MyUtils.dateDiff(horaInicioLocacao, horaFimLocacao, TimeUnit.HOURS);
-		double valorLocacao = qtdHorasLocacao <= 12 ? qtdHorasLocacao * valorHoraLocacao : valorDiarioLocacao;
+		double qtdHorasLocacao = Math.ceil(MyUtils.dateDiff(horaInicioLocacao, horaFimLocacao, TimeUnit.MINUTES) / 60.0);				
+		double valorLocacao = qtdHorasLocacao <= 12 ? qtdHorasLocacao * valorHoraLocacao : valorDiarioLocacao * (Math.ceil(qtdHorasLocacao / 24.0)) ;
 		double valorImposto = valorLocacao <= 100 ? valorLocacao * 0.2 : valorLocacao * 0.15;
 		double valorTotalPagamento = valorLocacao + valorImposto;
 

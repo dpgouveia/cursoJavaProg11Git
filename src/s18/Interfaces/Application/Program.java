@@ -8,6 +8,10 @@ import common.myUtils.MyUtils;
 import s18.Interfaces.Entidades.ContratoLocacao;
 import s18.Interfaces.Entidades.Locadora;
 import s18.Interfaces.Entidades.Veiculo;
+import s18.Interfaces.model.entities.CarRental;
+import s18.Interfaces.model.entities.Vehicle;
+import s18.Interfaces.model.services.BrazilTaxService;
+import s18.Interfaces.model.services.RentalService;
 
 public class Program {
 
@@ -18,13 +22,14 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner input = new Scanner(System.in);
 
-		aula181_exemplo01("AULA 181 - EXEMPLO 01", input);
+//		aula184_exemplo01("AULA 184 - EXEMPLO 01", input);
+		aula186_exemplo1("AULA 186 - EXEMPLO 01", input);
 
 		input.close();
 
 	}
 
-	public static void aula181_exemplo01(String prog, Scanner input) {
+	public static void aula186_exemplo1(String prog, Scanner input) {
 
 		System.out.println();
 		System.out.println("==============================");
@@ -32,22 +37,45 @@ public class Program {
 		System.out.println("==============================");
 		System.out.println();
 
-//		codigo de teste da impresso da nota de pagamento
-//		Veiculo veiculo = new Veiculo("Fiesta 2014");
-//		Locadora locadora = new Locadora("Localiza");
-//		ContratoLocacao cl;
-//		try {
-//			cl = new ContratoLocacao("Daniel", veiculo, locadora, MyUtils.timestampToDate.parse("22/03/2020 10:00:00"),
-//					MyUtils.timestampToDate.parse("23/03/2020 11:00:00"), 80.0, 400.00);
-//			System.out.println(cl);
-//		} catch (ParseException e) {
-//			System.out.println("Erro: " + e.getMessage());
-//
-//			System.out.println();
-//			System.out.println("==================");
-//			e.printStackTrace();
-//			System.out.println("==================");
-//		}
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println("Enter rental data");
+		System.out.print("Car model: ");
+		String model = MyUtils.readString(input);
+
+		System.out.print("Pickup (dd/MM/yyyy HH:mm:ss): ");
+		Date pickupDate = MyUtils.readTimeStamp(input);
+		System.out.print("Return (dd/MM/yyyy HH:mm:ss): ");
+		Date returnDate = MyUtils.readTimeStamp(input);
+		System.out.print("Enter price per hour: ");
+		Double pricePerHour = MyUtils.readDouble(input);
+		System.out.print("Enter price per day: ");
+		Double pricePerDay = MyUtils.readDouble(input);
+
+		CarRental carRental = new CarRental(pickupDate, returnDate, new Vehicle(model));
+		RentalService rs = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
+		rs.processInvoice(carRental);
+
+		System.out.println();
+		System.out.println("INVOICE:");
+		System.out.println("Basic payment: $" + String.format("%.2f", carRental.getInvoice().getBasicPayment()));
+		System.out.println("Tax: $" + String.format("%.2f", carRental.getInvoice().getTax()));
+		System.out.println("Total Payment: $" + String.format("%.2f", carRental.getInvoice().getTotalPayment()));
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - FIM DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+	}
+
+	public static void aula184_exemplo01(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
 
 		System.out.println();
 		System.out.println("==============================");
@@ -101,16 +129,16 @@ public class Program {
 
 			locadora.inserirNovoContrato(new ContratoLocacao(locatario, new Veiculo(modelo), locadora, inicioLocacao,
 					fimLocacao, valorHora, valorDiaria));
-			
+
 			qtdLocacoes--;
 		}
-		
+
 		// imprimindo todas as notas de pagamento da locadora
 		System.out.println();
 		System.out.println("==============================");
 		System.out.println("NOTAS DE PAGAMENTO");
 		System.out.println(locadora);
-		
+
 		System.out.println();
 		System.out.println("==============================");
 		System.out.println(prog + " - FIM DO PROGRAMA");
