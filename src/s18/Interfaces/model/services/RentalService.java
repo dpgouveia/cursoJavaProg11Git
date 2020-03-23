@@ -11,7 +11,7 @@ public class RentalService {
 	// atributos
 	private Double pricePerHour;
 	private Double pricePerDay;
-	private BrazilTaxService taxService;
+	private TaxService taxService;
 	
 	// construtores
 	public RentalService(Double pricePerHour, Double pricePerDay, BrazilTaxService taxService) {
