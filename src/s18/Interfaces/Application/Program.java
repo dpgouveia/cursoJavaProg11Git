@@ -9,8 +9,11 @@ import s18.Interfaces.Entidades.ContratoLocacao;
 import s18.Interfaces.Entidades.Locadora;
 import s18.Interfaces.Entidades.Veiculo;
 import s18.Interfaces.model.entities.CarRental;
+import s18.Interfaces.model.entities.Contract;
 import s18.Interfaces.model.entities.Vehicle;
 import s18.Interfaces.model.services.BrazilTaxService;
+import s18.Interfaces.model.services.InstallmentService;
+import s18.Interfaces.model.services.PayPal;
 import s18.Interfaces.model.services.RentalService;
 
 public class Program {
@@ -23,9 +26,50 @@ public class Program {
 		Scanner input = new Scanner(System.in);
 
 //		aula184_exemplo01("AULA 184 - EXEMPLO 01", input);
-		aula186_exemplo1("AULA 186 - EXEMPLO 01", input);
+//		aula186_exemplo1("AULA 186 - EXEMPLO 01", input);
+		aula189_exercicio1("AULA 189 - EXERCICIO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula189_exercicio1(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println("Enter contract data");
+		System.out.print("Number: ");
+		int number = MyUtils.readInteger(input);
+
+		System.out.print("Date (dd/MM/yyyy): ");
+		Date startDate = MyUtils.readDate(input);
+
+		System.out.print("Contract value: ");
+		double value = MyUtils.readDouble(input);
+
+		System.out.print("Enter number of installments: ");
+		int installments = MyUtils.readInt(input);
+
+		Contract contract = new Contract(number, startDate, value);
+		InstallmentService is = new InstallmentService(installments, new PayPal());
+		is.processInstallment(contract);
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println("Installments: ");
+		System.out.println(contract);
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - FIM DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
 
 	}
 
