@@ -8,8 +8,12 @@ import common.myUtils.MyUtils;
 import s18.Interfaces.Entidades.ContratoLocacao;
 import s18.Interfaces.Entidades.Locadora;
 import s18.Interfaces.Entidades.Veiculo;
+import s18.Interfaces.model.entities.AbstractShape;
 import s18.Interfaces.model.entities.CarRental;
+import s18.Interfaces.model.entities.Circle;
+import s18.Interfaces.model.entities.Color;
 import s18.Interfaces.model.entities.Contract;
+import s18.Interfaces.model.entities.Rectangle;
 import s18.Interfaces.model.entities.Vehicle;
 import s18.Interfaces.model.services.BrazilTaxService;
 import s18.Interfaces.model.services.InstallmentService;
@@ -27,9 +31,36 @@ public class Program {
 
 //		aula184_exemplo01("AULA 184 - EXEMPLO 01", input);
 //		aula186_exemplo1("AULA 186 - EXEMPLO 01", input);
-		aula189_exercicio1("AULA 189 - EXERCICIO 01", input);
+//		aula189_exercicio1("AULA 189 - EXERCICIO 01", input);
+		aula190_exemplo1("AULA 190 - EXEMPLO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula190_exemplo1(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+
+//		Shape s1 = new Circle(Color.BLUE, 2.0);
+//		Shape s2 = new Rectangle(Color.GREEN, 3.0, 4.0);
+		AbstractShape s1 = new Circle(Color.BLUE, 2.0);
+		AbstractShape s2 = new Rectangle(Color.GREEN, 3.0, 4.0);
+
+		System.out.println("Circle color: " + s1.getColor());
+		System.out.println("Circle area: " + String.format("%.3f", s1.area()));
+		System.out.println("Rectangle color: " + s2.getColor());
+		System.out.println("Rectangle area: " + String.format("%.3f", s2.area()));
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - FIM DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
 
 	}
 
