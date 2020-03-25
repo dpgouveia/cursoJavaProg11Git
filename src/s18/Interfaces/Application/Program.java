@@ -8,6 +8,9 @@ import common.myUtils.MyUtils;
 import s18.Interfaces.Entidades.ContratoLocacao;
 import s18.Interfaces.Entidades.Locadora;
 import s18.Interfaces.Entidades.Veiculo;
+import s18.Interfaces.model.devices.MyComboDevice;
+import s18.Interfaces.model.devices.MyPrinter;
+import s18.Interfaces.model.devices.MyScanner;
 import s18.Interfaces.model.entities.AbstractShape;
 import s18.Interfaces.model.entities.CarRental;
 import s18.Interfaces.model.entities.Circle;
@@ -32,12 +35,48 @@ public class Program {
 //		aula184_exemplo01("AULA 184 - EXEMPLO 01", input);
 //		aula186_exemplo1("AULA 186 - EXEMPLO 01", input);
 //		aula189_exercicio1("AULA 189 - EXERCICIO 01", input);
-		aula190_exemplo1("AULA 190 - EXEMPLO 01", input);
+//		aula190_exemplo1("AULA 190 - EXEMPLO 01", input);
+		aula191_exemplo1("AULA 191 - EXEMPLO 01", input);
 
 		input.close();
 
 	}
 
+	public static void aula191_exemplo1(String prog, Scanner input) {
+		
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+		
+		System.out.println();
+		System.out.println("==============================");
+		MyPrinter p = new MyPrinter("1080");
+		p.processDoc("My letter");
+		p.print("My letter");
+		
+		System.out.println();
+		System.out.println("==============================");
+		MyScanner s = new MyScanner("2003");
+		s.processDoc("My Email");
+		System.out.println("Scan result: " + s.scan());
+		
+		System.out.println();
+		System.out.println("==============================");
+		MyComboDevice cd = new MyComboDevice("2081");
+		cd.processDoc("My dissertation");
+		cd.print("My dissertation!");
+		System.out.println("Scan result: " + cd.scan());
+		
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - FIM DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+		
+	}
+	
 	public static void aula190_exemplo1(String prog, Scanner input) {
 
 		System.out.println();
