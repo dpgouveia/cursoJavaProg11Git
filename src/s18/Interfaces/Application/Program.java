@@ -1,5 +1,11 @@
 package s18.Interfaces.Application;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
@@ -16,6 +22,8 @@ import s18.Interfaces.model.entities.CarRental;
 import s18.Interfaces.model.entities.Circle;
 import s18.Interfaces.model.entities.Color;
 import s18.Interfaces.model.entities.Contract;
+import s18.Interfaces.model.entities.Funcionario;
+import s18.Interfaces.model.entities.Funcionario2;
 import s18.Interfaces.model.entities.Rectangle;
 import s18.Interfaces.model.entities.Vehicle;
 import s18.Interfaces.model.services.BrazilTaxService;
@@ -36,47 +44,228 @@ public class Program {
 //		aula186_exemplo1("AULA 186 - EXEMPLO 01", input);
 //		aula189_exercicio1("AULA 189 - EXERCICIO 01", input);
 //		aula190_exemplo1("AULA 190 - EXEMPLO 01", input);
-		aula191_exemplo1("AULA 191 - EXEMPLO 01", input);
+//		aula191_exemplo1("AULA 191 - EXEMPLO 01", input);
+//		aula192_exemplo2("AULA 192 - EXEMPLO 02", input);
+		aula192_exemplo3("AULA 192 - EXEMPLO 03", input);
 
 		input.close();
 
 	}
 
-	public static void aula191_exemplo1(String prog, Scanner input) {
-		
+	public static void aula192_exemplo3(String prog, Scanner input) {
+
 		System.out.println();
 		System.out.println("==============================");
 		System.out.println(prog + " - INICIO DO PROGRAMA");
 		System.out.println("==============================");
 		System.out.println();
-		
+
+		String inputFile = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a192_ex01\\in2.txt";
+
+		// lendo registros do arquivo
+		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+
+			// criando lista de nomes
+			ArrayList<Funcionario2> listaFuncionarios = new ArrayList<Funcionario2>();
+			String line = br.readLine();
+			while (line != null) {
+				String campos[] = line.split(",");
+				if (campos.length >= 2) {
+					Funcionario2 funcionario = new Funcionario2(campos[0], Double.parseDouble(campos[1]));
+					listaFuncionarios.add(funcionario);
+				}
+				line = br.readLine();
+			}
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("LISTA DE NOMES:");
+			for (Funcionario2 funcionario : listaFuncionarios) {
+				System.out.println(funcionario);
+			}
+
+			// ordenando a lista
+//			listaFuncionarios.sort(Comparator.naturalOrder()); // meu jeito
+			Collections.sort(listaFuncionarios);   // exemplo do professor
+
+			// imprimindo a lista ordenada
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("LISTA DE NOMES (ORDENADA)");
+			for (Funcionario2 funcionario : listaFuncionarios) {
+				System.out.println(funcionario);
+			}
+
+		} catch (NullPointerException | IOException e) {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("==============================");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("==============================");
+			System.out.println();
+		}
+
+	}
+
+	public static void aula192_exemplo2(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+
+		String inputFile = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a192_ex01\\in2.txt";
+
+		// lendo registros do arquivo
+		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+
+			// criando lista de nomes
+			ArrayList<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
+			String line = br.readLine();
+			while (line != null) {
+				String campos[] = line.split(",");
+				if (campos.length >= 2) {
+					Funcionario funcionario = new Funcionario(campos[0], Double.parseDouble(campos[1]));
+					listaFuncionarios.add(funcionario);
+				}
+				line = br.readLine();
+			}
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("LISTA DE NOMES:");
+			for (Funcionario funcionario : listaFuncionarios) {
+				System.out.println(funcionario);
+			}
+
+			// ordenando a lista
+			listaFuncionarios.sort(Comparator.naturalOrder()); // meu jeito
+//			Collections.sort(listaFuncionarios);   // exemplo do professor
+
+			// imprimindo a lista ordenada
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("LISTA DE NOMES (ORDENADA)");
+			for (Funcionario funcionario : listaFuncionarios) {
+				System.out.println(funcionario);
+			}
+
+		} catch (NullPointerException | IOException e) {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("==============================");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("==============================");
+			System.out.println();
+		}
+
+	}
+
+	public static void aula192_exemplo1(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+
+		String inputFile = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a192_ex01\\in.txt";
+
+		// lendo registros do arquivo
+		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+
+			// criando lista de nomes
+			ArrayList<String> listaNomes = new ArrayList<String>();
+			String line = br.readLine();
+			while (line != null) {
+				listaNomes.add(line);
+				line = br.readLine();
+			}
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("LISTA DE NOMES:");
+			for (String nome : listaNomes) {
+				System.out.println(nome);
+			}
+
+			// ordenando a lista
+			listaNomes.sort(Comparator.naturalOrder()); // meu jeito
+//			Collections.sort(listaNomes);                  // exemplo do professor
+
+			// imprimindo a lista ordenada
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("LISTA DE NOMES (ORDENADA)");
+			for (String nome : listaNomes) {
+				System.out.println(nome);
+			}
+
+		} catch (NullPointerException | IOException e) {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("==============================");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("==============================");
+			System.out.println();
+		}
+
+	}
+
+	public static void aula191_exemplo1(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+
 		System.out.println();
 		System.out.println("==============================");
 		MyPrinter p = new MyPrinter("1080");
 		p.processDoc("My letter");
 		p.print("My letter");
-		
+
 		System.out.println();
 		System.out.println("==============================");
 		MyScanner s = new MyScanner("2003");
 		s.processDoc("My Email");
 		System.out.println("Scan result: " + s.scan());
-		
+
 		System.out.println();
 		System.out.println("==============================");
 		MyComboDevice cd = new MyComboDevice("2081");
 		cd.processDoc("My dissertation");
 		cd.print("My dissertation!");
 		System.out.println("Scan result: " + cd.scan());
-		
+
 		System.out.println();
 		System.out.println("==============================");
 		System.out.println(prog + " - FIM DO PROGRAMA");
 		System.out.println("==============================");
 		System.out.println();
-		
+
 	}
-	
+
 	public static void aula190_exemplo1(String prog, Scanner input) {
 
 		System.out.println();
