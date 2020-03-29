@@ -17,12 +17,49 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner input = new Scanner(System.in);
 
-//		aula198_exemplo01("AULA 195 - EXEMPLO 01", input);
-//		aula198_exemplo02("AULA 195 - EXEMPLO 02", input);
-//		aula198_exemplo03("AULA 195 - EXEMPLO 03", input);
-		aula198_exemplo05("AULA 195 - EXEMPLO 05", input);
+//		aula198_exemplo01("AULA 198 - EXEMPLO 01", input);
+//		aula198_exemplo02("AULA 198 - EXEMPLO 02", input);
+//		aula198_exemplo03("AULA 198 - EXEMPLO 03", input);
+//		aula198_exemplo04("AULA 198 - EXEMPLO 04", input);
+//		aula198_exemplo05("AULA 198 - EXEMPLO 05", input);
+		aula199_exemplo01("AULA 199 - EXEMPLO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula199_exemplo01(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+		} catch (InvalidParameterException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (NullPointerException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(
+					"Erro: objetos necessários para execução do programa nao foram instanciados corretamente!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
