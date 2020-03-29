@@ -3,6 +3,7 @@ package s18.Interfaces.Application;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,13 +19,16 @@ import s18.Interfaces.model.devices.MyComboDevice;
 import s18.Interfaces.model.devices.MyPrinter;
 import s18.Interfaces.model.devices.MyScanner;
 import s18.Interfaces.model.entities.AbstractShape;
+import s18.Interfaces.model.entities.BrazilInterestService;
 import s18.Interfaces.model.entities.CarRental;
 import s18.Interfaces.model.entities.Circle;
 import s18.Interfaces.model.entities.Color;
 import s18.Interfaces.model.entities.Contract;
 import s18.Interfaces.model.entities.Funcionario;
 import s18.Interfaces.model.entities.Funcionario2;
+import s18.Interfaces.model.entities.InterestService;
 import s18.Interfaces.model.entities.Rectangle;
+import s18.Interfaces.model.entities.UsaInterestService;
 import s18.Interfaces.model.entities.Vehicle;
 import s18.Interfaces.model.services.BrazilTaxService;
 import s18.Interfaces.model.services.InstallmentService;
@@ -46,9 +50,48 @@ public class Program {
 //		aula190_exemplo1("AULA 190 - EXEMPLO 01", input);
 //		aula191_exemplo1("AULA 191 - EXEMPLO 01", input);
 //		aula192_exemplo2("AULA 192 - EXEMPLO 02", input);
-		aula192_exemplo3("AULA 192 - EXEMPLO 03", input);
+//		aula192_exemplo3("AULA 192 - EXEMPLO 03", input);
+		aula195_exemplo1("AULA 195 - EXEMPLO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula195_exemplo1(String prog, Scanner input) {
+
+		System.out.println();
+		System.out.println("==============================");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("==============================");
+		System.out.println();
+
+		try {
+			InterestService is1 = new BrazilInterestService();
+			InterestService is2 = new UsaInterestService();
+			System.out.println();
+			System.out.println("==============================");
+			System.out.print("Amount: ");
+			double amount = MyUtils.readDouble(input);
+			System.out.print("Months: ");
+			int months = MyUtils.readInt(input);
+			System.out.println("Payment after " + months + " months: ");
+			System.out.println("Brazil: " + String.format("%.2f", is1.payment(amount, months)));
+			System.out.println("USA: " + String.format("%.2f", is2.payment(amount, months)));
+		} catch (InvalidParameterException e) {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println("Error: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("==============================");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("==============================");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("==============================");
+			System.out.println();
+		}
 
 	}
 
@@ -85,7 +128,7 @@ public class Program {
 
 			// ordenando a lista
 //			listaFuncionarios.sort(Comparator.naturalOrder()); // meu jeito
-			Collections.sort(listaFuncionarios);   // exemplo do professor
+			Collections.sort(listaFuncionarios); // exemplo do professor
 
 			// imprimindo a lista ordenada
 			System.out.println();
