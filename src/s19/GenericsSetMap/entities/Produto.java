@@ -1,6 +1,6 @@
 package s19.GenericsSetMap.entities;
 
-public class Produto {
+public class Produto implements Comparable<Produto> {
 
 	// atributos
 	private String nome;
@@ -28,6 +28,17 @@ public class Produto {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	// metodos
+	@Override
+	public int compareTo(Produto o) {
+		return -1 * preco.compareTo(o.getPreco());
+	}
+
+	@Override
+	public String toString() {
+		return nome + ", " + "Preço: " + String.format("%.2f", preco) + "\n";
 	}
 
 }

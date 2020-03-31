@@ -1,14 +1,20 @@
 package s19.GenericsSetMap.application;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
 import common.myUtils.MyUtils;
+import s19.GenericsSetMap.entities.CalculationService;
 import s19.GenericsSetMap.entities.PrintService;
 import s19.GenericsSetMap.entities.PrintServiceInteger;
 import s19.GenericsSetMap.entities.PrintServiceObject;
 import s19.GenericsSetMap.entities.PrintServiceString;
+import s19.GenericsSetMap.entities.Produto;
 
 public class Program {
 
@@ -34,10 +40,24 @@ public class Program {
 		System.out.println("----------------------------");
 		System.out.println(prog + " - INICIO DO PROGRAMA");
 		System.out.println("----------------------------");
+		
+		File path = new File(
+				"C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a199_ex01\\in.txt");
+		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+//			System.out.println(cs.max(listaProdutos));
+			String line = br.readLine();
+			while (line != null) {
+//				System.out.println(line);
+				String campos[] = line.split(",");
+				listaProdutos.add(new Produto(campos[0], Double.parseDouble(campos[1])));
+				line = br.readLine();
+			}
 
-		try {
+			System.out.print("Produto mais caro: ");
+			System.out.println(CalculationService.max(listaProdutos));
 
-		} catch (InvalidParameterException e) {
+		} catch (IllegalStateException e) {
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("Erro: " + e.getMessage());
