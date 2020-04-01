@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -28,9 +30,62 @@ public class Program {
 //		aula198_exemplo03("AULA 198 - EXEMPLO 03", input);
 //		aula198_exemplo04("AULA 198 - EXEMPLO 04", input);
 //		aula198_exemplo05("AULA 198 - EXEMPLO 05", input);
-		aula199_exemplo01("AULA 199 - EXEMPLO 01", input);
+//		aula199_exemplo01("AULA 199 - EXEMPLO 01", input);
+		aula200_exemplo01("AULA 200 - EXEMPLO 01", input);
 
 		input.close();
+
+	}
+
+	private static void printList(List<?> list) {
+		for (Object obj : list) {
+			System.out.println(obj);
+		}
+	}
+
+	public static void aula200_exemplo01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			ArrayList<Object> myObjs = new ArrayList<Object>();
+			ArrayList<Integer> myNumbers = new ArrayList<Integer>();
+			ArrayList<?> myObjs2 = new ArrayList<Object>();
+//			myObjs = myNumbers;      // nao pode, pois lista de objetos nao e um super tipo de lista de integer
+			myObjs2 = myNumbers;
+
+			System.out.println();
+			Program.printList(Arrays.asList(5, 2, 10));
+			
+			System.out.println();
+			Program.printList(Arrays.asList("Daniel", "Joao", "Kelia"));
+			
+			List<?> intList = new ArrayList<Integer>();
+//			intList.add(3);     /// nao pode, pois o compilador nao sabe dizer o tipo de dados que a lista suporta
+			
+
+		} catch (NullPointerException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(
+					"Erro: objetos necessários para execução do programa nao foram instanciados corretamente!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
@@ -40,9 +95,10 @@ public class Program {
 		System.out.println("----------------------------");
 		System.out.println(prog + " - INICIO DO PROGRAMA");
 		System.out.println("----------------------------");
-		
+
+//		File path = new File("C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a199_ex01\\in.txt");
 		File path = new File(
-				"C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a199_ex01\\in.txt");
+				"C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a199_ex01\\in.txt");
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 //			System.out.println(cs.max(listaProdutos));

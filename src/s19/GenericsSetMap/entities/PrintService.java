@@ -13,7 +13,7 @@ public class PrintService<T> {
 		listaRegistros = new ArrayList<T>();
 		
 		if (listaRegistros == null) {
-			throw new IllegalStateException("Lista de numeros inexistente no objeto");
+			throw new IllegalStateException("Erro ao criar lista de registros no objeto");
 		}
 	}
 
@@ -25,7 +25,7 @@ public class PrintService<T> {
 	public T first() {
 		
 		if (listaRegistros.isEmpty()) {
-			throw new IllegalStateException("A lista de numero esta VAZIA!");
+			throw new IllegalStateException("A lista de registros esta VAZIA!");
 		}
 
 		return listaRegistros.get(0);
