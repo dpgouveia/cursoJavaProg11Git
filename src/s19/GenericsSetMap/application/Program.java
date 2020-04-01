@@ -6,9 +6,13 @@ import java.io.FileReader;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 import common.myUtils.MyUtils;
 import s19.GenericsSetMap.entities.CalculationService;
@@ -39,9 +43,110 @@ public class Program {
 //		aula201_exemplo01("AULA 201 - EXEMPLO 01", input);
 //		aula202_exemplo01("AULA 202 - EXEMPLO 01", input);
 //		aula202_exemplo02("AULA 202 - EXEMPLO 02", input);
-		aula203_exemplo01("AULA 203 - EXEMPLO 01", input);
+//		aula203_exemplo01("AULA 203 - EXEMPLO 01", input);
+//		aula204_exemplo01("AULA 204 - EXEMPLO 01", input);
+		aula204_exemplo02("AULA 204 - EXEMPLO 02", input);
 
 		input.close();
+
+	}
+
+	public static void aula204_exemplo02(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			Set<Integer> a = new TreeSet<Integer>(Arrays.asList(0, 2, 4, 5, 6, 8, 10));
+			Set<Integer> b = new TreeSet<Integer>(Arrays.asList(5, 6, 7, 8, 9, 10));
+
+			// union
+			Set<Integer> c = new TreeSet<Integer>(a);
+			c.addAll(b);
+			System.out.println(c);
+
+			// intersection
+			Set<Integer> d = new TreeSet<Integer>(a);
+			d.retainAll(b);
+			System.out.println(d);
+
+			// difference
+			Set<Integer> e = new TreeSet<Integer>(a);
+			e.removeAll(b);
+			System.out.println(e);
+
+		} catch (NullPointerException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(
+					"Erro: objetos necessários para execução do programa nao foram instanciados corretamente!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
+
+	}
+
+	public static void aula204_exemplo01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+//			Set<String> set = new HashSet<String>();
+//			Set<String> set = new TreeSet<String>();
+			Set<String> set = new LinkedHashSet<String>();
+			set.add("TV");
+			set.add("Notebook");
+			set.add("Tablet");
+
+//			set.remove("Tablet");
+//			set.removeIf(x -> x.length() > 3);        // remove todos os elementos no qual X tenha mais que 3 caracteres
+			set.removeIf(x -> x.charAt(0) == 'T'); // remove todos os elementos no qual a primeira letra seja T
+
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(set.contains("Notebook"));
+
+			System.out.println();
+			System.out.println("----------------------------");
+			for (String p : set) {
+				System.out.println(p);
+			}
+
+		} catch (NullPointerException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(
+					"Erro: objetos necessários para execução do programa nao foram instanciados corretamente!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
@@ -77,17 +182,17 @@ public class Program {
 			System.out.println(c1.equals(c2));
 			System.out.println(c1.equals(c3));
 			System.out.println(c4.equals(c3));
-			System.out.println(c4 == c3);         // referencia de memoria e nao comparacao de conteudo
-			
+			System.out.println(c4 == c3); // referencia de memoria e nao comparacao de conteudo
+
 			System.out.println();
 			System.out.println("----------------------------");
 			String s1 = "Test";
 			String s2 = "Test";
 			String s3 = new String("Test");
 			String s4 = new String("Test");
-			System.out.println(s1 == s2);        // neste caso o compilador realiza um tratamento especial na hora de validar o conteudo
-			System.out.println(s3 == s4);        // aqui voltamos a comparar referencias de memoria
-			
+			System.out.println(s1 == s2); // neste caso o compilador realiza um tratamento especial na hora de validar o
+											// conteudo
+			System.out.println(s3 == s4); // aqui voltamos a comparar referencias de memoria
 
 		} catch (NullPointerException e) {
 			System.out.println();
