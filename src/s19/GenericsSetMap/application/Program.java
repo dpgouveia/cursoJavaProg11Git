@@ -13,6 +13,7 @@ import java.util.Scanner;
 import common.myUtils.MyUtils;
 import s19.GenericsSetMap.entities.CalculationService;
 import s19.GenericsSetMap.entities.Circulo;
+import s19.GenericsSetMap.entities.Cliente;
 import s19.GenericsSetMap.entities.PrintService;
 import s19.GenericsSetMap.entities.PrintServiceInteger;
 import s19.GenericsSetMap.entities.PrintServiceObject;
@@ -36,9 +37,77 @@ public class Program {
 //		aula199_exemplo01("AULA 199 - EXEMPLO 01", input);
 //		aula200_exemplo01("AULA 200 - EXEMPLO 01", input);
 //		aula201_exemplo01("AULA 201 - EXEMPLO 01", input);
-		aula201_exemplo02("AULA 201 - EXEMPLO 02", input);
+//		aula202_exemplo01("AULA 202 - EXEMPLO 01", input);
+//		aula202_exemplo02("AULA 202 - EXEMPLO 02", input);
+		aula203_exemplo01("AULA 203 - EXEMPLO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula203_exemplo01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			System.out.println();
+			System.out.println("----------------------------");
+			String a = "Maria";
+			String b = "Daniel";
+			System.out.println(a.equals(b));
+
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(a.hashCode());
+			System.out.println(b.hashCode());
+
+			System.out.println();
+			System.out.println("----------------------------");
+			Cliente c1 = new Cliente("Maria", "maria@gmail.com");
+			Cliente c2 = new Cliente("Alex", "alex@gmail.com");
+			Cliente c3 = new Cliente("Maria", "outra_maria@gmail.com");
+			Cliente c4 = new Cliente("Maria", "outra_maria@gmail.com");
+			System.out.println(c1.hashCode());
+			System.out.println(c2.hashCode());
+			System.out.println(c3.hashCode());
+			System.out.println(c4.hashCode());
+			System.out.println(c1.equals(c2));
+			System.out.println(c1.equals(c3));
+			System.out.println(c4.equals(c3));
+			System.out.println(c4 == c3);         // referencia de memoria e nao comparacao de conteudo
+			
+			System.out.println();
+			System.out.println("----------------------------");
+			String s1 = "Test";
+			String s2 = "Test";
+			String s3 = new String("Test");
+			String s4 = new String("Test");
+			System.out.println(s1 == s2);        // neste caso o compilador realiza um tratamento especial na hora de validar o conteudo
+			System.out.println(s3 == s4);        // aqui voltamos a comparar referencias de memoria
+			
+
+		} catch (NullPointerException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(
+					"Erro: objetos necessários para execução do programa nao foram instanciados corretamente!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
@@ -48,7 +117,7 @@ public class Program {
 		}
 	}
 
-	public static void aula201_exemplo02(String prog, Scanner input) {
+	public static void aula202_exemplo02(String prog, Scanner input) {
 		System.out.println();
 		System.out.println("----------------------------");
 		System.out.println(prog + " - INICIO DO PROGRAMA");
@@ -122,7 +191,7 @@ public class Program {
 		return areas;
 	}
 
-	public static void aula201_exemplo01(String prog, Scanner input) {
+	public static void aula202_exemplo01(String prog, Scanner input) {
 		System.out.println();
 		System.out.println("----------------------------");
 		System.out.println(prog + " - INICIO DO PROGRAMA");
@@ -170,7 +239,7 @@ public class Program {
 		}
 	}
 
-	public static void aula200_exemplo01(String prog, Scanner input) {
+	public static void aula201_exemplo01(String prog, Scanner input) {
 		System.out.println();
 		System.out.println("----------------------------");
 		System.out.println(prog + " - INICIO DO PROGRAMA");
@@ -215,7 +284,7 @@ public class Program {
 
 	}
 
-	public static void aula199_exemplo01(String prog, Scanner input) {
+	public static void aula200_exemplo01(String prog, Scanner input) {
 
 		System.out.println();
 		System.out.println("----------------------------");
