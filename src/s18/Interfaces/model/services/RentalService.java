@@ -2,7 +2,7 @@ package s18.Interfaces.model.services;
 
 import java.util.concurrent.TimeUnit;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s18.Interfaces.model.entities.CarRental;
 import s18.Interfaces.model.entities.Invoice;
 

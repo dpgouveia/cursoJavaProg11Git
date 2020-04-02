@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s14.HerancaPolimorfismo.Entidades.Account;
 import s14.HerancaPolimorfismo.Entidades.Account2;
 import s14.HerancaPolimorfismo.Entidades.BusinessAcount;

@@ -3,7 +3,7 @@ package s18.Interfaces.Entidades;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 
 public class ContratoLocacao {
 

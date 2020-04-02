@@ -3,7 +3,7 @@ package s18.Interfaces.model.entities;
 import java.util.ArrayList;
 import java.util.Date;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 
 public class Contract {
 

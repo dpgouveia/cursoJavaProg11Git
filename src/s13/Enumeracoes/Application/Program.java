@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s13.Enumeracoes.Entidades.Client;
 import s13.Enumeracoes.Entidades.Comment;
 import s13.Enumeracoes.Entidades.Contrato;

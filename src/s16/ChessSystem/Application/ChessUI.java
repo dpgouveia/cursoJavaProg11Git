@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s16.ChessSystem.Chess.ChessMatch;
 import s16.ChessSystem.Chess.ChessPiece;
 import s16.ChessSystem.Chess.ChessPosition;

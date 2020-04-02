@@ -3,7 +3,7 @@ package s09.ConstrutoresSobrecargaEncapsulamento.Application;
 import java.util.Locale;
 import java.util.Scanner;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s09.ConstrutoresSobrecargaEncapsulamento.Entidades.ContaBancaria;
 import s09.ConstrutoresSobrecargaEncapsulamento.Entidades.Product;
 

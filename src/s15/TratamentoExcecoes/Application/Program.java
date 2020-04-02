@@ -9,7 +9,7 @@ import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s15.TratamentoExcecoes.Model.Entidades.Account;
 import s15.TratamentoExcecoes.Model.Entidades.Reserva;
 import s15.TratamentoExcecoes.Model.Entidades.ReservaComException;

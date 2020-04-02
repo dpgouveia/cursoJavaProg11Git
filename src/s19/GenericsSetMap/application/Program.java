@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s19.GenericsSetMap.entities.CalculationService;
 import s19.GenericsSetMap.entities.Circulo;
 import s19.GenericsSetMap.entities.Cliente;
@@ -111,12 +110,12 @@ public class Program {
 //			Set<String> set = new TreeSet<String>();
 			Set<String> set = new LinkedHashSet<String>();
 			set.add("TV");
-			set.add("Notebook");
 			set.add("Tablet");
+			set.add("Notebook");
 
 //			set.remove("Tablet");
 //			set.removeIf(x -> x.length() > 3);        // remove todos os elementos no qual X tenha mais que 3 caracteres
-			set.removeIf(x -> x.charAt(0) == 'T'); // remove todos os elementos no qual a primeira letra seja T
+//			set.removeIf(x -> x.charAt(0) == 'T'); // remove todos os elementos no qual a primeira letra seja T
 
 			System.out.println();
 			System.out.println("----------------------------");
@@ -125,7 +124,7 @@ public class Program {
 			System.out.println();
 			System.out.println("----------------------------");
 			for (String p : set) {
-				System.out.println(p);
+				System.out.println(p + " - [" + p.hashCode() + "]");
 			}
 
 		} catch (NullPointerException e) {

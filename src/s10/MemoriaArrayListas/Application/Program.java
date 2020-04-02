@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import common.myUtils.MyUtils;
+import common.utils.MyUtils;
 import s10.MemoriaArrayListas.Entidades.CadastroFuncionarios;
 import s10.MemoriaArrayListas.Entidades.Funcionario;
 import s10.MemoriaArrayListas.Entidades.Pensionato;
