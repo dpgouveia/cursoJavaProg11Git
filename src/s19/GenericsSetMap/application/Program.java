@@ -45,12 +45,52 @@ public class Program {
 //		aula202_exemplo02("AULA 202 - EXEMPLO 02", input);
 //		aula203_exemplo01("AULA 203 - EXEMPLO 01", input);
 //		aula204_exemplo01("AULA 203 - EXEMPLO 02", input);
-		aula204_exemplo01("AULA 204 - EXEMPLO 01", input);
+//		aula204_exemplo01("AULA 204 - EXEMPLO 01", input);
+		aula205_exemplo01("AULA 205 - EXEMPLO 01", input);
 
 		input.close();
 
 	}
-	
+
+	public static void aula205_exemplo01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			Set<Produto> set = new TreeSet<Produto>();
+
+			set.add(new Produto("TV", 900.00));
+			set.add(new Produto("Notebook", 1200.00));
+			set.add(new Produto("Tablet", 400.00));
+
+			for (Produto p : set) {
+				System.out.println(p);
+			}
+
+		} catch (NullPointerException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(
+					"Erro: objetos necessários para execução do programa nao foram instanciados corretamente!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
+	}
+
 	public static void aula204_exemplo01(String prog, Scanner input) {
 		System.out.println();
 		System.out.println("----------------------------");
@@ -60,15 +100,16 @@ public class Program {
 		try {
 
 			Set<Produto> set = new HashSet<Produto>();
-			
+
 			set.add(new Produto("TV", 900.00));
 			set.add(new Produto("Notebook", 1200.00));
 			set.add(new Produto("Tablet", 400.00));
-			
+
 			Produto prod = new Produto("Notebook", 1200.00);
-			
-			// se a classe Produto nao tivesse a redefinicao dos metodos hashCode e equals a comparacao seria falso (o java iria comparar a referencia de memoria)
-			System.out.println(set.contains(prod)); 
+
+			// se a classe Produto nao tivesse a redefinicao dos metodos hashCode e equals a
+			// comparacao seria falso (o java iria comparar a referencia de memoria)
+			System.out.println(set.contains(prod));
 
 		} catch (NullPointerException e) {
 			System.out.println();

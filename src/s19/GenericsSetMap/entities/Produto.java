@@ -33,7 +33,8 @@ public class Produto implements Comparable<Produto> {
 	// metodos
 	@Override
 	public int compareTo(Produto o) {
-		return -1 * preco.compareTo(o.getPreco());
+		// ordenacao por : ASC nome | DSC preço
+		return nome.toUpperCase().compareTo(o.nome.toUpperCase()) + -1 * preco.compareTo(o.getPreco());
 	}
 
 	@Override
