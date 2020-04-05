@@ -6,10 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.text.ParseException;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -19,6 +17,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import common.utils.MyUtils;
+import s19.GenericsSetMap.entities.Aluno;
 import s19.GenericsSetMap.entities.CalculationService;
 import s19.GenericsSetMap.entities.Circulo;
 import s19.GenericsSetMap.entities.Cliente;
@@ -52,9 +51,97 @@ public class Program {
 //		aula204_exemplo01("AULA 203 - EXEMPLO 02", input);
 //		aula204_exemplo01("AULA 204 - EXEMPLO 01", input);
 //		aula205_exemplo01("AULA 205 - EXEMPLO 01", input);
-		aula206_exercicio01("AULA 206 - EXERCICIO 01", input);
+//		aula206_exercicio01("AULA 206 - EXERCICIO 01", input);
+		aula207_exercicio01("AULA 207 - EXERCICIO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula207_exercicio01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			Set<Aluno> alunosCursoA = new HashSet<Aluno>();
+			Set<Aluno> alunosCursoB = new HashSet<Aluno>();
+			Set<Aluno> alunosCursoC = new HashSet<Aluno>();
+
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.print("Quantidade de alunos do curso A: ");
+			int qtdAlunosCurso = MyUtils.readInt(input);
+			if (qtdAlunosCurso <= 0) {
+				throw new IllegalArgumentException(
+						"A quantidade de alunos a serem cadastrado no curso DEVE SER MAIOR QUE ZERO!");
+			}
+			while (qtdAlunosCurso > 0) {
+				System.out.print("Digite o codigo do aluno: ");
+				alunosCursoA.add(new Aluno(MyUtils.readInt(input)));
+				qtdAlunosCurso--;
+			}
+
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.print("Quantidade de alunos do curso B: ");
+			qtdAlunosCurso = MyUtils.readInt(input);
+			if (qtdAlunosCurso <= 0) {
+				throw new IllegalArgumentException(
+						"A quantidade de alunos a serem cadastrado no curso DEVE SER MAIOR QUE ZERO!");
+			}
+			while (qtdAlunosCurso > 0) {
+				System.out.print("Digite o codigo do aluno: ");
+				alunosCursoB.add(new Aluno(MyUtils.readInt(input)));
+				qtdAlunosCurso--;
+			}
+
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.print("Quantidade de alunos do curso C: ");
+			qtdAlunosCurso = MyUtils.readInt(input);
+			if (qtdAlunosCurso <= 0) {
+				throw new IllegalArgumentException(
+						"A quantidade de alunos a serem cadastrado no curso DEVE SER MAIOR QUE ZERO!");
+			}
+			while (qtdAlunosCurso > 0) {
+				System.out.print("Digite o codigo do aluno: ");
+				alunosCursoC.add(new Aluno(MyUtils.readInt(input)));
+				qtdAlunosCurso--;
+			}
+
+			System.out.println();
+			System.out.println("----------------------------");
+			Set<Aluno> listaAlunosProfessorAlex = new HashSet<Aluno>();
+			listaAlunosProfessorAlex.addAll(alunosCursoA);
+			listaAlunosProfessorAlex.addAll(alunosCursoB);
+			listaAlunosProfessorAlex.addAll(alunosCursoC);
+			System.out.println("Total de alunos do professor Alex: " + listaAlunosProfessorAlex.size());
+
+		} catch (IllegalArgumentException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (RuntimeException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal na maquina virtual JAVA durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
@@ -80,7 +167,8 @@ public class Program {
 							"Um ou mais registros do arquivo nao contem a quantidade de campos necessarios para continuar a execucao do programa");
 				}
 
-				LoggedUser lu = new LoggedUser(fields[0], MyUtils.stringUTCDateToDate((fields[1])));   // meu jeito de ler UTC date
+				LoggedUser lu = new LoggedUser(fields[0], MyUtils.stringUTCDateToDate((fields[1]))); // meu jeito de ler
+																										// UTC date
 //				LoggedUser lu = new LoggedUser(fields[0], Date.from(Instant.parse(fields[1])));        // jeito do professor
 				System.out.println(lu);
 				listaUsuarios.add(lu);
