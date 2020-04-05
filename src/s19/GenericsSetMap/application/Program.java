@@ -12,8 +12,10 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import common.utils.MyUtils;
@@ -52,9 +54,88 @@ public class Program {
 //		aula204_exemplo01("AULA 204 - EXEMPLO 01", input);
 //		aula205_exemplo01("AULA 205 - EXEMPLO 01", input);
 //		aula206_exercicio01("AULA 206 - EXERCICIO 01", input);
-		aula207_exercicio01("AULA 207 - EXERCICIO 01", input);
+//		aula207_exercicio01("AULA 207 - EXERCICIO 01", input);
+		aula208_exemplo01("AULA 208 - EXERCICIO 01", input);
 
 		input.close();
+
+	}
+	
+	public static void aula208_exemplo01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			Map<String,String> cookies = new TreeMap<String,String>();
+			
+			cookies.put("username", "Maria");
+			cookies.put("email", "maria@gmail.com");
+			cookies.put("phone", "99711122");
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("All Cookies:");
+			for(String key : cookies.keySet()) {
+				System.out.println("key = [" + key + "] value = [" + cookies.get(key) + "]");
+			}
+			
+			cookies.remove("email");
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("All Cookies:");
+			for(String key : cookies.keySet()) {
+				System.out.println("key = [" + key + "] value = [" + cookies.get(key) + "]");
+			}
+			
+			cookies.put("phone", "99771133");
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("All Cookies:");
+			for(String key : cookies.keySet()) {
+				System.out.println("key = [" + key + "] value = [" + cookies.get(key) + "]");
+			}
+			
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Contains 'phone' key: " + cookies.containsKey("phone"));
+			
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Phone number: [" + cookies.get("phone") + "]");
+			
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Email: [" + cookies.get("email") + "]");
+			
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Cookies size: [" + cookies.size() + "]");
+			
+
+		} catch (IllegalArgumentException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (RuntimeException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal na maquina virtual JAVA durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
