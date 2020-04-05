@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.text.ParseException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -69,24 +71,26 @@ public class Program {
 
 		// C:\Users\BRDPG1\Documents\eclipse-workspace\cursoJavaProg11Git\temp\a206_exer01\in.txt
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-		
-			
-			List<LoggedUser> listaUsuarios = new ArrayList<LoggedUser>();
+			Set<LoggedUser> listaUsuarios = new HashSet<LoggedUser>();
 			String line = br.readLine();
-			while(line != null) {
-//				System.out.println(line);
+			while (line != null) {
 				String fields[] = line.split(" ");
-				
-				if(fields.length != 2) {
-					throw new IOException("Um ou mais registros do arquivo nao contem a quantidade de campos necessarios para continuar a execucao do programa");
+				if (fields.length != 2) {
+					throw new IOException(
+							"Um ou mais registros do arquivo nao contem a quantidade de campos necessarios para continuar a execucao do programa");
 				}
-				
-				LoggedUser lu = new LoggedUser(fields[0], MyUtils.utcdateToDate.parse((fields[1])));
+
+				LoggedUser lu = new LoggedUser(fields[0], MyUtils.stringUTCDateToDate((fields[1])));   // meu jeito de ler UTC date
+//				LoggedUser lu = new LoggedUser(fields[0], Date.from(Instant.parse(fields[1])));        // jeito do professor
 				System.out.println(lu);
 				listaUsuarios.add(lu);
 
 				line = br.readLine();
 			}
+
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Número total de usuários: " + listaUsuarios.size());
 
 		} catch (ParseException | IOException e) {
 			System.out.println();

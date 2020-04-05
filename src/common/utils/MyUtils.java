@@ -1,10 +1,11 @@
 package common.utils;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class MyUtils {
@@ -12,7 +13,6 @@ public class MyUtils {
 	// atributos estaticos
 	public static final SimpleDateFormat timeStampToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	public static final SimpleDateFormat simpleDateToDate = new SimpleDateFormat("dd/MM/yyyy");
-	public static final DateFormat utcdateToDate = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ssZ");
 
 	// metodos estaticos
 	public static int readInt(Scanner input) {
@@ -133,7 +133,7 @@ public class MyUtils {
 		long diffMiliseconds = target.getTime() - source.getTime();
 		return timeUnit.convert(diffMiliseconds, TimeUnit.MILLISECONDS);
 	}
-	
+
 	public static Date readTimeStamp(Scanner input) {
 
 		Locale.setDefault(Locale.US);
@@ -158,6 +158,12 @@ public class MyUtils {
 			}
 		} while (invalidDate);
 		return output;
+	}
+
+	public static Date stringUTCDateToDate(String utcDate) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return sdf.parse(utcDate);
 	}
 
 	// for test purposes
