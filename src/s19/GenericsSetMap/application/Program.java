@@ -3,7 +3,9 @@ package s19.GenericsSetMap.application;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,6 +20,7 @@ import common.utils.MyUtils;
 import s19.GenericsSetMap.entities.CalculationService;
 import s19.GenericsSetMap.entities.Circulo;
 import s19.GenericsSetMap.entities.Cliente;
+import s19.GenericsSetMap.entities.LoggedUser;
 import s19.GenericsSetMap.entities.PrintService;
 import s19.GenericsSetMap.entities.PrintServiceInteger;
 import s19.GenericsSetMap.entities.PrintServiceObject;
@@ -46,9 +49,61 @@ public class Program {
 //		aula203_exemplo01("AULA 203 - EXEMPLO 01", input);
 //		aula204_exemplo01("AULA 203 - EXEMPLO 02", input);
 //		aula204_exemplo01("AULA 204 - EXEMPLO 01", input);
-		aula205_exemplo01("AULA 205 - EXEMPLO 01", input);
+//		aula205_exemplo01("AULA 205 - EXEMPLO 01", input);
+		aula206_exercicio01("AULA 206 - EXERCICIO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula206_exercicio01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.print("Enter file full path: ");
+		String filePath = MyUtils.readString(input);
+
+		// C:\Users\BRDPG1\Documents\eclipse-workspace\cursoJavaProg11Git\temp\a206_exer01\in.txt
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+		
+			
+			List<LoggedUser> listaUsuarios = new ArrayList<LoggedUser>();
+			String line = br.readLine();
+			while(line != null) {
+//				System.out.println(line);
+				String fields[] = line.split(" ");
+				
+				if(fields.length != 2) {
+					throw new IOException("Um ou mais registros do arquivo nao contem a quantidade de campos necessarios para continuar a execucao do programa");
+				}
+				
+				LoggedUser lu = new LoggedUser(fields[0], MyUtils.utcdateToDate.parse((fields[1])));
+				System.out.println(lu);
+				listaUsuarios.add(lu);
+
+				line = br.readLine();
+			}
+
+		} catch (ParseException | IOException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro : " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 

@@ -1,5 +1,6 @@
 package common.utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -10,7 +11,8 @@ public class MyUtils {
 
 	// atributos estaticos
 	public static final SimpleDateFormat timeStampToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	public static final SimpleDateFormat stringToDate = new SimpleDateFormat("dd/MM/yyyy");
+	public static final SimpleDateFormat simpleDateToDate = new SimpleDateFormat("dd/MM/yyyy");
+	public static final DateFormat utcdateToDate = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ssZ");
 
 	// metodos estaticos
 	public static int readInt(Scanner input) {

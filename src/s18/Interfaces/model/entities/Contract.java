@@ -41,7 +41,7 @@ public class Contract {
 		StringBuffer sb = new StringBuffer();
 		for (Installments inst : installments) {
 			System.out.println(
-					MyUtils.stringToDate.format(inst.getDueDate()) + " - $ " + String.format("%.2f", inst.getAmount()));
+					MyUtils.simpleDateToDate.format(inst.getDueDate()) + " - $ " + String.format("%.2f", inst.getAmount()));
 		}
 		return sb.toString();
 	}
