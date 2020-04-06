@@ -1,13 +1,13 @@
 package s19.GenericsSetMap.entities;
 
-public class Produto implements Comparable<Produto> {
+public class Produto2 {
 
 	// atributos
 	private String nome;
 	private Double preco;
 
 	// construtores
-	public Produto(String nome, Double preco) {
+	public Produto2(String nome, Double preco) {
 		super();
 		this.nome = nome;
 		this.preco = preco;
@@ -29,20 +29,9 @@ public class Produto implements Comparable<Produto> {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-
+	
 	// metodos
 	@Override
-	public int compareTo(Produto o) {
-		// ordenacao por : ASC nome | DSC preço
-		return nome.toUpperCase().compareTo(o.nome.toUpperCase()) + -1 * preco.compareTo(o.getPreco());
-	}
-
-	@Override
-	public String toString() {
-		return nome + ", " + "Preço: " + String.format("%.2f", preco) + "\n";
-	}
-
-	 @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -59,7 +48,7 @@ public class Produto implements Comparable<Produto> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Produto2 other = (Produto2) obj;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -72,5 +61,7 @@ public class Produto implements Comparable<Produto> {
 			return false;
 		return true;
 	}
+
+	
 
 }

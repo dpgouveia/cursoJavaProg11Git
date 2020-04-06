@@ -8,6 +8,7 @@ import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -29,6 +30,7 @@ import s19.GenericsSetMap.entities.PrintServiceInteger;
 import s19.GenericsSetMap.entities.PrintServiceObject;
 import s19.GenericsSetMap.entities.PrintServiceString;
 import s19.GenericsSetMap.entities.Produto;
+import s19.GenericsSetMap.entities.Produto2;
 import s19.GenericsSetMap.entities.Retangulo;
 import s19.GenericsSetMap.entities.Shape;
 
@@ -55,12 +57,57 @@ public class Program {
 //		aula205_exemplo01("AULA 205 - EXEMPLO 01", input);
 //		aula206_exercicio01("AULA 206 - EXERCICIO 01", input);
 //		aula207_exercicio01("AULA 207 - EXERCICIO 01", input);
-		aula208_exemplo01("AULA 208 - EXERCICIO 01", input);
+//		aula208_exemplo01("AULA 208 - EXERCICIO 01", input);
+		aula208_exemplo02("AULA 208 - EXERCICIO 02", input);
 
 		input.close();
 
 	}
-	
+
+	public static void aula208_exemplo02(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		try {
+
+			Map<Produto2, Double> stock = new HashMap<Produto2, Double>();
+			Produto2 p1 = new Produto2("Tv", 900.0);
+			Produto2 p2 = new Produto2("Notebook", 1200.0);
+			Produto2 p3 = new Produto2("Tablet", 400.0);
+
+			stock.put(p1, 10000.0);
+			stock.put(p2, 20000.0);
+			stock.put(p3, 15000.0);
+
+			Produto2 ps = new Produto2("Tv", 900.0);
+			System.out.println("Contains 'ps' key: " + stock.containsKey(ps)); // sem equals() e hashCode() o produto
+																				// nao sera encontrado na lista, pois a
+																				// comparacao sera feita com referencia
+																				// de memoria
+
+		} catch (RuntimeException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal na maquina virtual JAVA durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
+
+	}
+
 	public static void aula208_exemplo01(String prog, Scanner input) {
 		System.out.println();
 		System.out.println("----------------------------");
@@ -69,50 +116,49 @@ public class Program {
 
 		try {
 
-			Map<String,String> cookies = new TreeMap<String,String>();
-			
+			Map<String, String> cookies = new TreeMap<String, String>();
+
 			cookies.put("username", "Maria");
 			cookies.put("email", "maria@gmail.com");
 			cookies.put("phone", "99711122");
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("All Cookies:");
-			for(String key : cookies.keySet()) {
+			for (String key : cookies.keySet()) {
 				System.out.println("key = [" + key + "] value = [" + cookies.get(key) + "]");
 			}
-			
+
 			cookies.remove("email");
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("All Cookies:");
-			for(String key : cookies.keySet()) {
+			for (String key : cookies.keySet()) {
 				System.out.println("key = [" + key + "] value = [" + cookies.get(key) + "]");
 			}
-			
+
 			cookies.put("phone", "99771133");
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("All Cookies:");
-			for(String key : cookies.keySet()) {
+			for (String key : cookies.keySet()) {
 				System.out.println("key = [" + key + "] value = [" + cookies.get(key) + "]");
 			}
-			
+
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("Contains 'phone' key: " + cookies.containsKey("phone"));
-			
+
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("Phone number: [" + cookies.get("phone") + "]");
-			
+
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("Email: [" + cookies.get("email") + "]");
-			
+
 			System.out.println();
 			System.out.println("----------------------------");
 			System.out.println("Cookies size: [" + cookies.size() + "]");
-			
 
 		} catch (IllegalArgumentException e) {
 			System.out.println();
