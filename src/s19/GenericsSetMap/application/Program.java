@@ -22,6 +22,7 @@ import java.util.TreeSet;
 import common.utils.MyUtils;
 import s19.GenericsSetMap.entities.Aluno;
 import s19.GenericsSetMap.entities.CalculationService;
+import s19.GenericsSetMap.entities.Candidato;
 import s19.GenericsSetMap.entities.Circulo;
 import s19.GenericsSetMap.entities.Cliente;
 import s19.GenericsSetMap.entities.LoggedUser;
@@ -58,9 +59,86 @@ public class Program {
 //		aula206_exercicio01("AULA 206 - EXERCICIO 01", input);
 //		aula207_exercicio01("AULA 207 - EXERCICIO 01", input);
 //		aula208_exemplo01("AULA 208 - EXERCICIO 01", input);
-		aula208_exemplo02("AULA 208 - EXERCICIO 02", input);
+//		aula208_exemplo02("AULA 208 - EXERCICIO 02", input);
+		aula209_exercicio01("AULA 209 - EXERCICIO 01", input);
 
 		input.close();
+
+	}
+
+	public static void aula209_exercicio01(String prog, Scanner input) {
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.println(prog + " - INICIO DO PROGRAMA");
+		System.out.println("----------------------------");
+
+		System.out.println();
+		System.out.println("----------------------------");
+		System.out.print("Enter file full path: ");
+		String filePath = MyUtils.readString(input);
+
+		// C:\Users\BRDPG1\Documents\eclipse-workspace\cursoJavaProg11Git\temp\a209_exer01\in.txt
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+			Map<Candidato, Integer> urna = new HashMap<Candidato, Integer>();
+			String line = br.readLine();
+			while (line != null) {
+				String campos[] = line.split(",");
+
+				if (campos.length != 2) {
+					throw new IOException(
+							"Um ou mais registros no arquivo possuem menos de dois campos. Nao e possivel continuar com a execucao do programa");
+				}
+
+				Candidato candidato = new Candidato(campos[0]);
+				Integer qtdVotos = Integer.parseInt(campos[1]);
+				if (urna.containsKey(candidato)) {
+					urna.put(candidato, urna.get(candidato) + qtdVotos);
+				} else {
+					urna.put(candidato, qtdVotos);
+				}
+
+				line = br.readLine();
+			}
+
+			// imprime fora de ordem
+//			System.out.println();
+//			System.out.println("----------------------------");
+//			for (Candidato candidato : urna.keySet()) {
+//				System.out.println(candidato.getNome() + ": " + urna.get(candidato));
+//			}
+
+			TreeSet<Candidato> urnaOrdenada = new TreeSet<Candidato>();
+			for (Candidato candidato : urna.keySet()) {
+				candidato.setQtdVotos(urna.get(candidato));
+				urnaOrdenada.add(candidato);
+			}
+			for (Candidato candidato : urnaOrdenada) {
+				System.out.println(candidato);
+			}
+
+		} catch (IOException | NumberFormatException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro: " + e.getMessage());
+		} catch (RuntimeException e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal inesperado durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println("Erro fatal na maquina virtual JAVA durante a execução do programa!");
+			System.out.println("Encerrando aplicação ....");
+			e.printStackTrace();
+		} finally {
+			System.out.println();
+			System.out.println("----------------------------");
+			System.out.println(prog + " - FIM DO PROGRAMA");
+			System.out.println("----------------------------");
+		}
 
 	}
 
