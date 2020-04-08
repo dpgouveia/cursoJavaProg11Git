@@ -1,6 +1,7 @@
 package s20.ProgFuncionalLambda.application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +13,8 @@ import s20.ProgFuncionalLambda.entities.Product2;
 
 public class Program {
 
+	public static int globalValue = 3;
+
 	public static void main(String args[]) {
 
 		Locale.setDefault(Locale.US);
@@ -21,10 +24,26 @@ public class Program {
 //		iniciarAula("212_exemplo_03", input);
 //		iniciarAula("212_exemplo_04", input);
 //		iniciarAula("212_exemplo_05", input);
-		iniciarAula("212_exemplo_06", input);
+//		iniciarAula("212_exemplo_06", input);
+
+//		iniciarAula("213_exemplo_01", input);
+//		iniciarAula("213_exemplo_02", input);
+		iniciarAula("213_exemplo_03", input);
 
 		input.close();
 
+	}
+
+	public static int compareProducts(Product p1, Product p2) {
+		return p1.getPrice().compareTo(p2.getPrice());
+	}
+
+	public static void changeOdValues(int numbers[]) {
+		for (int i = 0; i < numbers.length; i++) {
+			if (numbers[i] % 2 != 0) {
+				numbers[i] += globalValue;
+			}
+		}
 	}
 
 	public static void iniciarAula(String aula, Scanner input) {
@@ -110,7 +129,7 @@ public class Program {
 
 				break;
 			}
-			
+
 			case "212_exemplo_05": {
 				List<Product2> list = new ArrayList<Product2>();
 				list.add(new Product2("TV", 900.00));
@@ -119,9 +138,11 @@ public class Program {
 
 				// classe anonima dentro do programa principal
 				// tambem conhecida como "arrow function" (por causa da setinha)
-				// versao mais simplificada (pois conseguimos resolver tudo em uma unica instrucao
-				Comparator<Product2> comp = (o1, o2) -> o1.getName().toUpperCase().compareTo(o2.getName().toUpperCase());
-				
+				// versao mais simplificada (pois conseguimos resolver tudo em uma unica
+				// instrucao
+				Comparator<Product2> comp = (o1, o2) -> o1.getName().toUpperCase()
+						.compareTo(o2.getName().toUpperCase());
+
 				list.sort(comp);
 
 				for (Product2 p : list) {
@@ -130,7 +151,7 @@ public class Program {
 
 				break;
 			}
-			
+
 			case "212_exemplo_06": {
 				List<Product2> list = new ArrayList<Product2>();
 				list.add(new Product2("TV", 900.00));
@@ -139,13 +160,53 @@ public class Program {
 
 				// classe anonima dentro do programa principal
 				// tambem conhecida como "arrow function" (por causa da setinha)
-				// versao mais simplificada (pois conseguimos resolver tudo em uma unica instrucao
-				// versao ultra simplificada (declarando a funcao anonima como parametro do sort		
+				// versao mais simplificada (pois conseguimos resolver tudo em uma unica
+				// instrucao
+				// versao ultra simplificada (declarando a funcao anonima como parametro do sort
 				list.sort((o1, o2) -> o1.getName().toUpperCase().compareTo(o2.getName().toUpperCase()));
 
 				for (Product2 p : list) {
 					System.out.println(p);
 				}
+
+				break;
+			}
+
+			case "213_exemplo_01": {
+
+				int vect[] = new int[] { 3, 4, 5 };
+				changeOdValues(vect);
+				System.out.println(Arrays.toString(vect));
+
+				break;
+			}
+
+			case "213_exemplo_02": {
+
+				List<Product> list = new ArrayList<Product>();
+				list.add(new Product("TV", 900.00));
+				list.add(new Product("Notebook", 1200.00));
+				list.add(new Product("Tablet", 450.00));
+
+				list.sort(Program::compareProducts);
+
+				list.forEach(System.out::println);
+
+				break;
+			}
+
+			case "213_exemplo_03": {
+
+				List<Integer> list = Arrays.asList(3, 4, 5);
+
+				Integer sum = 0;
+				for (Integer x : list) {
+					sum += x;
+				}
+				System.out.println("Sum: " + sum);
+
+				Integer sum2 = list.stream().reduce(0, Integer::sum);
+				System.out.println("Sum2: " + sum2);
 
 				break;
 			}
