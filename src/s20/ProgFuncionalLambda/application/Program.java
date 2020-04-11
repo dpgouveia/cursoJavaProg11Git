@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
+import s20.ProgFuncionalLambda.entities.ProductService;
 import s20.ProgFuncionalLambda.exception.ProgramException;
 import s20.ProgFuncionalLambda.util.ProductConsumer;
 import s20.ProgFuncionalLambda.util.ProductFunction;
@@ -58,7 +59,9 @@ public class Program {
 //		iniciarAula("217_exemplo_03", input);
 //		iniciarAula("217_exemplo_04", input);
 //		iniciarAula("217_exemplo_05", input);
-		iniciarAula("217_exemplo_06", input);
+//		iniciarAula("217_exemplo_06", input);
+		
+		iniciarAula("218_exemplo_01", input);
 
 		input.close();
 
@@ -664,6 +667,29 @@ public class Program {
 				System.out.println();
 				System.out.println("------------------------------------------");
 				newList.forEach(System.out::println);
+
+				break;
+			}
+			
+			case "218_exemplo_01": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+				
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				System.out.println("(Comeca com T | Modo Antigo) Soma dos preços: " + ProductService.somaFiltrada(list));
+				System.out.println("(Comeca com T) Soma dos preços: " + ProductService.somaFiltradaPredicate(list, x -> x.getName().toUpperCase().charAt(0) == 'T'));
+				System.out.println("(Comeca com M) Soma dos preços: " + ProductService.somaFiltradaPredicate(list, x -> x.getName().toUpperCase().charAt(0) == 'M'));
+				System.out.println("(Preco < 100) Soma dos preços: " + ProductService.somaFiltradaPredicate(list, x -> x.getPrice() < 100));
 
 				break;
 			}
