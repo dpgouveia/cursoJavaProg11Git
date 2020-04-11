@@ -7,11 +7,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
 import s20.ProgFuncionalLambda.exception.ProgramException;
+import s20.ProgFuncionalLambda.util.ProductConsumer;
 import s20.ProgFuncionalLambda.util.ProductPredicate;
 
 public class Program {
@@ -39,7 +41,14 @@ public class Program {
 //		iniciarAula("215_exemplo_04", input);
 //		iniciarAula("215_exemplo_05", input);
 //		iniciarAula("215_exemplo_06", input);
-		iniciarAula("215_exemplo_07", input);
+//		iniciarAula("215_exemplo_07", input);
+
+//		iniciarAula("216_exemplo_01", input);
+//		iniciarAula("216_exemplo_02", input);
+//		iniciarAula("216_exemplo_03", input);
+//		iniciarAula("216_exemplo_04", input);
+//		iniciarAula("216_exemplo_05", input);
+		iniciarAula("216_exemplo_06", input);
 
 		input.close();
 
@@ -358,9 +367,151 @@ public class Program {
 				break;
 			}
 
-			default: {
-				System.out.println("Não existe a aula selecionada");
+			case "216_exemplo_01": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				list.forEach(new ProductConsumer());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
 				break;
+			}
+
+			case "216_exemplo_02": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				list.forEach(Product::staticProductConsumer);
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				break;
+			}
+
+			case "216_exemplo_03": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				list.forEach(Product::nonStaticProductConsumer);
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				break;
+			}
+
+			case "216_exemplo_04": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				Consumer<Product> consumer = new Consumer<Product>() {
+					@Override
+					public void accept(Product p) {
+						p.setPrice(p.getPrice() * 1.1);
+					}
+				};
+				list.forEach(consumer);
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				break;
+			}
+
+			case "216_exemplo_05": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				double increment = 1.1;
+				Consumer<Product> consumer = p -> {
+					p.setPrice(p.getPrice() * increment);
+				};
+				list.forEach(consumer);
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				break;
+			}
+
+			case "216_exemplo_06": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				double increment = 1.1;
+				list.forEach(p -> p.setPrice(p.getPrice() * increment));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				break;
+			}
+
+			default: {
+				throw new ProgramException("Aula inexistente");
 			}
 
 			}
