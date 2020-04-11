@@ -16,6 +16,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import common.utils.MyUtils;
+import s20.ProgFuncionalLambda.entities.Funcionario;
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
 import s20.ProgFuncionalLambda.entities.Product3;
@@ -73,7 +75,9 @@ public class Program {
 
 //		iniciarAula("220_exemplo_01", input);
 
-		iniciarAula("221_exercicio_01", input);
+//		iniciarAula("221_exercicio_01", input);
+
+		iniciarAula("222_exercicio_01", input);
 
 		input.close();
 
@@ -787,7 +791,7 @@ public class Program {
 						String fields[] = line.split(",");
 						if (fields.length != 2) {
 							throw new ProgramException(aula
-									+ ": registro defeituoso encontrado no arquivo (não contém a quantidade de campos necessários para a execução do programa).");
+									+ ": registro defeituoso encontrado no arquivo (não contém a quantidade de campos necessários para a execução do programa)");
 						}
 
 						listaProdutos.add(new Product3(fields[0], Double.parseDouble(fields[1])));
@@ -808,23 +812,97 @@ public class Program {
 				System.out.println("Produtos registrados");
 				listaProdutos.forEach(System.out::println);
 
-				double precoMedioTotal = listaProdutos.stream().
-						map(x -> x.getPrice()).
-						reduce(0.0, Double::sum) / listaProdutos.size();
+				double precoMedioTotal = listaProdutos.stream().map(x -> x.getPrice()).reduce(0.0, Double::sum)
+						/ listaProdutos.size();
 //				double precoMedioTotal = listaProdutos.stream().
 //						map(x -> x.getPrice()).
 //						reduce(0.0, (x, y) -> x + y) / listaProdutos.size();
 				System.out.println();
 				System.out.println("------------------------------------------");
 				System.out.println("Preço médio dos produtos: " + String.format("%.2f", precoMedioTotal));
-				System.out.println("Imprimindo os produtos abaixo do preço médio total: ");			
-				for (Product3 p : listaProdutos.stream().
-						filter(x -> x.getPrice() < precoMedioTotal)
+				System.out.println("Imprimindo os produtos abaixo do preço médio total: ");
+				for (Product3 p : listaProdutos.stream().filter(x -> x.getPrice() < precoMedioTotal)
 						.sorted((p1, p2) -> -1 * p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()))
 						.collect(Collectors.toList())) {
 					System.out.println(p);
 				}
 
+				break;
+			}
+
+			case "222_exercicio_01": {
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				System.out.print("Digite o salário: ");
+				double salario = MyUtils.readDouble(input);
+
+				if (salario <= 0) {
+					throw new ProgramException(aula + ": o valor de salário DEVE SER MAIOR QUE ZERO");
+				}
+
+				List<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
+				String inputFilePath = "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a222_exer01\\in.txt";
+				try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
+
+					String linha = br.readLine();
+					while (linha != null) {
+
+						String campos[] = linha.split(",");
+						if (campos.length != 3) {
+							throw new ProgramException(aula + ": REGISTRO DEFEITUOSO ENCONTRADO NO ARQUIVO na linha [" + linha + "]");
+						}
+
+						if(campos[0].isEmpty() || campos[0].isBlank()) {
+							throw new ProgramException(aula + ": o campo NOME FUNCIONÁRIO na linha [" + linha + "] ESTA VAZIO OU EM BRANCO");
+						}
+						
+						if(campos[1].isEmpty() || campos[1].isBlank()) {
+							throw new ProgramException(aula + ": o campo EMAIL FUNCIONÁRIO na linha [" + linha + "] ESTA VAZIO OU EM BRANCO");
+						}
+						
+						if(campos[2].isEmpty() || campos[2].isBlank()) {
+							throw new ProgramException(aula + ": o campo SALÁRIO FUNCIONÁRIO na linha [" + linha + "] ESTA VAZIO OU EM BRANCO");
+						}
+						
+						try {
+							Double.parseDouble(campos[2].trim());
+						} catch (NullPointerException | NumberFormatException e) {
+							throw new ProgramException(
+									aula + ": o campo SALÁRIO FUNCIONÁRIO na linha [" + linha + "] NAÕ É UM VALOR DECIMAL VÁLIDO");
+						}
+
+						listaFuncionarios.add(new Funcionario(campos[0], campos[1], Double.parseDouble(campos[2])));
+						linha = br.readLine();
+					}
+
+				} catch (IOException e) {
+					throw new ProgramException(aula + ": Arquivo não foi encontrado na máquina [" + inputFilePath + "]");
+				}
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				System.out.println("Lista de funcionários carregados no programa: ");
+				listaFuncionarios.forEach(System.out::println);
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				System.out.println("Email dos funcionarios com o salário maior que $ " + String.format("%.2f", salario) + ": ");
+				
+				List<String> listaNomeFuncionarios = listaFuncionarios.stream()
+						.filter(func -> func.getSalario() >= salario).map(func -> func.getEmail())
+						.collect(Collectors.toList());
+				for (String nomeFuncionario : listaNomeFuncionarios) {
+					System.out.println(nomeFuncionario);
+				}
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				double somaSalarios = listaFuncionarios.stream()
+						.filter(func -> func.getNome().toUpperCase().charAt(0) == 'M')
+						.map(func -> func.getSalario())
+						.reduce(0.0, Double::sum);
+				System.out.print("A soma dos sálarios dos funcionários que iniciam com a letra 'M' é: " + somaSalarios);
 				break;
 			}
 
