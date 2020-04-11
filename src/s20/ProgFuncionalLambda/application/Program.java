@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
@@ -60,8 +61,11 @@ public class Program {
 //		iniciarAula("217_exemplo_04", input);
 //		iniciarAula("217_exemplo_05", input);
 //		iniciarAula("217_exemplo_06", input);
-		
-		iniciarAula("218_exemplo_01", input);
+
+//		iniciarAula("218_exemplo_01", input);
+
+//		iniciarAula("219_exemplo_01", input);
+		iniciarAula("219_exemplo_02", input);
 
 		input.close();
 
@@ -670,7 +674,7 @@ public class Program {
 
 				break;
 			}
-			
+
 			case "218_exemplo_01": {
 
 				List<Product> list = new ArrayList<Product>();
@@ -679,17 +683,61 @@ public class Program {
 				list.add(new Product("Mouse", 50.00));
 				list.add(new Product("Tablet", 350.50));
 				list.add(new Product("HD Case", 80.90));
-				
+
 				System.out.println();
 				System.out.println("------------------------------------------");
 				list.forEach(System.out::println);
 
 				System.out.println();
 				System.out.println("------------------------------------------");
-				System.out.println("(Comeca com T | Modo Antigo) Soma dos preços: " + ProductService.somaFiltrada(list));
-				System.out.println("(Comeca com T) Soma dos preços: " + ProductService.somaFiltradaPredicate(list, x -> x.getName().toUpperCase().charAt(0) == 'T'));
-				System.out.println("(Comeca com M) Soma dos preços: " + ProductService.somaFiltradaPredicate(list, x -> x.getName().toUpperCase().charAt(0) == 'M'));
-				System.out.println("(Preco < 100) Soma dos preços: " + ProductService.somaFiltradaPredicate(list, x -> x.getPrice() < 100));
+				System.out
+						.println("(Comeca com T | Modo Antigo) Soma dos preços: " + ProductService.somaFiltrada(list));
+				System.out.println("(Comeca com T) Soma dos preços: "
+						+ ProductService.somaFiltradaPredicate(list, x -> x.getName().toUpperCase().charAt(0) == 'T'));
+				System.out.println("(Comeca com M) Soma dos preços: "
+						+ ProductService.somaFiltradaPredicate(list, x -> x.getName().toUpperCase().charAt(0) == 'M'));
+				System.out.println("(Preco < 100) Soma dos preços: "
+						+ ProductService.somaFiltradaPredicate(list, x -> x.getPrice() < 100));
+
+				break;
+			}
+
+			case "219_exemplo_01": {
+
+				List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
+				Stream<Integer> st1 = list.stream();
+				System.out.println(Arrays.toString(st1.toArray()));
+
+				Stream<String> st2 = Stream.of("Maria", "Alex", "Bob");
+				System.out.println(Arrays.toString(st2.toArray()));
+
+				// as streams abaixo tem tamanho indefinido em decorrencia da sua criacao estar utilizando a funcao iterate
+				Stream<Integer> st3 = Stream.iterate(0, x -> x + 2);
+				System.out.println(Arrays.toString(st3.limit(10).toArray()));
+
+				Stream<Long> st4 = Stream.iterate(new long[] { 0L, 1L }, p -> new long[] { p[1], p[0] + p[1] })
+						.map(p -> p[0]);
+				System.out.println(Arrays.toString(st4.limit(10).toArray()));
+
+				break;
+			}
+			
+			case "219_exemplo_02": {
+
+				List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
+				Stream<Integer> st1 = list.stream().map(x -> x * 10);
+				System.out.println(Arrays.toString(st1.toArray()));
+
+				Stream<String> st2 = Stream.of("Maria", "Alex", "Bob");
+				System.out.println(Arrays.toString(st2.toArray()));
+
+				// as streams abaixo tem tamanho indefinido em decorrencia da sua criacao estar utilizando a funcao iterate
+				Stream<Integer> st3 = Stream.iterate(0, x -> x + 2);
+				System.out.println(Arrays.toString(st3.limit(10).toArray()));
+
+				Stream<Long> st4 = Stream.iterate(new Long[] { 0L, 1L }, p -> new Long[] { p[1], p[0] + p[1] })
+						.map(p -> p[0]);
+				System.out.println(Arrays.toString(st4.limit(20).toArray()));
 
 				break;
 			}
@@ -703,7 +751,7 @@ public class Program {
 		} catch (ProgramException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println("Erro do programa: " + e.getMessage());
 		} catch (RuntimeException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
