@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
 import s20.ProgFuncionalLambda.exception.ProgramException;
 import s20.ProgFuncionalLambda.util.ProductConsumer;
+import s20.ProgFuncionalLambda.util.ProductFunction;
 import s20.ProgFuncionalLambda.util.ProductPredicate;
 
 public class Program {
@@ -48,7 +51,14 @@ public class Program {
 //		iniciarAula("216_exemplo_03", input);
 //		iniciarAula("216_exemplo_04", input);
 //		iniciarAula("216_exemplo_05", input);
-		iniciarAula("216_exemplo_06", input);
+//		iniciarAula("216_exemplo_06", input);
+
+//		iniciarAula("217_exemplo_01", input);
+//		iniciarAula("217_exemplo_02", input);
+//		iniciarAula("217_exemplo_03", input);
+//		iniciarAula("217_exemplo_04", input);
+//		iniciarAula("217_exemplo_05", input);
+		iniciarAula("217_exemplo_06", input);
 
 		input.close();
 
@@ -506,6 +516,154 @@ public class Program {
 				System.out.println();
 				System.out.println("------------------------------------------");
 				list.forEach(System.out::println);
+
+				break;
+			}
+
+			case "217_exemplo_01": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				List<Product> newList = new ArrayList<Product>();
+				newList = list.stream().map(new ProductFunction()).collect(Collectors.toList());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				newList.forEach(System.out::println);
+
+				break;
+			}
+
+			case "217_exemplo_02": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				List<Product> newList = new ArrayList<Product>();
+				newList = list.stream().map(Product::staticProductFunction).collect(Collectors.toList());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				newList.forEach(System.out::println);
+
+				break;
+			}
+
+			case "217_exemplo_03": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				List<Product> newList = new ArrayList<Product>();
+				newList = list.stream().map(Product::nonStaticProductFunction).collect(Collectors.toList());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				newList.forEach(System.out::println);
+
+				break;
+			}
+
+			case "217_exemplo_04": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				List<Product> newList = new ArrayList<Product>();
+				Function<Product, Product> func = new Function<Product, Product>() {
+					@Override
+					public Product apply(Product source) {
+						return new Product(source.getName().toUpperCase(), source.getPrice());
+					};
+				};
+				newList = list.stream().map(func).collect(Collectors.toList());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				newList.forEach(System.out::println);
+
+				break;
+			}
+
+			case "217_exemplo_05": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				List<Product> newList = new ArrayList<Product>();
+				Function<Product, Product> func = source -> {
+					return new Product(source.getName().toUpperCase(), source.getPrice());
+				};
+				newList = list.stream().map(func).collect(Collectors.toList());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				newList.forEach(System.out::println);
+
+				break;
+			}
+
+			case "217_exemplo_06": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				list.forEach(System.out::println);
+
+				List<Product> newList = new ArrayList<Product>();
+				newList = list.stream().map(source -> new Product(source.getName().toUpperCase(), source.getPrice()))
+						.collect(Collectors.toList());
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				newList.forEach(System.out::println);
 
 				break;
 			}

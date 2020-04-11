@@ -43,6 +43,14 @@ public class Product implements Comparable<Product> {
 		price *= 1.1;
 	}
 
+	public static Product staticProductFunction(Product source) {
+		return new Product(source.getName().toUpperCase(), source.getPrice());
+	}
+
+	public Product nonStaticProductFunction() {
+		return new Product(this.name.toUpperCase(), price);
+	}
+
 	@Override
 	public String toString() {
 		return "Product [name=" + name + ", price=" + String.format("%.2f", price) + "]";
