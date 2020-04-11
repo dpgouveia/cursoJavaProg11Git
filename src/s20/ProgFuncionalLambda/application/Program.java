@@ -7,9 +7,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
+import s20.ProgFuncionalLambda.exception.ProgramException;
+import s20.ProgFuncionalLambda.util.ProductPredicate;
 
 public class Program {
 
@@ -28,7 +31,15 @@ public class Program {
 
 //		iniciarAula("213_exemplo_01", input);
 //		iniciarAula("213_exemplo_02", input);
-		iniciarAula("213_exemplo_03", input);
+//		iniciarAula("213_exemplo_03", input);
+
+//		iniciarAula("215_exemplo_01", input);
+//		iniciarAula("215_exemplo_02", input);
+//		iniciarAula("215_exemplo_03", input);
+//		iniciarAula("215_exemplo_04", input);
+//		iniciarAula("215_exemplo_05", input);
+//		iniciarAula("215_exemplo_06", input);
+		iniciarAula("215_exemplo_07", input);
 
 		input.close();
 
@@ -211,6 +222,142 @@ public class Program {
 				break;
 			}
 
+			case "215_exemplo_01": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				list.removeIf(p -> p.getPrice() >= 100);
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
+			case "215_exemplo_02": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+//				list.removeIf(new ProductPredicate());
+				list.removeIf(new ProductPredicate(100.00));
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
+			case "215_exemplo_03": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				list.removeIf(Product::staticProductPredicate);
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
+			case "215_exemplo_04": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				list.removeIf(Product::nonStaticProductPredicate);
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
+			case "215_exemplo_05": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				Predicate<Product> pred = new Predicate<Product>() {
+					@Override
+					public boolean test(Product p) {
+						return p.getPrice() >= 100;
+					}
+				};
+				list.removeIf(pred);
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
+			case "215_exemplo_06": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				double min = 100.0;
+				Predicate<Product> pred = p -> p.getPrice() >= min;
+				list.removeIf(pred);
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
+			case "215_exemplo_07": {
+
+				List<Product> list = new ArrayList<Product>();
+
+				list.add(new Product("Tv", 900.00));
+				list.add(new Product("Mouse", 50.00));
+				list.add(new Product("Tablet", 350.50));
+				list.add(new Product("HD Case", 80.90));
+
+				double min = 100.0;
+				list.removeIf(p -> p.getPrice() >= min);
+
+				for (Product p : list) {
+					System.out.println(p);
+				}
+
+				break;
+			}
+
 			default: {
 				System.out.println("Não existe a aula selecionada");
 				break;
@@ -218,6 +365,10 @@ public class Program {
 
 			}
 
+		} catch (ProgramException e) {
+			System.out.println();
+			System.out.println("------------------------------------------");
+			System.out.println("Erro: " + e.getMessage());
 		} catch (RuntimeException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
