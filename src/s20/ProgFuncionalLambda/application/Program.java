@@ -1,5 +1,8 @@
 package s20.ProgFuncionalLambda.application;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +18,7 @@ import java.util.stream.Stream;
 
 import s20.ProgFuncionalLambda.entities.Product;
 import s20.ProgFuncionalLambda.entities.Product2;
+import s20.ProgFuncionalLambda.entities.Product3;
 import s20.ProgFuncionalLambda.entities.ProductService;
 import s20.ProgFuncionalLambda.exception.ProgramException;
 import s20.ProgFuncionalLambda.util.ProductConsumer;
@@ -66,8 +70,10 @@ public class Program {
 
 //		iniciarAula("219_exemplo_01", input);
 //		iniciarAula("219_exemplo_02", input);
-		
-		iniciarAula("220_exemplo_01", input);
+
+//		iniciarAula("220_exemplo_01", input);
+
+		iniciarAula("221_exercicio_01", input);
 
 		input.close();
 
@@ -713,7 +719,8 @@ public class Program {
 				Stream<String> st2 = Stream.of("Maria", "Alex", "Bob");
 				System.out.println(Arrays.toString(st2.toArray()));
 
-				// as streams abaixo tem tamanho indefinido em decorrencia da sua criacao estar utilizando a funcao iterate
+				// as streams abaixo tem tamanho indefinido em decorrencia da sua criacao estar
+				// utilizando a funcao iterate
 				Stream<Integer> st3 = Stream.iterate(0, x -> x + 2);
 				System.out.println(Arrays.toString(st3.limit(10).toArray()));
 
@@ -723,7 +730,7 @@ public class Program {
 
 				break;
 			}
-			
+
 			case "219_exemplo_02": {
 
 				List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
@@ -733,7 +740,8 @@ public class Program {
 				Stream<String> st2 = Stream.of("Maria", "Alex", "Bob");
 				System.out.println(Arrays.toString(st2.toArray()));
 
-				// as streams abaixo tem tamanho indefinido em decorrencia da sua criacao estar utilizando a funcao iterate
+				// as streams abaixo tem tamanho indefinido em decorrencia da sua criacao estar
+				// utilizando a funcao iterate
 				Stream<Integer> st3 = Stream.iterate(0, x -> x + 2);
 				System.out.println(Arrays.toString(st3.limit(10).toArray()));
 
@@ -743,7 +751,7 @@ public class Program {
 
 				break;
 			}
-			
+
 			case "220_exemplo_01": {
 
 				List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
@@ -751,20 +759,74 @@ public class Program {
 				System.out.println();
 				System.out.println("------------------------------------------");
 				System.out.println(Arrays.toString(st1.toArray()));
-				
+
 				int sum = list.stream().reduce(0, (x, y) -> x + y);
 				System.out.println();
 				System.out.println("------------------------------------------");
 				System.out.println("Somatorio da stream: " + sum);
-				
-				List<Integer> newList = list.stream().filter(x -> x % 2 == 0).map(x -> x * 10).collect(Collectors.toList());
+
+				List<Integer> newList = list.stream().filter(x -> x % 2 == 0).map(x -> x * 10)
+						.collect(Collectors.toList());
 				System.out.println();
 				System.out.println("------------------------------------------");
-				System.out.println("Somatorio dos numeros pares da lista multiplicados por 10: " + Arrays.toString(newList.toArray()));
-				
+				System.out.println("Somatorio dos numeros pares da lista multiplicados por 10: "
+						+ Arrays.toString(newList.toArray()));
+
 				break;
 			}
-			
+
+			case "221_exercicio_01": {
+
+				List<Product3> listaProdutos = new ArrayList<Product3>();
+				String inputFilePath = "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a221_exer01\\in.txt";
+				try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
+
+					String line = br.readLine();
+					while (line != null) {
+
+						String fields[] = line.split(",");
+						if (fields.length != 2) {
+							throw new ProgramException(aula
+									+ ": registro defeituoso encontrado no arquivo (não contém a quantidade de campos necessários para a execução do programa).");
+						}
+
+						listaProdutos.add(new Product3(fields[0], Double.parseDouble(fields[1])));
+
+						line = br.readLine();
+					}
+
+				} catch (NullPointerException | NumberFormatException | IOException e) {
+					throw new ProgramException(e.getMessage());
+				}
+
+				if (listaProdutos.size() <= 0) {
+					throw new ProgramException(aula + ": a lista de produtos esta vazia!");
+				}
+
+				System.out.println();
+				System.out.println("------------------------------------------");
+				System.out.println("Produtos registrados");
+				listaProdutos.forEach(System.out::println);
+
+				double precoMedioTotal = listaProdutos.stream().
+						map(x -> x.getPrice()).
+						reduce(0.0, Double::sum) / listaProdutos.size();
+//				double precoMedioTotal = listaProdutos.stream().
+//						map(x -> x.getPrice()).
+//						reduce(0.0, (x, y) -> x + y) / listaProdutos.size();
+				System.out.println();
+				System.out.println("------------------------------------------");
+				System.out.println("Preço médio dos produtos: " + String.format("%.2f", precoMedioTotal));
+				System.out.println("Imprimindo os produtos abaixo do preço médio total: ");			
+				for (Product3 p : listaProdutos.stream().
+						filter(x -> x.getPrice() < precoMedioTotal)
+						.sorted((p1, p2) -> -1 * p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()))
+						.collect(Collectors.toList())) {
+					System.out.println(p);
+				}
+
+				break;
+			}
 
 			default: {
 				throw new ProgramException("Aula inexistente");
@@ -775,18 +837,19 @@ public class Program {
 		} catch (ProgramException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
-			System.out.println("Erro do programa: " + e.getMessage());
+			System.out.println("ERRO NO PROGRAMA: " + e.getMessage());
+			System.out.println("Encerrando programa....");
 		} catch (RuntimeException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
 			System.out.println("ERRO INESPERADO durante a execução do programa!");
-			System.out.println("Encerrando a aplicação....");
+			System.out.println("Encerrando programa....");
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
 			System.out.println("ERRO FATAL NA MAQUINA VIRTUAL JAVA durante a execução do programa!");
-			System.out.println("Encerrando a aplicação....");
+			System.out.println("Encerrando programa....");
 			e.printStackTrace();
 		} finally {
 			System.out.println();
