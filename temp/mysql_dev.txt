@@ -1,0 +1,24 @@
+# comandos para trocar a senha do usuario root
+# com o mysql ativo (senha será mysql)
+mysql -u root -p
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'mysql';
+
+
+# criando um novo usuario no mysql
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+ALTER USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'gerente'@'localhost';
+
+
+# show mysql databases
+SELECT schema_name 
+FROM information_schema.schemata;
+
+
+# criando novo database
+DROP DATABASE danieldb;
+DROP USER daniel@localhost;
+CREATE DATABASE danieldb;
+CREATE USER daniel@localhost IDENTIFIED BY 'danieladmin';
+GRANT ALL PRIVILEGES ON danieldb.* TO 'daniel'@'localhost';
+
