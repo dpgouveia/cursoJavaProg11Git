@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.Scanner;
 
-
-
 import common.utils.MyUtils;
 import common.utils.db.DB;
 import s21.BancoDadosJDBC.exceptions.ProgramException;
@@ -30,7 +28,10 @@ public class Program {
 //		iniciarAula("231_exemplo_02", input, conn);
 //		iniciarAula("231_exemplo_03", input, conn);
 		
-		iniciarAula("232_exemplo_01", input, conn);
+//		iniciarAula("232_exemplo_01", input, conn);
+		
+//		iniciarAula("233_exemplo_01", input, conn);
+		iniciarAula("233_exemplo_02", input, conn);
 
 		input.close();
 		DB.closeConnection();
@@ -189,6 +190,53 @@ public class Program {
 					
 				} catch (SQLException e) {
 					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(pst);
+				}
+				
+				break;
+			}
+			
+			case "233_exemplo_01": {
+				
+				PreparedStatement pst = null;
+				try {
+					pst = conn.prepareStatement("DELETE FROM "
+												+ "coursejdbc.department d "
+												+ "WHERE " 
+												+ "d.Id = ?");
+					
+					pst.setInt(1, 5);
+					
+					int linhasAfetadas = pst.executeUpdate();
+					System.out.println("Linhas removidas da tabela pela query: " + linhasAfetadas);
+					
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(pst);
+				}
+				
+				break;
+			}
+			
+			case "233_exemplo_02": {
+				
+				PreparedStatement pst = null;
+				try {
+					pst = conn.prepareStatement("DELETE FROM "
+												+ "coursejdbc.department d "
+												+ "WHERE " 
+												+ "d.Id = ?");
+					
+					pst.setInt(1, 2);
+					
+					int linhasAfetadas = pst.executeUpdate();
+					System.out.println("Linhas removidas da tabela pela query: " + linhasAfetadas);
+					
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+//					throw new DBIntegrityException(aula + ": " + e.getMessage());
 				} finally {
 					DB.closeStatement(pst);
 				}
