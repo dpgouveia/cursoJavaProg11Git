@@ -23,10 +23,14 @@ public class Program {
 		Connection conn = DB.getConnection();
 
 //		iniciarAula("229_exemplo_01", input, conn);
+
 //		iniciarAula("230_exemplo_01", input, conn);
+
 //		iniciarAula("231_exemplo_01", input, conn);
 //		iniciarAula("231_exemplo_02", input, conn);
-		iniciarAula("231_exemplo_03", input, conn);
+//		iniciarAula("231_exemplo_03", input, conn);
+		
+		iniciarAula("232_exemplo_01", input, conn);
 
 		input.close();
 		DB.closeConnection();
@@ -56,7 +60,7 @@ public class Program {
 				ResultSet rs = null;
 				try {
 					st = conn.createStatement();
-					String query = "select * from coursejdbc.department d;";
+					String query = "SELECT * FROM coursejdbc.department d";
 					rs = st.executeQuery(query);
 
 					while (rs.next()) {
@@ -80,7 +84,7 @@ public class Program {
 					pst = conn.prepareStatement("INSERT INTO coursejdbc.seller " 
 												+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
 												+ "VALUES "
-												+ "(?, ?, ?, ?, ?);");
+												+ "(?, ?, ?, ?, ?)");
 					
 					pst.setString(1, "Another Carl Purple");
 					pst.setString(2, "other_carl@gmail.com");
@@ -108,7 +112,7 @@ public class Program {
 					pst = conn.prepareStatement("INSERT INTO coursejdbc.seller " 
 												+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
 												+ "VALUES "
-												+ "(?, ?, ?, ?, ?);"
+												+ "(?, ?, ?, ?, ?)"
 												, Statement.RETURN_GENERATED_KEYS);
 					
 					pst.setString(1, "Another Carl Purple");
@@ -143,7 +147,7 @@ public class Program {
 
 				PreparedStatement pst = null;
 				try {
-					pst = conn.prepareStatement("insert into department (Name) values ('D1'), ('D2')"
+					pst = conn.prepareStatement("INSERT INTO department (Name) VALUES ('D1'), ('D2')"
 												, Statement.RETURN_GENERATED_KEYS);
 
 					int linhasAfetadas = pst.executeUpdate();
@@ -165,6 +169,30 @@ public class Program {
 					DB.closeStatement(pst);
 				}
 
+				break;
+			}
+			
+			case "232_exemplo_01": {
+				
+				PreparedStatement pst = null;
+				try {
+					pst = conn.prepareStatement("UPDATE coursejdbc.seller "
+												+ "SET BaseSalary = BaseSalary + ? "
+												+ "WHERE "
+												+ "(DepartmentID = ?)");
+					
+					pst.setDouble(1, 200.00);
+					pst.setInt(2, 2);
+					
+					int linhasAfetadas = pst.executeUpdate();
+					System.out.println("Linhas atualizadas na tabela pela query: " + linhasAfetadas);
+					
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(pst);
+				}
+				
 				break;
 			}
 
