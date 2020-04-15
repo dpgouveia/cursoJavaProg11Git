@@ -1,6 +1,9 @@
 package s21.BancoDadosJDBC.application;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -15,7 +18,8 @@ public class Program {
 		Scanner input = new Scanner(System.in);
 		Connection conn = DB.getConnection();
 
-		iniciarAula("229_exemplo_01", input, conn);
+//		iniciarAula("229_exemplo_01", input, conn);
+		iniciarAula("230_exemplo_01", input, conn);
 
 		input.close();
 		DB.closeConnection();
@@ -36,6 +40,29 @@ public class Program {
 			case "229_exemplo_01": {
 				// nada... somente para testar se a crição da conexão com o banco de dados
 				// funcionou corretamente
+				break;
+			}
+
+			case "230_exemplo_01": {
+
+				Statement st = null;
+				ResultSet rs = null;
+				try {
+					st = conn.createStatement();
+					String query = "select * from coursejdbc.department d;";
+					rs = st.executeQuery(query);
+
+					while (rs.next()) {
+						System.out.println(rs.getInt("Id") + ", " + rs.getString("Name"));
+					}
+
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(st);
+					DB.closeResultSet(rs);
+				}
+
 				break;
 			}
 

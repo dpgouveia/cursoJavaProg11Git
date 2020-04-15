@@ -19,11 +19,12 @@ FROM information_schema.schemata;
 DROP USER developer@localhost;
 CREATE USER developer@localhost IDENTIFIED BY 'developer';
 
-
-# criar base de dados
+# criar base de dados (para testar o acesso ao banco)
 DROP DATABASE danieldb;
-DROP DATABASE coursejdbc;
 CREATE DATABASE danieldb;
-CREATE DATABASE coursejdbc;
 GRANT ALL PRIVILEGES ON danieldb.* TO 'developer'@'localhost';
+
+# criar base de dados (para o curso java)
+DROP DATABASE coursejdbc;
+CREATE DATABASE coursejdbc;
 GRANT ALL PRIVILEGES ON coursejdbc.* TO 'developer'@'localhost';
