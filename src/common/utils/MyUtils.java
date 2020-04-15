@@ -13,6 +13,8 @@ public class MyUtils {
 	// atributos estaticos
 	public static final SimpleDateFormat timeStampToDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	public static final SimpleDateFormat simpleDateToDate = new SimpleDateFormat("dd/MM/yyyy");
+	public static final SimpleDateFormat dbSimpleDateToDate = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat dbTimeStampToDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	// metodos estaticos
 	public static int readInt(Scanner input) {

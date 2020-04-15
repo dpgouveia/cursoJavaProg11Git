@@ -1,12 +1,16 @@
 package s21.BancoDadosJDBC.application;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Locale;
 import java.util.Scanner;
 
+
+
+import common.utils.MyUtils;
 import common.utils.db.DB;
 import s21.BancoDadosJDBC.exceptions.ProgramException;
 
@@ -19,7 +23,10 @@ public class Program {
 		Connection conn = DB.getConnection();
 
 //		iniciarAula("229_exemplo_01", input, conn);
-		iniciarAula("230_exemplo_01", input, conn);
+//		iniciarAula("230_exemplo_01", input, conn);
+//		iniciarAula("231_exemplo_01", input, conn);
+//		iniciarAula("231_exemplo_02", input, conn);
+		iniciarAula("231_exemplo_03", input, conn);
 
 		input.close();
 		DB.closeConnection();
@@ -61,6 +68,101 @@ public class Program {
 				} finally {
 					DB.closeStatement(st);
 					DB.closeResultSet(rs);
+				}
+
+				break;
+			}
+			
+			case "231_exemplo_01": {
+
+				PreparedStatement pst = null;
+				try {
+					pst = conn.prepareStatement("INSERT INTO coursejdbc.seller " 
+												+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+												+ "VALUES "
+												+ "(?, ?, ?, ?, ?);");
+					
+					pst.setString(1, "Another Carl Purple");
+					pst.setString(2, "other_carl@gmail.com");
+//					pst.setDate(3, new java.sql.Date(MyUtils.dbSimpleDateToDate.parse("1985-04-22").getTime()));
+					pst.setDate(3, new java.sql.Date(MyUtils.simpleDateToDate.parse("22/04/1985").getTime()));
+					pst.setDouble(4, 4500.00);
+					pst.setInt(5, 4);
+
+					int linhasAfetadas = pst.executeUpdate();
+					System.out.println("Tabela de vendedores atualizada. Número de linhas atualizadas: " + linhasAfetadas);
+					
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(pst);
+				}
+
+				break;
+			}
+			
+			case "231_exemplo_02": {
+
+				PreparedStatement pst = null;
+				try {
+					pst = conn.prepareStatement("INSERT INTO coursejdbc.seller " 
+												+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+												+ "VALUES "
+												+ "(?, ?, ?, ?, ?);"
+												, Statement.RETURN_GENERATED_KEYS);
+					
+					pst.setString(1, "Another Carl Purple");
+					pst.setString(2, "other_carl@gmail.com");
+					pst.setDate(3, new java.sql.Date(MyUtils.simpleDateToDate.parse("22/04/1985").getTime()));
+					pst.setDouble(4, 4500.00);
+					pst.setInt(5, 4);
+
+					int linhasAfetadas = pst.executeUpdate();
+					if(linhasAfetadas > 0) {
+						ResultSet rs = pst.getGeneratedKeys();
+						while(rs.next()) {
+							int id = rs.getInt(1);
+							System.out.println("ID = " + id);
+						}
+						
+						DB.closeResultSet(rs);
+					} else {
+						System.out.println("Nenhuma linha foi atualizada/criada pela query");
+					}
+					
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(pst);
+				}
+
+				break;
+			}
+			
+			case "231_exemplo_03": {
+
+				PreparedStatement pst = null;
+				try {
+					pst = conn.prepareStatement("insert into department (Name) values ('D1'), ('D2')"
+												, Statement.RETURN_GENERATED_KEYS);
+
+					int linhasAfetadas = pst.executeUpdate();
+					if(linhasAfetadas > 0) {
+						ResultSet rs = pst.getGeneratedKeys();
+						while(rs.next()) {
+							int id = rs.getInt(1);
+							System.out.println("ID = " + id);
+						}
+						
+						DB.closeResultSet(rs);
+					} else {
+						System.out.println("Nenhuma linha foi atualizada/criada pela query");
+					}
+					
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(pst);
 				}
 
 				break;
