@@ -16,9 +16,14 @@ FROM information_schema.schemata;
 
 
 # criando novo database
-DROP DATABASE danieldb;
-DROP USER daniel@localhost;
-CREATE DATABASE danieldb;
-CREATE USER daniel@localhost IDENTIFIED BY 'danieladmin';
-GRANT ALL PRIVILEGES ON danieldb.* TO 'daniel'@'localhost';
+DROP USER developer@localhost;
+CREATE USER developer@localhost IDENTIFIED BY 'developer';
 
+
+# criar base de dados
+DROP DATABASE danieldb;
+DROP DATABASE coursejdbc;
+CREATE DATABASE danieldb;
+CREATE DATABASE coursejdbc;
+GRANT ALL PRIVILEGES ON danieldb.* TO 'developer'@'localhost';
+GRANT ALL PRIVILEGES ON coursejdbc.* TO 'developer'@'localhost';
