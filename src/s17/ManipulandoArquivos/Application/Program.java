@@ -26,7 +26,7 @@ public class Program {
 //		aula178_exemplo02("AULA 178 - EXEMPLO 02");
 //		aula179_exemplo01("AULA 179 - EXEMPLO 01", input);
 //		aula180_exemplo01("AULA 180 - EXEMPLO 01", input);
-		aula181_exercicio01("AULA 180 - EXEMPLO 01", input);
+		aula181_exercicio01("AULA 181 - EXEMPLO 01", input);
 
 		input.close();
 
@@ -45,7 +45,7 @@ public class Program {
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 		// String path =
 		// "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
-		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a181_ex01\\in.txt";
+		String path = ".\\temp\\a181_ex01\\in.txt";
 
 		// lendo os registros do arquivos e montando a lista de produtos
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -217,7 +217,7 @@ public class Program {
 		System.out.println("================================");
 
 		String lines[] = new String[] { "Good morning", "Good afternoon", "Good night" };
-		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a178_ex02_out_ovr.txt";
+		String path = ".\\temp\\a178_ex01\\a178_ex02_out_ovr.txt";
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
 			for (String line : lines) {
@@ -248,7 +248,7 @@ public class Program {
 		System.out.println("================================");
 
 		String lines[] = new String[] { "Good morning", "Good afternoon", "Good night" };
-		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a178_ex01_out.txt";
+		String path = ".\\temp\\a178_ex01\\a178_ex01_out.txt";
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
 			for (String line : lines) {
@@ -278,7 +278,7 @@ public class Program {
 		System.out.println(prog + " - INICIO DO PROGRAMA");
 		System.out.println("================================");
 
-		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\in.txt";
+		String path = ".\\temp\\a175_ex01\\in.txt";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -311,7 +311,7 @@ public class Program {
 		System.out.println(prog + " - INICIO DO PROGRAMA");
 		System.out.println("================================");
 
-		String path = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\in.txt";
+		String path = ".\\temp\\a175_ex01\\in.txt";
 		BufferedReader br = null;
 		FileReader fr = null;
 
@@ -365,7 +365,7 @@ public class Program {
 		System.out.println(prog + " - INICIO DO PROGRAMA");
 		System.out.println("================================");
 
-		File file = new File("C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\in.txt");
+		File file = new File(".\\temp\\a175_ex01\\in.txt");
 		Scanner fileScanner = null;
 
 		try {
