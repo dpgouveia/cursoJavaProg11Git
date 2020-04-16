@@ -31,7 +31,11 @@ public class Program {
 //		iniciarAula("232_exemplo_01", input, conn);
 		
 //		iniciarAula("233_exemplo_01", input, conn);
-		iniciarAula("233_exemplo_02", input, conn);
+//		iniciarAula("233_exemplo_02", input, conn);
+		
+//		iniciarAula("234_exemplo_01", input, conn);
+//		iniciarAula("234_exemplo_02", input, conn);
+		iniciarAula("234_exemplo_03", input, conn);
 
 		input.close();
 		DB.closeConnection();
@@ -239,6 +243,86 @@ public class Program {
 //					throw new DBIntegrityException(aula + ": " + e.getMessage());
 				} finally {
 					DB.closeStatement(pst);
+				}
+				
+				break;
+			}
+			
+			case "234_exemplo_01": {
+				
+				Statement st = null;
+				
+				try {
+					st = conn.createStatement();
+					int linhasAfetadas1 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 3090 WHERE DepartmentId = 1");
+					int x = 1;
+					
+					if(x < 2) {
+						throw new SQLException(aula + ": " + "Erro FAKE!!");
+					}
+					
+					int linhasAfetadas2 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 4090 WHERE DepartmentId = 2");
+					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas1);
+					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas2);
+				} catch (SQLException e) {
+					throw new ProgramException(aula + ": " + e.getMessage());
+				} finally {
+					DB.closeStatement(st);
+				}
+				
+				break;
+			}
+			
+			case "234_exemplo_02": {
+				
+				Statement st = null;
+				
+				try {
+					st = conn.createStatement();
+					
+					conn.setAutoCommit(false);
+					
+					int linhasAfetadas1 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 4090 WHERE DepartmentId = 1");
+					int x = 1;
+					
+					if(x < 2) {
+						throw new SQLException(aula + ": " + "Erro FAKE!!");
+					}
+					int linhasAfetadas2 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 5090 WHERE DepartmentId = 2");
+					
+					conn.commit();
+					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas1);
+					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas2);
+				} catch (SQLException e) {
+					conn.rollback();
+					throw new ProgramException(aula + ": Transaction rolled back\n" + "Caused by: " + e.getMessage());
+				} finally {
+					DB.closeStatement(st);
+				}
+				
+				break;
+			}
+			
+			case "234_exemplo_03": {
+				
+				Statement st = null;
+				
+				try {
+					st = conn.createStatement();
+					
+					conn.setAutoCommit(false);
+					
+					int linhasAfetadas1 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 5090 WHERE DepartmentId = 1");
+					int linhasAfetadas2 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 6090 WHERE DepartmentId = 2");
+					
+					conn.commit();
+					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas1);
+					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas2);
+				} catch (SQLException e) {
+					conn.rollback();
+					throw new ProgramException(aula + ": Transaction rolled back\n" + "Caused by: " + e.getMessage());
+				} finally {
+					DB.closeStatement(st);
 				}
 				
 				break;
