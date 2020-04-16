@@ -782,7 +782,7 @@ public class Program {
 			case "221_exercicio_01": {
 
 				List<Product3> listaProdutos = new ArrayList<Product3>();
-				String inputFilePath = "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a221_exer01\\in.txt";
+				String inputFilePath = ".\\temp\\a221_exer01\\in.txt";
 				try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
 
 					String line = br.readLine();
@@ -842,7 +842,7 @@ public class Program {
 				}
 
 				List<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
-				String inputFilePath = "C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a222_exer01\\in.txt";
+				String inputFilePath = ".\\temp\\a222_exer01\\in.txt";
 				try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath))) {
 
 					String linha = br.readLine();
