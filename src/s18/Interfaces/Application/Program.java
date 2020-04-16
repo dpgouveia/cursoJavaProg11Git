@@ -49,9 +49,10 @@ public class Program {
 //		aula189_exercicio1("AULA 189 - EXERCICIO 01", input);
 //		aula190_exemplo1("AULA 190 - EXEMPLO 01", input);
 //		aula191_exemplo1("AULA 191 - EXEMPLO 01", input);
+//		aula192_exemplo1("AULA 192 - EXEMPLO 01", input);
 //		aula192_exemplo2("AULA 192 - EXEMPLO 02", input);
-//		aula192_exemplo3("AULA 192 - EXEMPLO 03", input);
-		aula195_exemplo1("AULA 195 - EXEMPLO 01", input);
+		aula192_exemplo3("AULA 192 - EXEMPLO 03", input);
+//		aula195_exemplo1("AULA 195 - EXEMPLO 01", input);
 
 		input.close();
 
@@ -103,7 +104,7 @@ public class Program {
 		System.out.println("==============================");
 		System.out.println();
 
-		String inputFile = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a192_ex01\\in2.txt";
+		String inputFile = ".\\temp\\a192_ex01\\in2.txt";
 
 		// lendo registros do arquivo
 		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
@@ -164,7 +165,7 @@ public class Program {
 		System.out.println("==============================");
 		System.out.println();
 
-		String inputFile = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a192_ex01\\in2.txt";
+		String inputFile = ".\\temp\\a192_ex01\\in2.txt";
 
 		// lendo registros do arquivo
 		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
@@ -225,7 +226,7 @@ public class Program {
 		System.out.println("==============================");
 		System.out.println();
 
-		String inputFile = "C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a192_ex01\\in.txt";
+		String inputFile = ".\\temp\\a192_ex01\\in.txt";
 
 		// lendo registros do arquivo
 		try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
