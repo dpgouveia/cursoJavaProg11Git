@@ -47,7 +47,7 @@ public class Program {
 //		aula198_exemplo03("AULA 198 - EXEMPLO 03", input);
 //		aula198_exemplo04("AULA 198 - EXEMPLO 04", input);
 //		aula198_exemplo05("AULA 198 - EXEMPLO 05", input);
-//		aula199_exemplo01("AULA 199 - EXEMPLO 01", input);
+		aula199_exemplo01("AULA 199 - EXEMPLO 01", input);
 //		aula200_exemplo01("AULA 200 - EXEMPLO 01", input);
 //		aula201_exemplo01("AULA 201 - EXEMPLO 01", input);
 //		aula202_exemplo01("AULA 202 - EXEMPLO 01", input);
@@ -60,7 +60,7 @@ public class Program {
 //		aula207_exercicio01("AULA 207 - EXERCICIO 01", input);
 //		aula208_exemplo01("AULA 208 - EXERCICIO 01", input);
 //		aula208_exemplo02("AULA 208 - EXERCICIO 02", input);
-		aula209_exercicio01("AULA 209 - EXERCICIO 01", input);
+//		aula209_exercicio01("AULA 209 - EXERCICIO 01", input);
 
 		input.close();
 
@@ -831,7 +831,7 @@ public class Program {
 
 //		File path = new File("C:\\Users\\BRDPG1\\Documents\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a199_ex01\\in.txt");
 		File path = new File(
-				"C:\\Users\\Familia\\Documents\\Daniel\\eclipse\\eclipse-workspace\\cursoJavaProg11Git\\temp\\a199_ex01\\in.txt");
+				".\\temp\\a199_ex01\\in.txt");
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 //			System.out.println(cs.max(listaProdutos));
