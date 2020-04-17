@@ -1,6 +1,8 @@
 package s21.DemoDaoJDBC.application;
 
 import common.utils.MyUtils;
+import s21.DemoDaoJDBC.model.dao.DaoFactory;
+import s21.DemoDaoJDBC.model.dao.SellerDao;
 import s21.DemoDaoJDBC.model.entities.Department;
 import s21.DemoDaoJDBC.model.entities.Seller;
 
@@ -22,6 +24,8 @@ public class Program {
 			Seller seller = new Seller(1, "Bob", "bob@gmail.com", MyUtils.simpleDateToDate.parse("17/04/1985"), 3000.00,
 					dept);
 			System.out.println(seller);
+			
+			SellerDao sellerDao = DaoFactory.createSellerDao();
 
 		} catch (ProgramException e) {
 			System.out.println();
