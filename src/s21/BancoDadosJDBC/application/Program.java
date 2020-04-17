@@ -20,9 +20,9 @@ public class Program {
 		Scanner input = new Scanner(System.in);
 		Connection conn = DB.getConnection();
 
-		iniciarAula("229_exemplo_01", input, conn);
+//		iniciarAula("229_exemplo_01", input, conn);
 
-//		iniciarAula("230_exemplo_01", input, conn);
+		iniciarAula("230_exemplo_01", input, conn);
 
 //		iniciarAula("231_exemplo_01", input, conn);
 //		iniciarAula("231_exemplo_02", input, conn);
