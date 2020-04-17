@@ -61,6 +61,16 @@ cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
 git push origin master
 
 
+### Criando novo repo no git
+### criar pasta que armazenara o repositorio local
+git init
+git remote add origin https://github.com/acenelio/demo-dao-jdbc.git
+git pull origin master
+git add .
+git commit -m "Project created"
+git push origin master
+
+
 ###
 ### INCOMUM
 ###

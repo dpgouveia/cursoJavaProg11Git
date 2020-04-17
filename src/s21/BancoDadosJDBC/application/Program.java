@@ -20,7 +20,7 @@ public class Program {
 		Scanner input = new Scanner(System.in);
 		Connection conn = DB.getConnection();
 
-//		iniciarAula("229_exemplo_01", input, conn);
+		iniciarAula("229_exemplo_01", input, conn);
 
 //		iniciarAula("230_exemplo_01", input, conn);
 
@@ -35,7 +35,7 @@ public class Program {
 		
 //		iniciarAula("234_exemplo_01", input, conn);
 //		iniciarAula("234_exemplo_02", input, conn);
-		iniciarAula("234_exemplo_03", input, conn);
+//		iniciarAula("234_exemplo_03", input, conn);
 
 		input.close();
 		DB.closeConnection();

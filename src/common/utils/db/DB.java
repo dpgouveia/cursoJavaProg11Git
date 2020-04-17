@@ -16,7 +16,7 @@ public class DB {
 
 	// metodos estaticos da classe
 	private static Properties loadProperties() {
-		String propertiesFilePath = ".\\properties\\db.properties";
+		String propertiesFilePath = ".\\properties\\localhost.db.properties";
 		try (FileInputStream fis = new FileInputStream(propertiesFilePath)) {
 			Properties props = new Properties();
 			props.load(fis);
