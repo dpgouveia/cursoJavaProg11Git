@@ -8,11 +8,11 @@ import java.util.List;
 
 import common.utils.db.DB;
 import s21.DemoDaoJDBC.application.ProgramException;
+import s21.DemoDaoJDBC.model.dao.DaoUtil;
 import s21.DemoDaoJDBC.model.dao.SellerDao;
-import s21.DemoDaoJDBC.model.entities.Department;
 import s21.DemoDaoJDBC.model.entities.Seller;
 
-public class SellerDaoJDBC implements SellerDao {
+public class SellerDaoJDBC implements SellerDao, DaoUtil {
 
 	// atributos
 	private Connection conn;
@@ -66,14 +66,10 @@ public class SellerDaoJDBC implements SellerDao {
 					pst.setInt(1, id);
 					rs = pst.executeQuery();
 
-					while (rs.next()) {
-						seller = new Seller(rs.getInt("Id"), 
-											rs.getString("Name"),
-											rs.getString("Email"),
-											rs.getDate("BirthDate"),
-											rs.getDouble("BaseSalary"),
-											new Department(rs.getInt("DepartmentId"), rs.getString("DepName")));
+					if (rs.next()) {
+						seller = instantiateSeller(rs, instantiateDepartment(rs));
 					}
+
 				}
 
 			} catch (SQLException e) {
@@ -83,6 +79,7 @@ public class SellerDaoJDBC implements SellerDao {
 				DB.closeResultSet(rsCheck);
 				DB.closeStatement(pst);
 				DB.closeResultSet(rs);
+
 			}
 
 		}

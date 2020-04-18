@@ -5,6 +5,8 @@ import s21.DemoDaoJDBC.application.ProgramException;
 public enum DaoJDBCQuerys {
 
 	// Valores numeros representam as querys
+	// DepartmentDaoJDBC
+	
 	// SellerDaoJDBC
 	SELLER_FINDBYID_CHECK,
 	SELLER_FINDBYID;
