@@ -6,14 +6,17 @@ import java.io.Serializable;
 // Isso permite que o objeto possa ser gravado em arquivos, banco de dados e trafegar na rede
 public class Department implements Serializable {
 
+	// atributoe estáticos
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// atibutos
 	private Integer id;
 	private String name;
 
+	// construtores
 	public Department() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,6 +28,7 @@ public class Department implements Serializable {
 		this.name = name;
 	}
 
+	// getter e setters
 	public Integer getId() {
 		return id;
 	}
@@ -41,6 +45,7 @@ public class Department implements Serializable {
 		this.name = name;
 	}
 
+	// métodos
 	@Override
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + "]";

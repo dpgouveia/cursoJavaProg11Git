@@ -1,10 +1,8 @@
 package s21.DemoDaoJDBC.application;
 
-import common.utils.MyUtils;
+import common.utils.db.DB;
 import s21.DemoDaoJDBC.model.dao.DaoFactory;
 import s21.DemoDaoJDBC.model.dao.SellerDao;
-import s21.DemoDaoJDBC.model.entities.Department;
-import s21.DemoDaoJDBC.model.entities.Seller;
 
 public class Program {
 
@@ -18,14 +16,18 @@ public class Program {
 
 		try {
 
-			Department dept = new Department(1, "Books");
-			System.out.println(dept);
+//			Department dept = new Department(1, "Books");
+//			System.out.println(dept);
+//
+//			Seller seller = new Seller(1, "Bob", "bob@gmail.com", MyUtils.simpleDateToDate.parse("17/04/1985"), 3000.00,
+//					dept);
+//			System.out.println(seller);
 
-			Seller seller = new Seller(1, "Bob", "bob@gmail.com", MyUtils.simpleDateToDate.parse("17/04/1985"), 3000.00,
-					dept);
-			System.out.println(seller);
-			
 			SellerDao sellerDao = DaoFactory.createSellerDao();
+
+			System.out.println(sellerDao.findById(3));
+
+			DB.closeConnection();
 
 		} catch (ProgramException e) {
 			System.out.println();

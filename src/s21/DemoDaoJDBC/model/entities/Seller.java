@@ -7,11 +7,13 @@ import common.utils.MyUtils;
 
 public class Seller implements Serializable {
 
+	// atributos estáticos
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// atributos
 	private Integer id;
 	private String name;
 	private String email;
@@ -19,6 +21,7 @@ public class Seller implements Serializable {
 	private Double baseSalary;
 	private Department departament;
 
+	// construtores
 	public Seller() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -34,6 +37,7 @@ public class Seller implements Serializable {
 		this.departament = departament;
 	}
 
+	// getters e setters
 	public Integer getId() {
 		return id;
 	}
@@ -82,6 +86,7 @@ public class Seller implements Serializable {
 		this.departament = departament;
 	}
 
+	// métodos
 	@Override
 	public int hashCode() {
 		final int prime = 31;
