@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import common.utils.db.DB;
 import s21.DemoDaoJDBC.application.ProgramException;
@@ -126,6 +128,7 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 	@Override
 	public List<Seller> findAll() {
 		List<Seller> sellers = new ArrayList<Seller>();
+		Map<Integer, Department> departments = new HashMap<Integer, Department>();
 
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -134,14 +137,17 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDALL.returnQuery());
 			rs = pst.executeQuery();
 
-			if (rs.next()) {
-				Department dept = instantiateDepartment(rs);
-				sellers.add(instantiateSeller(rs, dept));
-				while (rs.next()) {
-					sellers.add(instantiateSeller(rs, dept));
+			while(rs.next()) {
+				
+				Department dept = departments.get(rs.getInt("SellerDepartmentId")); 
+				if(dept == null) {
+					dept = instantiateDepartment(rs);
+					departments.put(dept.getId(), dept);
 				}
+				
+				sellers.add(instantiateSeller(rs, dept));
 			}
-
+			
 		} catch (SQLException e) {
 			throw new ProgramException(e.getMessage());
 		} finally {
