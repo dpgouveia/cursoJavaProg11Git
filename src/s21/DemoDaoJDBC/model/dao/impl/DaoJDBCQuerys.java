@@ -9,7 +9,9 @@ public enum DaoJDBCQuerys {
 	
 	// SellerDaoJDBC
 	SELLER_FINDBYID_CHECK,
-	SELLER_FINDBYID;
+	SELLER_FINDBYID,
+	SELLER_FINDBYDEPARTMENT,
+	SELLER_FINDALL;
 	
 
 	// Retornando a string referente a query selecionada
@@ -28,16 +30,58 @@ public enum DaoJDBCQuerys {
 			
 		case SELLER_FINDBYID:
 			return 
-					"select                     " + 
-					"	s.*                     " + 
-					"	,d.Name as 'DepName'    " + 
-					"from                       " + 
-					"	seller s                " + 
-					"inner join department d    " + 
-					"	on s.Id = d.Id          " + 
-					"where                      " + 
-					"	s.Id = ?                ";
+					"select                                     " +
+					"	s.Id  as 'SellerID',                    " +
+					"	s.Name  as 'SellerName',                " +
+					"	s.Email as 'SellerEmail',               " +
+					"	s.BirthDate as 'SellerBirthDate',       " +
+					"	s.BaseSalary as 'SellerBaseSalary',     " +
+					"	s.DepartmentId as 'SellerDepartmentId', " +
+					"	d.Name as 'DepartmentName'              " +
+					"from                                       " +
+					"	seller s,                               " +
+					"	department d                            " +
+					"where                                      " +
+					" 	s.DepartmentId = d.Id                   " +
+					"	and s.Id = ?                            ";
 		
+		case SELLER_FINDBYDEPARTMENT:
+			return 
+					"select                                     " +
+					"	s.Id  as 'SellerID',                    " +
+					"	s.Name  as 'SellerName',                " +
+					"	s.Email as 'SellerEmail',               " +
+					"	s.BirthDate as 'SellerBirthDate',       " +
+					"	s.BaseSalary as 'SellerBaseSalary',     " +
+					"	s.DepartmentId as 'SellerDepartmentId', " +
+					"	d.Name as 'DepartmentName'              " +
+					"from                                       " +
+					"	seller s,                               " +
+					"	department d                            " +
+					" where                                     " +
+					" 	s.DepartmentId = d.Id                   " +
+					" 	and d.Id = ?                            " +
+					"order by                                   " +
+					"	s.Name                                  ";
+		
+		case SELLER_FINDALL:
+			return 
+					"select                                     " +
+					"	s.Id  as 'SellerID',                    " +
+					"	s.Name  as 'SellerName',                " +
+					"	s.Email as 'SellerEmail',               " +
+					"	s.BirthDate as 'SellerBirthDate',       " +
+					"	s.BaseSalary as 'SellerBaseSalary',     " +
+					"	s.DepartmentId as 'SellerDepartmentId', " +
+					"	d.Name as 'DepartmentName'              " +
+					"from                                       " +
+					"	seller s,                               " +
+					"	department d                            " +
+					" where                                     " +
+					" 	s.DepartmentId = d.Id                   " +
+					"order by                                   " +
+					"	s.Name                                  ";
+			
 		default:
 			throw new ProgramException(getClass() + ": valor enumerado especificado não possui uma querys válida associada no programa!");
 			

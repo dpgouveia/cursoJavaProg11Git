@@ -9,16 +9,16 @@ import s21.DemoDaoJDBC.model.entities.Seller;
 public interface DaoUtil {
 	
 	default Seller instantiateSeller(ResultSet rs, Department dept) throws SQLException {
-		return  new Seller(rs.getInt("Id"), 
-				rs.getString("Name"),
-				rs.getString("Email"),
-				rs.getDate("BirthDate"),
-				rs.getDouble("BaseSalary"),
+		return  new Seller(rs.getInt("SellerID"), 
+				rs.getString("SellerName"),
+				rs.getString("SellerEmail"),
+				rs.getDate("SellerBirthDate"),
+				rs.getDouble("SellerBaseSalary"),
 				dept);
 	}
 	
 	default Department instantiateDepartment(ResultSet rs) throws SQLException {
-		return new Department(rs.getInt("DepartmentId"), rs.getString("DepName"));
+		return new Department(rs.getInt("SellerDepartmentId"), rs.getString("DepartmentName"));
 	}
 
 }

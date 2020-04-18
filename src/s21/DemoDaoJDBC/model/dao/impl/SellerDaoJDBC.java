@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import common.utils.db.DB;
 import s21.DemoDaoJDBC.application.ProgramException;
 import s21.DemoDaoJDBC.model.dao.DaoUtil;
 import s21.DemoDaoJDBC.model.dao.SellerDao;
+import s21.DemoDaoJDBC.model.entities.Department;
 import s21.DemoDaoJDBC.model.entities.Seller;
 
 public class SellerDaoJDBC implements SellerDao, DaoUtil {
@@ -88,9 +90,66 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 	}
 
 	@Override
+	public List<Seller> findByDepartment(Integer id) {
+
+		List<Seller> sellers = new ArrayList<Seller>();
+
+		if (id != null) {
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			try {
+
+				pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDBYDEPARTMENT.returnQuery());
+				pst.setInt(1, id);
+				rs = pst.executeQuery();
+
+				if (rs.next()) {
+					Department dept = instantiateDepartment(rs);
+					sellers.add(instantiateSeller(rs, dept));
+					while (rs.next()) {
+						sellers.add(instantiateSeller(rs, dept));
+					}
+				}
+
+			} catch (SQLException e) {
+				throw new ProgramException(e.getMessage());
+			} finally {
+				DB.closeStatement(pst);
+				DB.closeResultSet(rs);
+			}
+
+		}
+
+		return sellers;
+	}
+
+	@Override
 	public List<Seller> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Seller> sellers = new ArrayList<Seller>();
+
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+
+			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDALL.returnQuery());
+			rs = pst.executeQuery();
+
+			if (rs.next()) {
+				Department dept = instantiateDepartment(rs);
+				sellers.add(instantiateSeller(rs, dept));
+				while (rs.next()) {
+					sellers.add(instantiateSeller(rs, dept));
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new ProgramException(e.getMessage());
+		} finally {
+			DB.closeStatement(pst);
+			DB.closeResultSet(rs);
+		}
+
+		return sellers;
 	}
 
 }

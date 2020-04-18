@@ -26,9 +26,18 @@ public class Program {
 			SellerDao sellerDao = DaoFactory.createSellerDao();
 
 			System.out.println();
-			System.out.println("-------------------------------");
-			System.out.println("==== TEST: seller findById ====");
-			System.out.println(sellerDao.findById(3));
+			System.out.println("==== TEST: seller findById");
+			System.out.println(sellerDao.findById(14));
+
+			System.out.println();
+			System.out.println("==== TEST: seller findByDepartment");
+			sellerDao.findByDepartment(2).forEach(System.out::println);
+			sellerDao.findByDepartment(4).forEach(System.out::println);
+			sellerDao.findByDepartment(14).forEach(System.out::println);
+			
+			System.out.println();
+			System.out.println("==== TEST: seller findAll");
+			sellerDao.findAll().forEach(System.out::println);
 
 			DB.closeConnection();
 
