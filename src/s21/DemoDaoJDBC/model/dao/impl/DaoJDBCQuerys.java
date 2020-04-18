@@ -8,6 +8,7 @@ public enum DaoJDBCQuerys {
 	// DepartmentDaoJDBC
 	
 	// SellerDaoJDBC
+	SELLER_INSERT,
 	SELLER_FINDBYID_CHECK,
 	SELLER_FINDBYID,
 	SELLER_FINDBYDEPARTMENT,
@@ -18,6 +19,14 @@ public enum DaoJDBCQuerys {
 	String returnQuery() {
 		
 		switch(this) {
+		
+		case SELLER_INSERT:
+			return 
+					"insert                                                                 " +
+					"	into seller (Name, Email, BirthDate, BaseSalary, DepartmentId)      " +
+					"values                                                                 " +
+					"	(?, ?, ?, ?, ?)                                                     ";     
+		
 		
 		case SELLER_FINDBYID_CHECK:
 			return 

@@ -30,7 +30,26 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 	// métodos
 	@Override
 	public void insert(Seller obj) {
-		// TODO Auto-generated method stub
+
+		if (obj != null) {
+			PreparedStatement pst = null;
+			try {
+
+				pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_INSERT.returnQuery());
+				pst.setString(1, obj.getName());
+				pst.setString(2, obj.getEmail());
+				pst.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
+				pst.setDouble(4, obj.getBaseSalary());
+				pst.setInt(5, obj.getDepartament().getId());
+
+				pst.executeUpdate();
+
+			} catch (SQLException e) {
+				throw new ProgramException(e.getMessage());
+			} finally {
+				DB.closeStatement(pst);
+			}
+		}
 
 	}
 
@@ -83,9 +102,7 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 				DB.closeResultSet(rsCheck);
 				DB.closeStatement(pst);
 				DB.closeResultSet(rs);
-
 			}
-
 		}
 
 		return seller;
@@ -119,7 +136,6 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 				DB.closeStatement(pst);
 				DB.closeResultSet(rs);
 			}
-
 		}
 
 		return sellers;
@@ -137,17 +153,16 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDALL.returnQuery());
 			rs = pst.executeQuery();
 
-			while(rs.next()) {
-				
-				Department dept = departments.get(rs.getInt("SellerDepartmentId")); 
-				if(dept == null) {
+			while (rs.next()) {
+				Department dept = departments.get(rs.getInt("SellerDepartmentId"));
+				if (dept == null) {
 					dept = instantiateDepartment(rs);
 					departments.put(dept.getId(), dept);
 				}
-				
+
 				sellers.add(instantiateSeller(rs, dept));
 			}
-			
+
 		} catch (SQLException e) {
 			throw new ProgramException(e.getMessage());
 		} finally {
