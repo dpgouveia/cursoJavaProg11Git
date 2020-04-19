@@ -48,11 +48,15 @@ public class Program {
 			Department dept = new Department(1, "Computers");
 			Seller seller = new Seller(1, "Daniel", "daniel@gmail.com", MyUtils.simpleDateToDate.parse("02/03/1984"), 1000.00,
 					dept);
+			
+			System.out.println();
+			System.out.println("Insering this seller into database: " + seller);
 			sellerDao.insert(seller);
-			System.out.println("seller insert() -- completed");
+			
 			System.out.println();
 			sellerDao.findAll().forEach(System.out::println);
-
+			System.out.println("After insert this seller: "  + seller);
+			
 			DB.closeConnection();
 
 		} catch (ProgramException e) {

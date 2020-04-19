@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,14 +36,22 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 			PreparedStatement pst = null;
 			try {
 
-				pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_INSERT.returnQuery());
+				pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_INSERT.returnQuery(), Statement.RETURN_GENERATED_KEYS);
 				pst.setString(1, obj.getName());
 				pst.setString(2, obj.getEmail());
 				pst.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
 				pst.setDouble(4, obj.getBaseSalary());
 				pst.setInt(5, obj.getDepartament().getId());
 
-				pst.executeUpdate();
+				if(pst.executeUpdate() > 0) {
+					ResultSet rs = pst.getGeneratedKeys();
+					if(rs.next()) {
+						obj.setId(rs.getInt(1));
+					}
+					DB.closeResultSet(rs);
+				} else {
+					throw new ProgramException("Erro durante a insercao do Seller na base de dados");
+				}
 
 			} catch (SQLException e) {
 				throw new ProgramException(e.getMessage());
