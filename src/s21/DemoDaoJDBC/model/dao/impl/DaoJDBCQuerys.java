@@ -34,7 +34,15 @@ public enum DaoJDBCQuerys {
 					"from                                 " +
 					"	department d                      " + 
 					"where                                " +
-					"	d.Id = ?                          "; 
+					"	d.Id = ?                          ";
+			
+		case DEPARTMENT_FINDALL:
+			return
+					"select                               " +
+					"	d.Id as 'SellerDepartmentId',     " +
+					"	d.Name as 'DepartmentName'        " +
+					"from                                 " +
+					"	department d                      ";
 		
 		case SELLER_INSERT:
 			return 

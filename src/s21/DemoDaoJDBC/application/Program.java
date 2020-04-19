@@ -66,6 +66,10 @@ public class Program {
 			System.out.println("==== TEST: department findById()");
 			System.out.println(departmentDao.findById(1));
 			
+			System.out.println();
+			System.out.println("==== TEST: department findAll()");
+			departmentDao.findAll().forEach(System.out::println);
+			
 			break;
 		}
 

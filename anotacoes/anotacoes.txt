@@ -14,7 +14,7 @@ cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Gi
 
 
 ### restaurar projeto do GIT
-cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/
+cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
 git clone https://github.com/dpgouveia/cursoJavaProg11Git.git
 
 cd /C/Users/BRDPG1/Documents/eclipse-workspace/cursoJavaProg11Git
