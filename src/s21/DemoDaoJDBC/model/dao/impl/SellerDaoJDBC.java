@@ -33,6 +33,12 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 	public void insert(Seller obj) {
 
 		if (obj != null) {
+
+			if (obj.getId() != null) {
+				throw new ProgramException(
+						"Não é possível inserir um seller com ID previamente preenchido na base de dados");
+			}
+
 			PreparedStatement pst = null;
 			try {
 
@@ -61,14 +67,21 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 			} finally {
 				DB.closeStatement(pst);
 			}
+		} else {
+			throw new ProgramException("Nao é possível inserir um seller NULO na base de dados");
 		}
 
 	}
 
 	@Override
 	public void update(Seller obj) {
-	
+
 		if (obj != null) {
+
+			if (obj.getId() == null) {
+				throw new ProgramException("Não é possível atualizar um seller com ID NULO na base de dados");
+			}
+
 			PreparedStatement pst = null;
 			try {
 
@@ -93,13 +106,42 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 			} finally {
 				DB.closeStatement(pst);
 			}
+		} else {
+			throw new ProgramException("Nao é possível atualizar um seller NULO na base de dados");
 		}
 
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+
+		if (id == null) {
+			throw new ProgramException("Não é possível excluir registro com ID NULO da base de dados");
+		}
+
+		if (findById(id) == null) {
+			throw new ProgramException("O Seller ID informado não existe na base de dados");
+		}
+
+		PreparedStatement pst = null;
+		try {
+
+			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_DELETE.returnQuery());
+			pst.setInt(1, id);
+
+			conn.setAutoCommit(false);
+			if (pst.executeUpdate() > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+				throw new ProgramException("Erro durante o delete do Seller na base de dados");
+			}
+
+		} catch (SQLException e) {
+			throw new ProgramException(e.getMessage());
+		} finally {
+			DB.closeStatement(pst);
+		}
 
 	}
 
