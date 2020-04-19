@@ -71,14 +71,24 @@ public class Program {
 //			System.out.println("==== TEST: department findAll()");
 //			departmentDao.findAll().forEach(System.out::println);
 			
+//			System.out.println();
+//			System.out.println("==== TEST: department insert()");
+//			Department dept = new Department();
+//			dept.setName("Food");
+//			System.out.println("Before insert: " + dept);
+//			departmentDao.insert(dept);
+//			System.out.println("After insert: " + dept);
+//			departmentDao.insert(null);
+			
 			System.out.println();
-			System.out.println("==== TEST: department insert()");
-			Department dept = new Department();
-			dept.setName("Food");
-			System.out.println("Before insert: " + dept);
-			departmentDao.insert(dept);
-			System.out.println("After insert: " + dept);
-			departmentDao.insert(null);
+			System.out.println("==== TEST: department update()");
+			Department dept = departmentDao.findById(8);
+			System.out.println("Before update: " + dept);
+//			dept.setId(null);
+			dept.setName("Groceries");
+			departmentDao.update(dept);
+			System.out.println("After update: " + departmentDao.findById(8));
+			departmentDao.update(null);
 			
 			break;
 		}

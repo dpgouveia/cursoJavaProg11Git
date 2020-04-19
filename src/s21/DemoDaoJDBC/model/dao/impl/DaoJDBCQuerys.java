@@ -32,6 +32,12 @@ public enum DaoJDBCQuerys {
 					"	into department (Name)      " +
 					"values                         " +
 					"	(?)                         ";
+			
+		case DEPARTMENT_UPDATE:
+			return 
+					"update department d   " +
+					"	set d.Name = ?     " +
+					"where d.Id = ?        ";
 		
 		case DEPARTMENT_FINDBYID:
 			return

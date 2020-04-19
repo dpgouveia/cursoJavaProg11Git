@@ -64,7 +64,33 @@ public class DepartmentDaoJDBC implements DepartmentDao, DaoUtil {
 
 	@Override
 	public void update(Department obj) {
-		// TODO Auto-generated method stub
+		
+		if(obj == null ) {
+			throw new ProgramException("Não é possível atualizar um Department NULO na base de dados");
+		}
+		
+		if(obj.getId() == null) {
+			throw new ProgramException("Não é possível atualizar um Department sem um ID previamente preenchido na base de dados");
+		}
+		
+		PreparedStatement pst = null;		
+		try {
+			pst = conn.prepareStatement(DaoJDBCQuerys.DEPARTMENT_UPDATE.returnQuery());
+			pst.setString(1, obj.getName());
+			pst.setInt(2, obj.getId());
+			
+			if (pst.executeUpdate() > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+				throw new ProgramException("Erro durante a atualização do Department na base de dados");
+			}
+			
+		} catch (SQLException e) {
+			throw new ProgramException(e.getMessage());
+		} finally {
+			DB.closeStatement(pst);
+		}
 		
 	}
 
