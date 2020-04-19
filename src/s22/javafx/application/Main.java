@@ -1,6 +1,10 @@
 package s22.javafx.application;
 
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -13,7 +17,7 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage stage) {
 
 		System.out.println();
 		System.out.println("------------------------------------------");
@@ -21,12 +25,13 @@ public class Main extends Application {
 
 		try {
 
-			iniciarAula("aula254_exemplo01", primaryStage);
+//			iniciarAula("aula254_exemplo01", primaryStage);
+			iniciarAula("aula255_exemplo01", stage);
 
 		} catch (MainException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
-			System.out.println("ERRO NO PROGRAMA: " + e.getMessage());
+			System.out.println("ERRO NÃO TRATADO PELO PROGRAMA: " + e.getMessage());
 			System.out.println("Encerrando programa....");
 		} catch (RuntimeException e) {
 			System.out.println();
@@ -48,7 +53,7 @@ public class Main extends Application {
 
 	}
 
-	private void iniciarAula(String aula, Stage primaryStage) {
+	private void iniciarAula(String aula, Stage stage) {
 
 		System.out.println();
 		System.out.println("------------------------------------------");
@@ -61,9 +66,23 @@ public class Main extends Application {
 
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
-//			scene.getStylesheets().add(this.getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			scene.getStylesheets().add(this.getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+
+			break;
+		}
+
+		case "aula255_exemplo01": {
+
+			try {
+				Parent parent = FXMLLoader.load(getClass().getResource("../gui/View.fxml"));
+				Scene scene = new Scene(parent);
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException e) {
+				throw new MainException(e.getMessage());
+			}
 
 			break;
 		}
