@@ -96,7 +96,28 @@ public class DepartmentDaoJDBC implements DepartmentDao, DaoUtil {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		
+		if(id == null ) {
+			throw new ProgramException("Não é possível excluir um Department com ID NULO da base de dados");
+		}
+				
+		PreparedStatement pst = null;		
+		try {
+			pst = conn.prepareStatement(DaoJDBCQuerys.DEPARTMENT_DELETEBYID.returnQuery());
+			pst.setInt(1, id);
+			
+			if (pst.executeUpdate() > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+				throw new ProgramException("Erro durante a exclusão do Department na base de dados");
+			}
+			
+		} catch (SQLException e) {
+			throw new ProgramException(e.getMessage());
+		} finally {
+			DB.closeStatement(pst);
+		}
 		
 	}
 

@@ -4,18 +4,16 @@ import s21.DemoDaoJDBC.application.ProgramException;
 
 public enum DaoJDBCQuerys {
 
-	// Valores numeros representam as querys
-	// DepartmentDaoJDBC
+	// Valores enumerados representam as querys
 	DEPARTMENT_INSERT,
 	DEPARTMENT_UPDATE,
-	DEPARTMENT_DELETE,
+	DEPARTMENT_DELETEBYID,
 	DEPARTMENT_FINDBYID,
 	DEPARTMENT_FINDALL,
 	
-	// SellerDaoJDBC
 	SELLER_INSERT,
 	SELLER_UPDATE,
-	SELLER_DELETE,
+	SELLER_DELETEBYID,
 	SELLER_FINDBYID,
 	SELLER_FINDBYDEPARTMENT,
 	SELLER_FINDALL;
@@ -38,6 +36,11 @@ public enum DaoJDBCQuerys {
 					"update department d   " +
 					"	set d.Name = ?     " +
 					"where d.Id = ?        ";
+			
+		case DEPARTMENT_DELETEBYID:
+			return 
+					"delete from department d " +
+					"where d.Id = ?           ";
 		
 		case DEPARTMENT_FINDBYID:
 			return
@@ -70,7 +73,7 @@ public enum DaoJDBCQuerys {
 					"	set s.Name = ?, s.Email = ?, s.BirthDate = ?, s.BaseSalary = ?, s.DepartmentId = ?      " +
 					"where s.Id = ?                                                                             "; 
 			
-		case SELLER_DELETE:
+		case SELLER_DELETEBYID:
 			return 
 					"delete from seller s " +
 					"where s.Id = ?       ";

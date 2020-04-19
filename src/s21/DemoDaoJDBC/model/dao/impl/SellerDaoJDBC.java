@@ -124,7 +124,7 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 		PreparedStatement pst = null;
 		try {
 
-			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_DELETE.returnQuery());
+			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_DELETEBYID.returnQuery());
 			pst.setInt(1, id);
 
 			if (pst.executeUpdate() > 0) {

@@ -4,7 +4,6 @@ import common.utils.db.DB;
 import s21.DemoDaoJDBC.model.dao.DaoFactory;
 import s21.DemoDaoJDBC.model.dao.DepartmentDao;
 import s21.DemoDaoJDBC.model.dao.SellerDao;
-import s21.DemoDaoJDBC.model.entities.Department;
 
 public class Program {
 
@@ -18,7 +17,7 @@ public class Program {
 
 		try {
 
-//			testeDaoJDBC("SellerDaoJDBC");
+			testeDaoJDBC("SellerDaoJDBC");
 			testeDaoJDBC("DepartmentDaoJDBC");
 
 			DB.closeConnection();
@@ -67,9 +66,9 @@ public class Program {
 //			System.out.println("==== TEST: department findById()");
 //			System.out.println(departmentDao.findById(1));
 			
-//			System.out.println();
-//			System.out.println("==== TEST: department findAll()");
-//			departmentDao.findAll().forEach(System.out::println);
+			System.out.println();
+			System.out.println("==== TEST: department findAll()");
+			departmentDao.findAll().forEach(System.out::println);
 			
 //			System.out.println();
 //			System.out.println("==== TEST: department insert()");
@@ -80,15 +79,26 @@ public class Program {
 //			System.out.println("After insert: " + dept);
 //			departmentDao.insert(null);
 			
-			System.out.println();
-			System.out.println("==== TEST: department update()");
-			Department dept = departmentDao.findById(8);
-			System.out.println("Before update: " + dept);
+//			System.out.println();
+//			System.out.println("==== TEST: department update()");
+//			Department dept = departmentDao.findById(8);
+//			System.out.println("Before update: " + dept);
 //			dept.setId(null);
-			dept.setName("Groceries");
-			departmentDao.update(dept);
-			System.out.println("After update: " + departmentDao.findById(8));
-			departmentDao.update(null);
+//			dept.setName("Groceries");
+//			departmentDao.update(dept);
+//			System.out.println("After update: " + departmentDao.findById(8));
+//			departmentDao.update(null);
+			
+//			System.out.println();
+//			System.out.println("==== TEST: department delete()");
+//			Department dept = departmentDao.findById(8);
+//			System.out.println("Before delete: ");
+//			departmentDao.findAll().forEach(System.out::println);
+//			departmentDao.deleteById(dept == null ? null : dept.getId());
+//			departmentDao.deleteById(null);
+//			System.out.println();
+//			System.out.println("After delete: ");
+//			departmentDao.findAll().forEach(System.out::println);
 			
 			break;
 		}
