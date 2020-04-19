@@ -75,6 +75,9 @@ git push origin master
 ### INCOMUM
 ###
 
+### gravar usuário e senha no git (para nao ficar perguntando toda hora)
+git config --global credential.helper store
+git push
 
 ### restaurar ultimo commit no git
 cd /c/Users/Familia/Documents/Daniel/eclipse/eclipse-workspace/cursoJavaProg11Git
