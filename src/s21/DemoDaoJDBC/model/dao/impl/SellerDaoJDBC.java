@@ -43,13 +43,16 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 				pst.setDouble(4, obj.getBaseSalary());
 				pst.setInt(5, obj.getDepartament().getId());
 
-				if(pst.executeUpdate() > 0) {
+				conn.setAutoCommit(false);
+				if (pst.executeUpdate() > 0) {
+					conn.commit();
 					ResultSet rs = pst.getGeneratedKeys();
-					if(rs.next()) {
+					if (rs.next()) {
 						obj.setId(rs.getInt(1));
 					}
 					DB.closeResultSet(rs);
 				} else {
+					conn.rollback();
 					throw new ProgramException("Erro durante a insercao do Seller na base de dados");
 				}
 
