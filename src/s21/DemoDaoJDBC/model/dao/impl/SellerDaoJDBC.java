@@ -49,7 +49,6 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 				pst.setDouble(4, obj.getBaseSalary());
 				pst.setInt(5, obj.getDepartament().getId());
 
-				conn.setAutoCommit(false);
 				if (pst.executeUpdate() > 0) {
 					conn.commit();
 					ResultSet rs = pst.getGeneratedKeys();
@@ -93,7 +92,6 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 				pst.setInt(5, obj.getDepartament().getId());
 				pst.setInt(6, obj.getId());
 
-				conn.setAutoCommit(false);
 				if (pst.executeUpdate() > 0) {
 					conn.commit();
 				} else {
@@ -129,7 +127,6 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_DELETE.returnQuery());
 			pst.setInt(1, id);
 
-			conn.setAutoCommit(false);
 			if (pst.executeUpdate() > 0) {
 				conn.commit();
 			} else {

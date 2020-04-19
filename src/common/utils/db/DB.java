@@ -34,6 +34,7 @@ public class DB {
 
 			try {
 				conn = DriverManager.getConnection(url, props);
+				conn.setAutoCommit(false);
 			} catch (SQLException e) {
 				throw new DBException(e.getMessage());
 			}

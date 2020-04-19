@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,37 @@ public class DepartmentDaoJDBC implements DepartmentDao, DaoUtil {
 	// méotodos
 	@Override
 	public void insert(Department obj) {
-		// TODO Auto-generated method stub
+
+		if(obj == null ) {
+			throw new ProgramException("Não é possível inserir um Department NULO na base de dados");
+		}
+		
+		if(obj.getId() != null) {
+			throw new ProgramException("Não é possível inserir um Department com ID previamente preenchido na base de dados");
+		}
+		
+		PreparedStatement pst = null;		
+		try {
+			pst = conn.prepareStatement(DaoJDBCQuerys.DEPARTMENT_INSERT.returnQuery(), Statement.RETURN_GENERATED_KEYS);
+			pst.setString(1, obj.getName());
+			
+			if (pst.executeUpdate() > 0) {
+				conn.commit();
+				ResultSet rs = pst.getGeneratedKeys();
+				if (rs.next()) {
+					obj.setId(rs.getInt(1));
+				}
+				DB.closeResultSet(rs);
+			} else {
+				conn.rollback();
+				throw new ProgramException("Erro durante a insercao do Department na base de dados");
+			}
+			
+		} catch (SQLException e) {
+			throw new ProgramException(e.getMessage());
+		} finally {
+			DB.closeStatement(pst);
+		}
 		
 	}
 

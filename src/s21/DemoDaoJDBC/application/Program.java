@@ -4,6 +4,7 @@ import common.utils.db.DB;
 import s21.DemoDaoJDBC.model.dao.DaoFactory;
 import s21.DemoDaoJDBC.model.dao.DepartmentDao;
 import s21.DemoDaoJDBC.model.dao.SellerDao;
+import s21.DemoDaoJDBC.model.entities.Department;
 
 public class Program {
 
@@ -62,13 +63,22 @@ public class Program {
 			
 			DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 			
-			System.out.println();
-			System.out.println("==== TEST: department findById()");
-			System.out.println(departmentDao.findById(1));
+//			System.out.println();
+//			System.out.println("==== TEST: department findById()");
+//			System.out.println(departmentDao.findById(1));
+			
+//			System.out.println();
+//			System.out.println("==== TEST: department findAll()");
+//			departmentDao.findAll().forEach(System.out::println);
 			
 			System.out.println();
-			System.out.println("==== TEST: department findAll()");
-			departmentDao.findAll().forEach(System.out::println);
+			System.out.println("==== TEST: department insert()");
+			Department dept = new Department();
+			dept.setName("Food");
+			System.out.println("Before insert: " + dept);
+			departmentDao.insert(dept);
+			System.out.println("After insert: " + dept);
+			departmentDao.insert(null);
 			
 			break;
 		}

@@ -26,6 +26,13 @@ public enum DaoJDBCQuerys {
 		
 		switch(this) {
 		
+		case DEPARTMENT_INSERT:
+			return 
+					"insert                         " +
+					"	into department (Name)      " +
+					"values                         " +
+					"	(?)                         ";
+		
 		case DEPARTMENT_FINDBYID:
 			return
 					"select                               " +
