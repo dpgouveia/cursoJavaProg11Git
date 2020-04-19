@@ -150,39 +150,27 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 
 		Seller seller = null;
 
-		if (id != null) {
-			PreparedStatement pstCheck = null;
-			ResultSet rsCheck = null;
-			PreparedStatement pst = null;
-			ResultSet rs = null;
-			try {
+		if (id == null) {
+			throw new ProgramException("Não é possível buscar registros de Seller com ID NULO na base de dados");
+		}
 
-				// Verificando se temos um registro unico para o ID
-				pstCheck = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDBYID_CHECK.returnQuery());
-				pstCheck.setInt(1, id);
-				rsCheck = pstCheck.executeQuery();
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
 
-				// Caso o registro seja único, criamos um objeto, populamos os dados e
-				// retornarmos a referência dele
-				if (rsCheck.next() && rsCheck.getInt("count") == 1) {
-					pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDBYID.returnQuery());
-					pst.setInt(1, id);
-					rs = pst.executeQuery();
+			pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_FINDBYID.returnQuery());
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
 
-					if (rs.next()) {
-						seller = instantiateSeller(rs, instantiateDepartment(rs));
-					}
-
-				}
-
-			} catch (SQLException e) {
-				throw new ProgramException(e.getMessage());
-			} finally {
-				DB.closeStatement(pstCheck);
-				DB.closeResultSet(rsCheck);
-				DB.closeStatement(pst);
-				DB.closeResultSet(rs);
+			if (rs.next()) {
+				seller = instantiateSeller(rs, instantiateDepartment(rs));
 			}
+
+		} catch (SQLException e) {
+			throw new ProgramException(e.getMessage());
+		} finally {
+			DB.closeStatement(pst);
+			DB.closeResultSet(rs);
 		}
 
 		return seller;

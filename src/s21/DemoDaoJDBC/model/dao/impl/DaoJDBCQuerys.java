@@ -6,12 +6,16 @@ public enum DaoJDBCQuerys {
 
 	// Valores numeros representam as querys
 	// DepartmentDaoJDBC
+	DEPARTMENT_INSERT,
+	DEPARTMENT_UPDATE,
+	DEPARTMENT_DELETE,
+	DEPARTMENT_FINDBYID,
+	DEPARTMENT_FINDALL,
 	
 	// SellerDaoJDBC
 	SELLER_INSERT,
 	SELLER_UPDATE,
 	SELLER_DELETE,
-	SELLER_FINDBYID_CHECK,
 	SELLER_FINDBYID,
 	SELLER_FINDBYDEPARTMENT,
 	SELLER_FINDALL;
@@ -21,6 +25,16 @@ public enum DaoJDBCQuerys {
 	String returnQuery() {
 		
 		switch(this) {
+		
+		case DEPARTMENT_FINDBYID:
+			return
+					"select                               " +
+					"	d.Id as 'SellerDepartmentId',     " +
+					"	d.Name as 'DepartmentName'        " +
+					"from                                 " +
+					"	department d                      " + 
+					"where                                " +
+					"	d.Id = ?                          "; 
 		
 		case SELLER_INSERT:
 			return 
@@ -39,16 +53,7 @@ public enum DaoJDBCQuerys {
 			return 
 					"delete from seller s " +
 					"where s.Id = ?       ";
-			
-		case SELLER_FINDBYID_CHECK:
-			return 
-					"select                    " + 
-					"	count(s.Id) as 'count' " +
-					"from                      " +
-					"	seller s               " +
-					"where                     " +
-					"	s.Id = ?               ";
-			
+					
 		case SELLER_FINDBYID:
 			return 
 					"select                                     " +
