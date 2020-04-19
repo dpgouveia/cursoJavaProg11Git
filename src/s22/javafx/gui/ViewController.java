@@ -59,14 +59,43 @@ public class ViewController {
 	public void onBtCalcSumAction() {
 
 		try {
-			double number1 = Double.parseDouble(txtNumber1.getText().toLowerCase().trim().replace(",", "."));
-			double number2 = Double.parseDouble(txtNumber2.getText().toLowerCase().trim().replace(",", "."));
+			
+			String number1Txt = txtNumber1.getText().toLowerCase().trim().replace(",", ".");
+			String number2Txt = txtNumber2.getText().toLowerCase().trim().replace(",", ".");
+			
+			if(number1Txt == null || number1Txt.isBlank() || number1Txt.isEmpty()) {
+				throw new NumberFormatException("First number is empty!");
+			}
+			
+			try {
+				Double.parseDouble(number1Txt);
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("First number contains invalid characters");
+			}
+			
+			if(number2Txt == null || number2Txt.isBlank() || number2Txt.isEmpty()) {
+				throw new NumberFormatException("Second number is empty!");
+			}
+			
+			try {
+				Double.parseDouble(number2Txt);
+			} catch (NumberFormatException e) {
+				throw new NumberFormatException("Second number contains invalid characters");
+			}
+			
+			double number1 = Double.parseDouble(number1Txt);
+			double number2 = Double.parseDouble(number2Txt);
 			double sum = number1 + number2;
 			lblResult.setText(String.format("%.2f", sum));
+			
 		} catch (NumberFormatException e) {
 			Alerts.showAlert("Error", "Invalid Number Format", e.getMessage(), AlertType.ERROR);
+		} catch (RuntimeException e) {
+			Alerts.showAlert("Error", "Unknow error", e.getMessage(), AlertType.ERROR);
+		} catch (Exception e) {
+			Alerts.showAlert("Error", "Unexpected error", e.getMessage(), AlertType.ERROR);
 		}
-
+		
 	}
 
 }
