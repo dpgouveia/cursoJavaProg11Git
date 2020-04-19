@@ -9,6 +9,7 @@ public enum DaoJDBCQuerys {
 	
 	// SellerDaoJDBC
 	SELLER_INSERT,
+	SELLER_UPDATE,
 	SELLER_FINDBYID_CHECK,
 	SELLER_FINDBYID,
 	SELLER_FINDBYDEPARTMENT,
@@ -27,7 +28,12 @@ public enum DaoJDBCQuerys {
 					"values                                                                 " +
 					"	(?, ?, ?, ?, ?)                                                     ";     
 		
-		
+		case SELLER_UPDATE:
+			return 
+					"update seller s                                                                            " +
+					"	set s.Name = ?, s.Email = ?, s.BirthDate = ?, s.BaseSalary = ?, s.DepartmentId = ?      " +
+					"where s.Id = ?                                                                             "; 
+			
 		case SELLER_FINDBYID_CHECK:
 			return 
 					"select                    " + 

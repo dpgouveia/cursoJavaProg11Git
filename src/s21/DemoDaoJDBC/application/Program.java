@@ -1,10 +1,8 @@
 package s21.DemoDaoJDBC.application;
 
-import common.utils.MyUtils;
 import common.utils.db.DB;
 import s21.DemoDaoJDBC.model.dao.DaoFactory;
 import s21.DemoDaoJDBC.model.dao.SellerDao;
-import s21.DemoDaoJDBC.model.entities.Department;
 import s21.DemoDaoJDBC.model.entities.Seller;
 
 public class Program {
@@ -42,20 +40,25 @@ public class Program {
 //			System.out.println("==== TEST: seller findAll()");
 //			sellerDao.findAll().forEach(System.out::println);
 
-			System.out.println();
-			System.out.println("==== TEST: seller insert()");
+//			System.out.println();
+//			System.out.println("==== TEST: seller insert()");
+//
+//			Department dept = new Department(1, "Computers");
+//			Seller seller = new Seller(1, "Daniel", "daniel@gmail.com", MyUtils.simpleDateToDate.parse("02/03/1984"), 1000.00,
+//					dept);
+//			
+//			System.out.println("Before insert: " + seller);
+//			sellerDao.insert(seller);
+//			System.out.println("After insert: " + seller);
 
-			Department dept = new Department(1, "Computers");
-			Seller seller = new Seller(1, "Daniel", "daniel@gmail.com", MyUtils.simpleDateToDate.parse("02/03/1984"), 1000.00,
-					dept);
 			
 			System.out.println();
-			System.out.println("Insering this seller into database: " + seller);
-			sellerDao.insert(seller);
-			
-			System.out.println();
-			sellerDao.findAll().forEach(System.out::println);
-			System.out.println("After insert this seller: "  + seller);
+			System.out.println("==== TEST: seller update()");
+			Seller seller = sellerDao.findById(9);
+			System.out.println("Before update: " + seller);
+			seller.setName("Martha Wayne");
+			sellerDao.update(seller);
+			System.out.println(" After update: " + seller);
 			
 			DB.closeConnection();
 

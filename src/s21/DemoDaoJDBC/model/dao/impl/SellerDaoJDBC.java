@@ -67,7 +67,33 @@ public class SellerDaoJDBC implements SellerDao, DaoUtil {
 
 	@Override
 	public void update(Seller obj) {
-		// TODO Auto-generated method stub
+	
+		if (obj != null) {
+			PreparedStatement pst = null;
+			try {
+
+				pst = conn.prepareStatement(DaoJDBCQuerys.SELLER_UPDATE.returnQuery());
+				pst.setString(1, obj.getName());
+				pst.setString(2, obj.getEmail());
+				pst.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
+				pst.setDouble(4, obj.getBaseSalary());
+				pst.setInt(5, obj.getDepartament().getId());
+				pst.setInt(6, obj.getId());
+
+				conn.setAutoCommit(false);
+				if (pst.executeUpdate() > 0) {
+					conn.commit();
+				} else {
+					conn.rollback();
+					throw new ProgramException("Erro durante o update do Seller na base de dados");
+				}
+
+			} catch (SQLException e) {
+				throw new ProgramException(e.getMessage());
+			} finally {
+				DB.closeStatement(pst);
+			}
+		}
 
 	}
 
