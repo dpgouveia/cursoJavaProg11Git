@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s22.javafx.gui.ViewController">
+   <children>
+      <Button fx:id="btInformation" layoutX="59.0" layoutY="138.0" mnemonicParsing="false" onAction="#onBtInformationAction" text="Information" />
+      <Label layoutX="121.0" layoutY="94.0" text="Experimente os botões abaixo" />
+      <Button fx:id="btError" layoutX="179.0" layoutY="138.0" mnemonicParsing="false" onAction="#onBtErrorAction" text="Error" />
+      <Button fx:id="btErrorNoHeader" layoutX="262.0" layoutY="138.0" mnemonicParsing="false" onAction="#onBtErrorNoHeaderAction" text="Error (No header)" />
+   </children>
+</AnchorPane>
