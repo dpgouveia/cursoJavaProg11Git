@@ -11,6 +11,7 @@ Criar um projeto JavaFX não traz o template padrão (AFF!). Copiar do material de
 
 Run As -> Run Configurations -> Arguments -> VM Arguments
 --module-path C:\Users\Familia\Documents\Daniel\eclipse\java-libs\javafx-sdk\lib --add-modules=javafx.fxml,javafx.controls
+--module-path C:\Users\BRDPG1\Documents\Programas\eclipse\java-libs\javafx-sdk\lib --add-modules=javafx.fxml,javafx.controls
 
 
 
