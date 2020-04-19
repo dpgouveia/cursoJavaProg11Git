@@ -1,6 +1,7 @@
 package s22.javafx.application;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,10 @@ import s22.javafx.exceptions.MainException;
 public class Main extends Application {
 
 	public static void main(String args[]) {
+
+		Locale ptBrLocale = new Locale("pt", "BR");
+		Locale.setDefault(ptBrLocale);
+
 		launch(args);
 	}
 
@@ -29,7 +34,8 @@ public class Main extends Application {
 //			iniciarAula("aula255_exemplo01", stage);
 //			iniciarAula("aula256_exemplo01", stage);
 //			iniciarAula("aula257_exemplo01", stage);
-			iniciarAula("aula258_exemplo01", stage);
+//			iniciarAula("aula258_exemplo01", stage);
+			iniciarAula("aula259_exemplo01", stage);
 
 		} catch (MainException e) {
 			System.out.println();
@@ -122,6 +128,20 @@ public class Main extends Application {
 
 			try {
 				Parent parent = FXMLLoader.load(getClass().getResource("../gui/View258.fxml"));
+				Scene scene = new Scene(parent);
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException e) {
+				throw new MainException(e.getMessage());
+			}
+
+			break;
+		}
+
+		case "aula259_exemplo01": {
+
+			try {
+				Parent parent = FXMLLoader.load(getClass().getResource("../gui/View259.fxml"));
 				Scene scene = new Scene(parent);
 				stage.setScene(scene);
 				stage.show();
