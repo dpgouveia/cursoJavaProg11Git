@@ -36,7 +36,8 @@ public class Main extends Application {
 //			iniciarAula("aula257_exemplo01", stage);
 //			iniciarAula("aula258_exemplo01", stage);
 //			iniciarAula("aula259_exemplo01", stage);
-			iniciarAula("aula260_exemplo01", stage);
+//			iniciarAula("aula260_exemplo01", stage);
+			iniciarAula("aula261_exemplo01", stage);
 
 		} catch (MainException e) {
 			System.out.println();
@@ -157,6 +158,20 @@ public class Main extends Application {
 
 			try {
 				Parent parent = FXMLLoader.load(getClass().getResource("../gui/View260.fxml"));
+				Scene scene = new Scene(parent);
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException e) {
+				throw new MainException(e.getMessage());
+			}
+
+			break;
+		}
+
+		case "aula261_exemplo01": {
+
+			try {
+				Parent parent = FXMLLoader.load(getClass().getResource("../gui/View261.fxml"));
 				Scene scene = new Scene(parent);
 				stage.setScene(scene);
 				stage.show();
