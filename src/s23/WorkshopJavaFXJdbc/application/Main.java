@@ -11,7 +11,16 @@ import javafx.stage.Stage;
 import s23.WorkshopJavaFXJdbc.exception.MainException;
 
 public class Main extends Application {
+	
+	// atributos estáticos da classe
+	private static Scene mainScene;
+	
+	// getters e setters
+	public static Scene getMainScene() {
+		return mainScene;
+	}
 
+	// main function
 	public static void main(String args[]) {
 		
 		System.out.println();
@@ -23,6 +32,7 @@ public class Main extends Application {
 		
 	}
 
+	// métodos
 	@Override
 	public void start(Stage stage) {
 
@@ -32,7 +42,7 @@ public class Main extends Application {
 			ScrollPane scrollPane = loader.load();
 			scrollPane.setFitToHeight(true);
 			scrollPane.setFitToWidth(true);
-			Scene mainScene = new Scene(scrollPane);
+			mainScene = new Scene(scrollPane);
 			stage.setScene(mainScene);
 			stage.setTitle("Workshop JavaFX JDBC - DEMO");
 			stage.show();
