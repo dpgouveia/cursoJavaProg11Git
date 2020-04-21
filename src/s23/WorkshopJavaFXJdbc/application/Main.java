@@ -3,6 +3,7 @@ package s23.WorkshopJavaFXJdbc.application;
 import java.io.IOException;
 import java.util.Locale;
 
+import common.utils.db.DBException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -47,7 +48,7 @@ public class Main extends Application {
 			stage.setTitle("Workshop JavaFX JDBC - DEMO");
 			stage.show();
 
-		} catch (IOException | MainException e) {
+		} catch (DBException | IOException | MainException e) {
 			System.out.println();
 			System.out.println("------------------------------------------");
 			System.out.println("ERRO DURANTE A EXECUÇÃO DO PROGRAMA!");

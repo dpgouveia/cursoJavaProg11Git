@@ -2,12 +2,17 @@ package s23.WorkshopJavaFXJdbc.model.entities;
 
 import java.io.Serializable;
 
+// Serializable: interface para permitir que os objetos da classe possam ser convertidos em bytes
+// Isso permite que o objeto possa ser gravado em arquivos, banco de dados e trafegar na rede
 public class Department implements Serializable {
 
-	// atributos estaticos
+	// atributoe estáticos
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	// atributos
+	// atibutos
 	private Integer id;
 	private String name;
 
@@ -23,9 +28,13 @@ public class Department implements Serializable {
 		this.name = name;
 	}
 
-	// getters e setters
+	// getter e setters
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -37,18 +46,21 @@ public class Department implements Serializable {
 	}
 
 	// métodos
-	@Override public String toString() {
+	@Override
+	public String toString() {
 		return "Department [id=" + id + ", name=" + name + "]";
 	}
-	
-	@Override public int hashCode() {
+
+	@Override
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
-	@Override public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -62,10 +74,6 @@ public class Department implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 }
