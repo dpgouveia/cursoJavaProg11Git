@@ -3,6 +3,7 @@ package s23.WorkshopJavaFXJdbc.gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import common.utils.db.DBException;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import s22.javafx.exceptions.MainException;
 import s22.javafx.gui.util.Alerts;
+import s23.WorkshopJavaFXJdbc.exceptions.ValidationException;
 import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
 import s23.WorkshopJavaFXJdbc.gui.util.Constraints;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
@@ -68,8 +70,20 @@ public class DepartmentFormController implements Initializable{
 		System.out.println();
 		System.out.println("==== getFormData()");
 		
+		ValidationException exception = new ValidationException("Validation error");
+		if(txtDepartmentName.getText() == null 
+				|| txtDepartmentName.getText().trim().isBlank()
+				|| txtDepartmentName.getText().trim().isEmpty()) {
+			exception.addError("DepartmentName", "Field is empty or blank!");
+		}
+		
+		if(exception.containErrors()) {
+			throw exception;
+		}
+		
 		Integer deptId = Utils.tryParseToInt(txtDepartmentID.getText());
 		String deptName = txtDepartmentName.getText();
+		
 		return new Department(deptId, deptName);
 	}
 	
@@ -98,7 +112,9 @@ public class DepartmentFormController implements Initializable{
 			service.saveOrUpdate(entity);
 			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
-		} catch (DBException e) {
+		} catch (ValidationException e) {
+			setErrorMessages(e.getErrors());
+		}catch (DBException e) {
 			Alerts.showAlert("Erro saving object", null, e.getMessage(), AlertType.ERROR);
 		}
 		
@@ -129,6 +145,16 @@ public class DepartmentFormController implements Initializable{
 		
 		txtDepartmentID.setText(String.valueOf(entity.getId()));
 		txtDepartmentName.setText(entity.getName());
+	}
+	
+	private void setErrorMessages(Map<String, String> errors) {
+		System.out.println();
+		System.out.println("==== setErrorMessages()");
+		
+		if(errors.keySet().contains("DepartmentName")) {
+			labelStatus.setText(errors.get("DepartmentName"));
+		}
+	
 	}
 
 }

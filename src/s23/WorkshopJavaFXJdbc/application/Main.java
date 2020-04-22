@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-import s23.WorkshopJavaFXJdbc.exception.MainException;
+import s23.WorkshopJavaFXJdbc.exceptions.MainException;
 
 public class Main extends Application {
 	

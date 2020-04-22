@@ -9,10 +9,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="145.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s23.WorkshopJavaFXJdbc.gui.DepartmentFormController">
    <children>
-      <GridPane layoutX="30.0" layoutY="30.0" prefHeight="89.0" prefWidth="485.0">
+      <GridPane layoutX="30.0" layoutY="30.0" prefHeight="89.0" prefWidth="722.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="109.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="265.0" />
@@ -32,7 +33,10 @@
                </opaqueInsets>
             </TextField>
             <TextField fx:id="txtDepartmentID" disable="true" GridPane.columnIndex="1" />
-            <Label fx:id="labelStatus" textAlignment="RIGHT" textFill="#ff7676" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="labelStatus" textAlignment="CENTER" textFill="#ff7676" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" text="Save" />

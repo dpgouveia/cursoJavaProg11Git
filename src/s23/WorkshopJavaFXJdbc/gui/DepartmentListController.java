@@ -21,7 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import s22.javafx.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.application.Main;
-import s23.WorkshopJavaFXJdbc.exception.MainException;
+import s23.WorkshopJavaFXJdbc.exceptions.MainException;
 import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Department;

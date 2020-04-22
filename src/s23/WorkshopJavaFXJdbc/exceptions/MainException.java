@@ -1,4 +1,4 @@
-package s23.WorkshopJavaFXJdbc.exception;
+package s23.WorkshopJavaFXJdbc.exceptions;
 
 public class MainException extends RuntimeException {
 
