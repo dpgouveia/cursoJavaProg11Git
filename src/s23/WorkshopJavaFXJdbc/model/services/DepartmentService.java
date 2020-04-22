@@ -14,9 +14,9 @@ public class DepartmentService {
 
 	// métodos
 	public List<Department> findAll() {
-
 		System.out.println();
 		System.out.println("==== findAll() --> dao.findAll()");
+		
 		return dao.findAll();
 	}
 
@@ -32,11 +32,31 @@ public class DepartmentService {
 		if (dept.getId() == null) {
 			dao.insert(dept);
 		} else if (dao.findById(dept.getId()) == null) {
-			throw new MainException("The specified department ID does not exist on Departemnt table for update");
+			throw new MainException("The specified department ID does not exist on Departemnt table for update operation");
 		} else {
 			dao.update(dept);
 		}
 
 	}
 
+	public void remove(Department dept) {
+		System.out.println();
+		System.out.println("==== remove()");
+		
+		if(dept == null) {
+			throw new MainException("Department object IS NULL!");
+		}
+		
+		if(dept.getId() == null) {
+			throw new MainException("Department ID IS NULL!");
+		}
+		
+		if(dao.findById(dept.getId()) == null) {
+			throw new MainException("The specified department ID does not exist on Departemnt table for remove operation");
+		}
+		
+		dao.deleteById(dept.getId());		
+	}
+	
+	
 }
