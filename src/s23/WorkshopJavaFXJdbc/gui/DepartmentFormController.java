@@ -38,14 +38,14 @@ public class DepartmentFormController implements Initializable{
 	// getters e setters
 	public void setDepartment(Department entity) {
 		System.out.println();
-		System.out.println("==== setDepartment()");
+		System.out.println(getClass() + " ==== setDepartment()");
 		
 		this.entity = entity;
 	}
 	
 	public void setDepartmentService(DepartmentService service) {
 		System.out.println();
-		System.out.println("==== setDepartmentService()");
+		System.out.println(getClass() + " ==== setDepartmentService()");
 		
 		this.service = service;
 	}
@@ -53,7 +53,7 @@ public class DepartmentFormController implements Initializable{
 	// métodos
 	private void notifyDataChangeListeners() {
 		System.out.println();
-		System.out.println("==== notifyDataChangeListeners()");
+		System.out.println(getClass() + " ==== notifyDataChangeListeners()");
 		
 		targetListeners.forEach(DataChangeListener::onDataChanged);
 //		dataChangedListeners.forEach(x -> x.onDataChanged());
@@ -61,14 +61,14 @@ public class DepartmentFormController implements Initializable{
 	
 	public void subscribeDataChangeListener(DataChangeListener listener) {
 		System.out.println();
-		System.out.println("==== subscribeDataChangeListener()");
+		System.out.println(getClass() + " ==== subscribeDataChangeListener()");
 		
 		targetListeners.add(listener);
 	}
 	
 	private Department getFormData() {
 		System.out.println();
-		System.out.println("==== getFormData()");
+		System.out.println(getClass() + " ==== getFormData()");
 		
 		ValidationException exception = new ValidationException("Validation error");
 		if(txtDepartmentName.getText() == null 
@@ -89,7 +89,7 @@ public class DepartmentFormController implements Initializable{
 	
 	private void initializeNodes() {
 		System.out.println();
-		System.out.println("==== initializeNodes()");
+		System.out.println(getClass() + " ==== initializeNodes()");
 		
 		Constraints.setTextFieldInteger(txtDepartmentID);
 		Constraints.setTextFieldMaxLength(txtDepartmentName, 30);
@@ -97,7 +97,7 @@ public class DepartmentFormController implements Initializable{
 	
 	@FXML public void onBtSaveAction(ActionEvent event) {
 		System.out.println();
-		System.out.println("==== onBtSave()");
+		System.out.println(getClass() + " ==== onBtSave()");
 		
 		if(entity == null) {
 			throw new MainException("Department entity IS NULL!");
@@ -122,14 +122,14 @@ public class DepartmentFormController implements Initializable{
 	
 	@FXML public void onBtCancelAction(ActionEvent event) {
 		System.out.println();
-		System.out.println("==== onBtCancel()");
+		System.out.println(getClass() + " ==== onBtCancel()");
 		
 		Utils.currentStage(event).close();
 	}
 	
 	@Override public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println();
-		System.out.println("==== initialize()");
+		System.out.println(getClass() + " ==== initialize()");
 		
 		// TODO Auto-generated method stub
 		initializeNodes();
@@ -137,7 +137,7 @@ public class DepartmentFormController implements Initializable{
 	
 	public void updateFormData() {
 		System.out.println();
-		System.out.println("==== updateFormData()");
+		System.out.println(getClass() + " ==== updateFormData()");
 		
 		if(entity == null) {
 			throw new MainException("Department entity IS NULL");
@@ -149,7 +149,7 @@ public class DepartmentFormController implements Initializable{
 	
 	private void setErrorMessages(Map<String, String> errors) {
 		System.out.println();
-		System.out.println("==== setErrorMessages()");
+		System.out.println(getClass() + " ==== setErrorMessages()");
 		
 		if(errors.keySet().contains("DepartmentName")) {
 			labelStatus.setText(errors.get("DepartmentName"));

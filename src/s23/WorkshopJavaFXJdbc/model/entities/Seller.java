@@ -8,9 +8,6 @@ import common.utils.MyUtils;
 public class Seller implements Serializable {
 
 	// atributos estáticos
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	// atributos
@@ -19,7 +16,8 @@ public class Seller implements Serializable {
 	private String email;
 	private Date birthDate;
 	private Double baseSalary;
-	private Department departament;
+	private Department department;
+
 
 	// construtores
 	public Seller() {
@@ -34,7 +32,7 @@ public class Seller implements Serializable {
 		this.email = email;
 		this.birthDate = birthDate;
 		this.baseSalary = baseSalary;
-		this.departament = departament;
+		this.department = departament;
 	}
 
 	// getters e setters
@@ -79,13 +77,17 @@ public class Seller implements Serializable {
 	}
 
 	public Department getDepartament() {
-		return departament;
+		return department;
 	}
 
 	public void setDepartament(Department departament) {
-		this.departament = departament;
+		this.department = departament;
 	}
-
+	
+	public Integer getDepartmentId() {
+		return department.getId();
+	}
+		
 	// métodos
 	@Override
 	public int hashCode() {
@@ -116,7 +118,7 @@ public class Seller implements Serializable {
 	public String toString() {
 		return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthDate="
 				+ MyUtils.simpleDateToDate.format(birthDate) + ", baseSalary=" + baseSalary + ", departament="
-				+ departament + "]";
+				+ department + "]";
 	}
 
 }

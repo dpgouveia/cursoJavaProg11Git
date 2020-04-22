@@ -15,7 +15,7 @@ public class DepartmentService {
 	// métodos
 	public List<Department> findAll() {
 		System.out.println();
-		System.out.println("==== findAll() --> dao.findAll()");
+		System.out.println(getClass() + " ==== findAll()");
 		
 		return dao.findAll();
 	}
@@ -23,7 +23,7 @@ public class DepartmentService {
 	public void saveOrUpdate(Department dept) {
 
 		System.out.println();
-		System.out.println("==== findAll() --> dao.saveOrUpdate()");
+		System.out.println(getClass() + " ==== dao.saveOrUpdate()");
 
 		if (dept == null) {
 			throw new MainException("Department object IS NULL!");
@@ -41,7 +41,7 @@ public class DepartmentService {
 
 	public void remove(Department dept) {
 		System.out.println();
-		System.out.println("==== remove()");
+		System.out.println(getClass() + " ==== remove()");
 		
 		if(dept == null) {
 			throw new MainException("Department object IS NULL!");

@@ -48,7 +48,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	// getters e setters
 	public void setDepartmentService(DepartmentService service) {
 		System.out.println();
-		System.out.println("==== setDepartmentService()");
+		System.out.println(getClass() + "  ==== setDepartmentService()");
 		
 		this.service = service;
 	}
@@ -56,7 +56,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	// métodos
 	@FXML public void onBtNewDepartmentAction(ActionEvent event) {
 		System.out.println();
-		System.out.println("==== onBtNewDepartmentAction()");
+		System.out.println(getClass() + " ==== onBtNewDepartmentAction()");
 		
 		Department dept = new Department();
 		createDialogForm(dept, "../gui/DepartmentForm.fxml", Utils.currentStage(event));
@@ -65,14 +65,14 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	
 	@Override public void initialize(URL url, ResourceBundle rb) {
 		System.out.println();
-		System.out.println("==== initialize()");
+		System.out.println(getClass() +  " ==== initialize()");
 		
 		initializeNodes();
 	}
 	
 	private void initializeNodes() {
 		System.out.println();
-		System.out.println("==== initializeNodes()");
+		System.out.println(getClass() + " ==== initializeNodes()");
 		
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -84,7 +84,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	
 	public void updateTableView() {
 		System.out.println();
-		System.out.println("==== updateTableView()");
+		System.out.println(getClass() + " ==== updateTableView()");
 		
 		if(service == null) {
 			throw new MainException("DepartmentService IS NULL");
@@ -99,7 +99,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	
 	private void createDialogForm(Department dept, String absoluteName, Stage parentStage) {
 		System.out.println();
-		System.out.println("==== createDialogForm()");
+		System.out.println(getClass() + " ==== createDialogForm()");
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -122,19 +122,18 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		} catch (IOException e) {
 			Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
-		
 	}
 
 	@Override public void onDataChanged() {
 		System.out.println();
-		System.out.println("==== onDataChanged()");
+		System.out.println(getClass() + " ==== onDataChanged()");
 		
 		updateTableView();
 	}
 	
 	private void initEditButtons() {
 		System.out.println();
-		System.out.println("==== initEditButtons()");
+		System.out.println(getClass() + " ==== initEditButtons()");
 		
 		tableColumnEdit.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEdit.setCellFactory(param -> new TableCell<Department, Department>() {
@@ -160,7 +159,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	
 	private void initRemoveButtons() {
 		System.out.println();
-		System.out.println("==== initRemoveButtons()");
+		System.out.println(getClass() + " ==== initRemoveButtons()");
 		
 		tableColumnRemove.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnRemove.setCellFactory(param -> new TableCell<Department, Department>() {
@@ -198,9 +197,8 @@ public class DepartmentListController implements Initializable, DataChangeListen
 			} catch (MainException | DBException e) {
 				Alerts.showAlert("Error removing object", null, e.getMessage(), AlertType.ERROR);
 			}
-			
+	
 		}
-		
 	}
 	
 }

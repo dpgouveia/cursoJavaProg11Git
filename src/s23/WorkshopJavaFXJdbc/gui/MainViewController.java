@@ -17,28 +17,30 @@ import javafx.scene.layout.VBox;
 import s22.javafx.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.application.Main;
 import s23.WorkshopJavaFXJdbc.model.services.DepartmentService;
+import s23.WorkshopJavaFXJdbc.model.services.SellerService;
 
 public class MainViewController implements Initializable {
 
-	// atributos JavaFX
-	@FXML
-	private MenuItem menuItemSeller;
-	@FXML
-	private MenuItem menuItemDepartment;
-	@FXML
-	private MenuItem menuItemAbout;
+	// atributos
+	@FXML private MenuItem menuItemSeller;
+	@FXML private MenuItem menuItemDepartment;
+	@FXML private MenuItem menuItemAbout;
 
-	// métodos JavaFX
-	@FXML
-	public void onMenuItemSellerAction() {
+	// métodos
+	@FXML public void onMenuItemSellerAction() {
 		System.out.println();
-		System.out.println("==== onMenuItemSellerAction() ");
+		System.out.println(getClass() + " ==== onMenuItemSellerAction() ");
+		
+		loadView("../gui/SellerList.fxml", 
+				(SellerListController controller) -> {
+					controller.setSellerService(new SellerService());
+					controller.updateTableView();
+				});
 	}
 
-	@FXML
-	public void onmenuItemDepartmentAction() {
+	@FXML public void onmenuItemDepartmentAction() {
 		System.out.println();
-		System.out.println("==== onmenuItemDepartmentAction() ");
+		System.out.println(getClass() + " ==== onmenuItemDepartmentAction() ");
 
 		loadView("../gui/DepartmentList.fxml", 
 				(DepartmentListController controller) -> {
@@ -47,24 +49,22 @@ public class MainViewController implements Initializable {
 				});
 	}
 
-	@FXML
-	public void onmenuItemAboutAction() {
+	@FXML public void onmenuItemAboutAction() {
 		System.out.println();
-		System.out.println("==== onmenuItemAboutAction() ");
+		System.out.println(getClass() + " ==== onmenuItemAboutAction() ");
 
 		loadView("../gui/AboutView.fxml", x -> {});
 	}
 
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
+	@Override public void initialize(URL url, ResourceBundle rb) {
 		System.out.println();
-		System.out.println("==== initialize() ");
+		System.out.println(getClass() + " ==== initialize() ");
 		
 	}
 
 	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
 		System.out.println();
-		System.out.println("==== loadView() ");
+		System.out.println(getClass() + " ==== loadView() ");
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 		try {
