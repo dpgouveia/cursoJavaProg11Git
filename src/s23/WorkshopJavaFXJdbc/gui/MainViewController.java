@@ -57,10 +57,15 @@ public class MainViewController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		System.out.println();
+		System.out.println("==== initialize() ");
+		
 	}
 
 	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
+		System.out.println();
+		System.out.println("==== loadView() ");
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 		try {
 			VBox newVBox = loader.load();

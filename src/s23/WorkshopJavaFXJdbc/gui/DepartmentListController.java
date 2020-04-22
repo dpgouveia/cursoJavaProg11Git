@@ -22,11 +22,12 @@ import javafx.stage.Stage;
 import s22.javafx.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.application.Main;
 import s23.WorkshopJavaFXJdbc.exception.MainException;
+import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Department;
 import s23.WorkshopJavaFXJdbc.model.services.DepartmentService;
 
-public class DepartmentListController implements Initializable {
+public class DepartmentListController implements Initializable, DataChangeListener {
 
 	// atributos
 	@FXML private Button btNewDepartment;
@@ -38,6 +39,9 @@ public class DepartmentListController implements Initializable {
 	
 	// getters e setters
 	public void setDepartmentService(DepartmentService service) {
+		System.out.println();
+		System.out.println("==== setDepartmentService()");
+		
 		this.service = service;
 	}
 
@@ -52,10 +56,16 @@ public class DepartmentListController implements Initializable {
 	}
 	
 	@Override public void initialize(URL url, ResourceBundle rb) {
+		System.out.println();
+		System.out.println("==== initialize()");
+		
 		initializeNodes();
 	}
 	
 	private void initializeNodes() {
+		System.out.println();
+		System.out.println("==== initializeNodes()");
+		
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		
@@ -65,6 +75,8 @@ public class DepartmentListController implements Initializable {
 	}
 	
 	public void updateTableView() {
+		System.out.println();
+		System.out.println("==== updateTableView()");
 		
 		if(service == null) {
 			throw new MainException("service IS NULL!");
@@ -76,6 +88,8 @@ public class DepartmentListController implements Initializable {
 	}
 	
 	private void createDialogForm(Department dept, String absoluteName, Stage parentStage) {
+		System.out.println();
+		System.out.println("==== createDialogForm()");
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -84,6 +98,7 @@ public class DepartmentListController implements Initializable {
 			DepartmentFormController controller = loader.getController();
 			controller.setDepartment(dept);
 			controller.setDepartmentService(service);
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -93,11 +108,19 @@ public class DepartmentListController implements Initializable {
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
+			
 		} catch (IOException e) {
 			Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
 		
 	}
-	
+
+	@Override
+	public void onDataChanged() {
+		System.out.println();
+		System.out.println("==== onDataChanged()");
+		
+		updateTableView();
+	}
 
 }

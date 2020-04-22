@@ -1,18 +1,21 @@
 package s23.WorkshopJavaFXJdbc.gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import common.utils.db.DBException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import s22.javafx.exceptions.MainException;
 import s22.javafx.gui.util.Alerts;
+import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
 import s23.WorkshopJavaFXJdbc.gui.util.Constraints;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Department;
@@ -28,24 +31,52 @@ public class DepartmentFormController implements Initializable{
 	@FXML private Button btCancelAction;
 	private Department entity;
 	private DepartmentService service;
+	private List<DataChangeListener> targetListeners = new ArrayList<DataChangeListener>();
 	
 	// getters e setters
 	public void setDepartment(Department entity) {
+		System.out.println();
+		System.out.println("==== setDepartment()");
+		
 		this.entity = entity;
 	}
 	
 	public void setDepartmentService(DepartmentService service) {
+		System.out.println();
+		System.out.println("==== setDepartmentService()");
+		
 		this.service = service;
 	}
 	
 	// métodos
+	private void notifyDataChangeListeners() {
+		System.out.println();
+		System.out.println("==== notifyDataChangeListeners()");
+		
+		targetListeners.forEach(DataChangeListener::onDataChanged);
+//		dataChangedListeners.forEach(x -> x.onDataChanged());
+	}
+	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		System.out.println();
+		System.out.println("==== subscribeDataChangeListener()");
+		
+		targetListeners.add(listener);
+	}
+	
 	private Department getFormData() {
+		System.out.println();
+		System.out.println("==== getFormData()");
+		
 		Integer deptId = Utils.tryParseToInt(txtDepartmentID.getText());
 		String deptName = txtDepartmentName.getText();
 		return new Department(deptId, deptName);
 	}
 	
 	private void initializeNodes() {
+		System.out.println();
+		System.out.println("==== initializeNodes()");
+		
 		Constraints.setTextFieldInteger(txtDepartmentID);
 		Constraints.setTextFieldMaxLength(txtDepartmentName, 30);
 	}
@@ -65,14 +96,13 @@ public class DepartmentFormController implements Initializable{
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
+			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
 		} catch (DBException e) {
 			Alerts.showAlert("Erro saving object", null, e.getMessage(), AlertType.ERROR);
 		}
 		
-		
 	}
-	
 	
 	@FXML public void onBtCancelAction(ActionEvent event) {
 		System.out.println();
@@ -82,12 +112,14 @@ public class DepartmentFormController implements Initializable{
 	}
 	
 	@Override public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println();
+		System.out.println("==== initialize()");
+		
 		// TODO Auto-generated method stub
 		initializeNodes();
 	}
 	
 	public void updateFormData() {
-		
 		System.out.println();
 		System.out.println("==== updateFormData()");
 		
