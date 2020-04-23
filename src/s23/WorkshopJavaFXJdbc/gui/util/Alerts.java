@@ -10,7 +10,7 @@ public class Alerts {
 
 	public static void showAlert(String title, String header, String content, AlertType type) {
 		System.out.println();
-		System.out.println("==== showAlert()");
+		System.out.println(Alerts.class + " ==== showAlert()");
 		
 		Alert alert = new Alert(type);
 		alert.setTitle(title);
@@ -21,7 +21,7 @@ public class Alerts {
 
 	public static Optional<ButtonType> showConfirmation(String title, String content) {
 		System.out.println();
-		System.out.println("==== showConfirmation()");
+		System.out.println(Alerts.class +  " ==== showConfirmation()");
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle(title);

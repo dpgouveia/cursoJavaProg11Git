@@ -144,7 +144,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 				
 				this.setAlignment(Pos.CENTER);
 				
-				if(dept == null) {
+				if(empty || dept == null) {
 					setGraphic(null);
 					return;
 				}
@@ -170,7 +170,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 				
 				this.setAlignment(Pos.CENTER);
 				
-				if(dept == null) {
+				if(empty || dept == null) {
 					setGraphic(null);
 					return;
 				}
