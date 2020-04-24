@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -39,8 +40,34 @@
             <TextField fx:id="txtSellerId" disable="true" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="txtSellerName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtSellerEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <DatePicker fx:id="datePickerBirthDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <DatePicker fx:id="dpBirthDate" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="txtSellerBaseSalary" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="cmbBxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="lblErrSellerName" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblErrSellerEmail" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblErrSellerBirthDate" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblErrSellerBaseSalary" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblErrSellerDepartment" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
                   <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" text="Save" />
@@ -50,12 +77,6 @@
                   <Insets />
                </GridPane.margin>
             </HBox>
-            <Label textFill="#f85b5b" GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtDepartment" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
