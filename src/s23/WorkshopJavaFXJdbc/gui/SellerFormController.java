@@ -4,12 +4,13 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
 import s23.WorkshopJavaFXJdbc.exceptions.MainException;
 import s23.WorkshopJavaFXJdbc.exceptions.ValidationException;
 import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
@@ -25,6 +29,7 @@ import s23.WorkshopJavaFXJdbc.gui.util.Constraints;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Department;
 import s23.WorkshopJavaFXJdbc.model.entities.Seller;
+import s23.WorkshopJavaFXJdbc.model.services.DepartmentService;
 import s23.WorkshopJavaFXJdbc.model.services.SellerService;
 
 public class SellerFormController implements Initializable {
@@ -46,6 +51,8 @@ public class SellerFormController implements Initializable {
 	private Seller entity;
 	private SellerService service;
 	private List<DataChangeListener> targetListerners = new ArrayList<DataChangeListener>();
+	private DepartmentService departmentService;
+	private ObservableList<Department> obsCmbBxDepartment;
 	
 	
 	// getters e setters
@@ -56,11 +63,12 @@ public class SellerFormController implements Initializable {
 		entity = seller;
 	}
 	
-	public void setService(SellerService service) {
+	public void setServices(SellerService service, DepartmentService departmentService) {
 		System.out.println();
 		System.out.println(getClass() + " ==== setService()");
 		
 		this.service = service;
+		this.departmentService = departmentService;
 	}
 	
 	
@@ -96,6 +104,10 @@ public class SellerFormController implements Initializable {
 			dpBirthDate.setValue(LocalDate.ofInstant(entity.getBirthDate().toInstant(), ZoneId.systemDefault()));
 		}
 		
+		if(entity.getDepartament() != null) {
+			cmbBxDepartment.setValue(entity.getDepartament());
+		} 
+
 	}
 	
 	@FXML public void onBtSaveAction() {
@@ -195,11 +207,52 @@ public class SellerFormController implements Initializable {
 		System.out.println();
 		System.out.println(getClass() + " ==== initializeNodes()");
 		
+		initializeComboBoxDepartment();
+		
 		Constraints.setTextFieldInteger(txtSellerId);
 		Constraints.setTextFieldMaxLength(txtSellerName, 100);
 		Constraints.setTextFieldMaxLength(txtSellerEmail, 100);
 		Constraints.setTextFieldDouble(txtSellerBaseSalary);
 		
+	}
+	
+	public void loadAssociatedObjects() {
+		System.out.println();
+		System.out.println(getClass() + " ==== loadAssociatedObjects()");
+		
+		if(departmentService == null) {
+			throw new MainException("DepartmentService object IS NULL");
+		}
+		
+		obsCmbBxDepartment = FXCollections.observableArrayList(departmentService.findAll());
+		cmbBxDepartment.setItems(obsCmbBxDepartment);
+	}
+	
+	private void initializeComboBoxDepartment() {
+		
+		// Coding functional interfaces
+		// Callback --- cmbBxDepartment factory
+		Callback<ListView<Department>, ListCell<Department>> factory = new Callback<ListView<Department>, ListCell<Department>>() {
+		
+			@Override public ListCell<Department> call(ListView<Department> factory) {
+				ListCell<Department> cell = new ListCell<Department>() {
+					
+					@Override protected void updateItem(Department dept, boolean empty) {
+						super.updateItem(dept, empty);
+						setText(empty ? "" : dept.getName().toUpperCase());
+					}
+					
+				};
+				
+				return cell;
+			}
+		};
+		
+		System.out.println();
+		System.out.println(getClass() + " ==== initializeComboBoxDepartment()");
+		
+		cmbBxDepartment.setCellFactory(factory);
+		cmbBxDepartment.setButtonCell(factory.call(null));	
 	}
 	
 }

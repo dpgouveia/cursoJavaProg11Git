@@ -33,6 +33,7 @@ import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
 import s23.WorkshopJavaFXJdbc.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Seller;
+import s23.WorkshopJavaFXJdbc.model.services.DepartmentService;
 import s23.WorkshopJavaFXJdbc.model.services.SellerService;
 
 public class SellerListController implements Initializable, DataChangeListener {
@@ -177,7 +178,8 @@ public class SellerListController implements Initializable, DataChangeListener {
 			Pane pane = loader.load();
 			
 			SellerFormController controller = loader.getController();
-			controller.setService(service);
+			controller.setServices(service, new DepartmentService());
+			controller.loadAssociatedObjects();
 			controller.setSeller(seller);
 			controller.updateFormData();
 			
@@ -191,6 +193,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 			
 		} catch (IOException e) {
 			Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
+			e.printStackTrace();
 		}
 	}
 	

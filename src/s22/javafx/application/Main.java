@@ -36,8 +36,8 @@ public class Main extends Application {
 //			iniciarAula("aula257_exemplo01", stage);
 //			iniciarAula("aula258_exemplo01", stage);
 //			iniciarAula("aula259_exemplo01", stage);
-//			iniciarAula("aula260_exemplo01", stage);
-			iniciarAula("aula261_exemplo01", stage);
+			iniciarAula("aula260_exemplo01", stage);
+//			iniciarAula("aula261_exemplo01", stage);
 
 		} catch (MainException e) {
 			System.out.println();
