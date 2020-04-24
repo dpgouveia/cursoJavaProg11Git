@@ -66,9 +66,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 		System.out.println(getClass() + " ==== onBtNewSellerAction()");
 		
 		Seller seller = new Seller();
-		createDialogForm(seller, "", Utils.currentStage(event));   // necessita do form
-		
+		createDialogForm(seller, "../gui/SellerForm.fxml", Utils.currentStage(event));	
 	}
+	
 	
 	@Override public void initialize(URL url, ResourceBundle rb) {
 		System.out.println();
@@ -136,7 +136,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 				}
 											
 				setGraphic(editButton);
-				editButton.setOnAction(event -> createDialogForm(seller, "", Utils.currentStage(event))); // necessita do form
+				editButton.setOnAction(event -> createDialogForm(seller, "../gui/SellerForm.fxml", Utils.currentStage(event)));
 											
 			}			
 		});
@@ -175,6 +175,11 @@ public class SellerListController implements Initializable, DataChangeListener {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			SellerFormController controller = loader.getController();
+			controller.setService(service);
+			controller.setSeller(seller);
+			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter seller data");

@@ -23,7 +23,7 @@ import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Department;
 import s23.WorkshopJavaFXJdbc.model.services.DepartmentService;
 
-public class DepartmentFormController implements Initializable{
+public class DepartmentFormController implements Initializable {
 
 	// atributos
 	@FXML private TextField txtDepartmentID;
