@@ -1,15 +1,19 @@
 package s23.WorkshopJavaFXJdbc.gui.util;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 public class Utils {
 
@@ -101,5 +105,29 @@ public class Utils {
 		
 		tableColumn.setCellFactory(formattedDoubleColumn);	
 	}
+	
+	public static void formatDatePicker(DatePicker dp, String format) {
+		System.out.println();
+		System.out.println(Utils.class + " ==== formatDatePicker()");
+		
+		dp.setConverter(new StringConverter<LocalDate>() {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+			
+			@Override
+			public String toString(LocalDate localDate) {
+				String output = localDate == null ? "" : localDate.format(formatter); 
+				return output;
+			}
+			
+			@Override
+			public LocalDate fromString(String stringDate) {
+				LocalDate localDate = (stringDate == null || stringDate.isBlank() || stringDate.isEmpty()) ? null : LocalDate.parse(stringDate, formatter);
+				return localDate;
+			}
+		});
+		
+	}
+	
+	
 	
 }

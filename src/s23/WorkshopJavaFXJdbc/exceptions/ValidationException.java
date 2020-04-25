@@ -24,14 +24,14 @@ public class ValidationException extends RuntimeException {
 
 	public void addError(String fieldName, String errorMessage) {
 		System.out.println();
-		System.out.println("==== addError()");
+		System.out.println(getClass() + " ==== addError()");
 		
 		errors.put(fieldName, errorMessage);
 	}
 	
 	public boolean containErrors() {
 		System.out.println();
-		System.out.println("==== containErrors()");
+		System.out.println(getClass() + " ==== containErrors()");
 		
 		return errors.size() > 0;
 	}

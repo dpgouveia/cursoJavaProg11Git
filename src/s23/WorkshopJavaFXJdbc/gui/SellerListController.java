@@ -46,7 +46,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 	@FXML private TableColumn<Seller, String> tableColumnSellerEmail;
 	@FXML private TableColumn<Seller, Date> tableColumnSellerBirthDate;
 	@FXML private TableColumn<Seller, Double> tableColumnSellerBaseSalary;
-	@FXML private TableColumn<Seller, Integer> tableColumnDepartmentID;
+	@FXML private TableColumn<Seller, String> tableColumnDepartmentName;
 	@FXML private TableColumn<Seller, Seller> tableColumnEdit;
 	@FXML private TableColumn<Seller, Seller> tableColumnRemove;
 	private SellerService service;
@@ -87,7 +87,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 		tableColumnSellerEmail.setCellValueFactory(new PropertyValueFactory<Seller, String>("email"));
 		tableColumnSellerBirthDate.setCellValueFactory(new PropertyValueFactory<Seller, Date>("birthDate"));
 		tableColumnSellerBaseSalary.setCellValueFactory(new PropertyValueFactory<Seller, Double>("baseSalary"));
-		tableColumnDepartmentID.setCellValueFactory(new PropertyValueFactory<Seller, Integer>("departmentId"));
+		tableColumnDepartmentName.setCellValueFactory(new PropertyValueFactory<Seller, String>("departmentName"));
 		
 		Utils.formatTableColumnDate(tableColumnSellerBirthDate, "dd/MM/yyyy");
 		Utils.formatTableColumnDouble(tableColumnSellerBaseSalary, 2);
@@ -180,6 +180,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 			SellerFormController controller = loader.getController();
 			controller.setServices(service, new DepartmentService());
 			controller.loadAssociatedObjects();
+			controller.subscribeDataChangeListener(this);
 			controller.setSeller(seller);
 			controller.updateFormData();
 			

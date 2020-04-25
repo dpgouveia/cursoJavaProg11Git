@@ -87,6 +87,10 @@ public class Seller implements Serializable {
 	public Integer getDepartmentId() {
 		return department.getId();
 	}
+	
+	public String getDepartmentName() {
+		return department.getName();
+	}
 		
 	// métodos
 	@Override

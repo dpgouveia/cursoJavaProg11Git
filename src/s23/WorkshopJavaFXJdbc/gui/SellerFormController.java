@@ -3,12 +3,15 @@ package s23.WorkshopJavaFXJdbc.gui;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import common.utils.db.DBException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,10 +24,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.util.Callback;
 import s23.WorkshopJavaFXJdbc.exceptions.MainException;
 import s23.WorkshopJavaFXJdbc.exceptions.ValidationException;
 import s23.WorkshopJavaFXJdbc.gui.listerners.DataChangeListener;
+import s23.WorkshopJavaFXJdbc.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.gui.util.Constraints;
 import s23.WorkshopJavaFXJdbc.gui.util.Utils;
 import s23.WorkshopJavaFXJdbc.model.entities.Department;
@@ -110,7 +115,7 @@ public class SellerFormController implements Initializable {
 
 	}
 	
-	@FXML public void onBtSaveAction() {
+	@FXML public void onBtSaveAction(ActionEvent event) {
 		System.out.println();
 		System.out.println(getClass() + " ==== onBtSaveAction()");
 		
@@ -123,34 +128,40 @@ public class SellerFormController implements Initializable {
 		}
 		
 		try {
+			clearErrorMessages();
 			entity = getFormData();
+			service.saveOrUpdate(entity);
+			notifyChangedListeners();
+			Utils.currentStage(event).close();
 		} catch(ValidationException e) {
 			setErrorMessages(e.getErrors());
+		} catch (DBException e) {
+			Alerts.showAlert("DBException", null, e.getMessage(), AlertType.ERROR);
 		}
-		
-		notifyChangedListeners();
-		
+			
 	}
 	
+	private void clearErrorMessages() {
+		System.out.println();
+		System.out.println(getClass() + " ==== clearErrorMessages()");
+		
+		lblErrSellerName.setText("");
+		lblErrSellerEmail.setText("");
+		lblErrSellerBirthDate.setText("");
+		lblErrSellerBaseSalary.setText("");
+		lblErrSellerDepartment.setText("");
+		
+	}
+
 	private void setErrorMessages(Map<String, String> errors) {
 		System.out.println();
 		System.out.println(getClass() + " ==== setErrorMessages()");
-		
-		if(errors.keySet().contains("SellerName")) {
-			lblErrSellerName.setText(errors.get("SellerName"));
-		}
-		
-		if(errors.keySet().contains("SellerEmail")) {
-			lblErrSellerEmail.setText(errors.get("SellerEmail"));
-		}
-		
-		if(errors.keySet().contains("SellerBirthDate")) {
-			lblErrSellerBirthDate.setText(errors.get("SellerBirthDate"));
-		}
-		
-		if(errors.keySet().contains("SellerBaseSalary")) {
-			lblErrSellerBaseSalary.setText(errors.get("SellerBaseSalary"));
-		}
+			
+		lblErrSellerName.setText(errors.keySet().contains("SellerName") ? errors.get("SellerName") : "");
+		lblErrSellerEmail.setText(errors.keySet().contains("SellerEmail") ? errors.get("SellerEmail") : "");
+		lblErrSellerBirthDate.setText(errors.keySet().contains("SellerBirthDate") ? errors.get("SellerBirthDate") : "");
+		lblErrSellerBaseSalary.setText(errors.keySet().contains("SellerBaseSalary") ? errors.get("SellerBaseSalary") : "");
+		lblErrSellerDepartment.setText(errors.keySet().contains("SellerDepartment") ? errors.get("SellerDepartment") : "");
 		
 	}
 
@@ -159,20 +170,44 @@ public class SellerFormController implements Initializable {
 		System.out.println(getClass() + " ==== getFormData()");
 		
 		ValidationException exception = new ValidationException("Validation error");
-		if(txtSellerName == null || txtSellerName.getText().trim().isBlank() || txtSellerName.getText().trim().isEmpty()) {
+		if(txtSellerName.getText() == null || txtSellerName.getText().trim().isBlank() || txtSellerName.getText().trim().isEmpty()) {
 			exception.addError("SellerName", "Field is empty or blank!");
 		}
 		
-		if(txtSellerEmail == null || txtSellerEmail.getText().trim().isBlank() || txtSellerEmail.getText().trim().isEmpty()) {
+		if(txtSellerEmail.getText() == null || txtSellerEmail.getText().trim().isBlank() || txtSellerEmail.getText().trim().isEmpty()) {
 			exception.addError("SellerEmail", "Field is empty or blank!");
 		}
 		
-		if(dpBirthDate.getValue() == null) {
+		if(dpBirthDate.getEditor().getText() == null || dpBirthDate.getEditor().getText().trim().isBlank() || dpBirthDate.getEditor().getText().trim().isEmpty()) {
 			exception.addError("SellerBirthDate", "Field is empty or blank!");
 		}
 		
-		if(txtSellerBaseSalary == null || txtSellerBaseSalary.getText().trim().isBlank() || txtSellerBaseSalary.getText().trim().isEmpty()) {
+		if(!exception.getErrors().containsKey("SellerBirthDate")) {
+			try {
+				LocalDate.parse(dpBirthDate.getEditor().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			} catch(DateTimeParseException e) {
+				exception.addError("SellerBirthDate", "Invalid date value! Cause: " + e.getMessage());
+			}
+		}
+		
+		if(txtSellerBaseSalary.getText() == null || txtSellerBaseSalary.getText().trim().isBlank() || txtSellerBaseSalary.getText().trim().isEmpty()) {
 			exception.addError("SellerBaseSalary", "Field is empty or blank!");
+		}
+		
+		if(txtSellerBaseSalary.getText().trim().replace(',','0').replace('.', '0').chars().anyMatch(Character::isAlphabetic)  ) {
+			exception.addError("SellerBaseSalary", "Invalid number format!");
+		}
+		
+		if(!exception.getErrors().containsKey("SellerBaseSalary")) {
+			try {
+				Double.valueOf(txtSellerBaseSalary.getText().replace(',', '.'));
+			} catch(NumberFormatException e) {
+				exception.addError("SellerBaseSalary", "Invalid number format! Cause: " + e.getMessage() );
+			}	
+		}
+		
+		if(cmbBxDepartment.getValue() == null) {
+			exception.addError("SellerDepartment", "Field is empty or blank");
 		}
 		
 		if(exception.containErrors()) {
@@ -182,10 +217,12 @@ public class SellerFormController implements Initializable {
 		Integer sellerId = Utils.tryParseToInt(txtSellerId.getText());
 		String sellerName = txtSellerName.getText().trim();
 		String sellerEmail = txtSellerEmail.getText().trim();
+//		Date sellerBirthDate = Date.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date sellerBirthDate = Date.from(LocalDate.parse(dpBirthDate.getEditor().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Double sellerBaseSalary = Double.valueOf(txtSellerBaseSalary.getText().replace(',', '.'));
-		Date sellerBirthDate = Date.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Department dept = cmbBxDepartment.getValue();
 		
-		return null;
+		return new Seller(sellerId, sellerName, sellerEmail, sellerBirthDate, sellerBaseSalary, dept);
 	}
 
 	@FXML public void onBtCancelAction(ActionEvent event) {
@@ -212,6 +249,7 @@ public class SellerFormController implements Initializable {
 		Constraints.setTextFieldInteger(txtSellerId);
 		Constraints.setTextFieldMaxLength(txtSellerName, 100);
 		Constraints.setTextFieldMaxLength(txtSellerEmail, 100);
+		Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");
 		Constraints.setTextFieldDouble(txtSellerBaseSalary);
 		
 	}

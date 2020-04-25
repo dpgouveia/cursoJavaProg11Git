@@ -12,7 +12,7 @@ public class SellerService {
 	// atributos
 	private SellerDao dao = DaoFactory.createSellerDao();
 
-	// métodos
+	// métodos	
 	public List<Seller> findAll() {
 		System.out.println();
 		System.out.println(getClass() + " ==== findAll()");
