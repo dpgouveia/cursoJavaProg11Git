@@ -67,7 +67,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 		System.out.println(getClass() + " ==== onBtNewSellerAction()");
 		
 		Seller seller = new Seller();
-		createDialogForm(seller, "../gui/SellerForm.fxml", Utils.currentStage(event));	
+		createDialogForm(seller, "/s23/WorkshopJavaFXJdbc/gui/SellerForm.fxml", Utils.currentStage(event));	
 	}
 	
 	
@@ -137,7 +137,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 				}
 											
 				setGraphic(editButton);
-				editButton.setOnAction(event -> createDialogForm(seller, "../gui/SellerForm.fxml", Utils.currentStage(event)));
+				editButton.setOnAction(event -> createDialogForm(seller, "/s23/WorkshopJavaFXJdbc/gui/SellerForm.fxml", Utils.currentStage(event)));
 											
 			}			
 		});

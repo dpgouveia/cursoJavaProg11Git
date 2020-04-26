@@ -59,7 +59,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		System.out.println(getClass() + " ==== onBtNewDepartmentAction()");
 		
 		Department dept = new Department();
-		createDialogForm(dept, "../gui/DepartmentForm.fxml", Utils.currentStage(event));
+		createDialogForm(dept, "/s23/WorkshopJavaFXJdbc/gui/DepartmentForm.fxml", Utils.currentStage(event));
 		
 	}
 	
@@ -151,7 +151,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 				}
 											
 				setGraphic(editButton);
-				editButton.setOnAction(event -> createDialogForm(dept, "../gui/DepartmentForm.fxml", Utils.currentStage(event)));
+				editButton.setOnAction(event -> createDialogForm(dept, "/s23/WorkshopJavaFXJdbc/gui/DepartmentForm.fxml", Utils.currentStage(event)));
 											
 			}			
 		});

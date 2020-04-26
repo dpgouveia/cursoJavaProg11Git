@@ -14,8 +14,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import s22.javafx.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.application.Main;
+import s23.WorkshopJavaFXJdbc.gui.util.Alerts;
 import s23.WorkshopJavaFXJdbc.model.services.DepartmentService;
 import s23.WorkshopJavaFXJdbc.model.services.SellerService;
 
@@ -31,7 +31,7 @@ public class MainViewController implements Initializable {
 		System.out.println();
 		System.out.println(getClass() + " ==== onMenuItemSellerAction() ");
 		
-		loadView("../gui/SellerList.fxml", 
+		loadView("/s23/WorkshopJavaFXJdbc/gui/SellerList.fxml", 
 				(SellerListController controller) -> {
 					controller.setSellerService(new SellerService());
 					controller.updateTableView();
@@ -42,7 +42,7 @@ public class MainViewController implements Initializable {
 		System.out.println();
 		System.out.println(getClass() + " ==== onmenuItemDepartmentAction() ");
 
-		loadView("../gui/DepartmentList.fxml", 
+		loadView("/s23/WorkshopJavaFXJdbc/gui/DepartmentList.fxml", 
 				(DepartmentListController controller) -> {
 					controller.setDepartmentService(new DepartmentService());
 					controller.updateTableView();
@@ -53,7 +53,7 @@ public class MainViewController implements Initializable {
 		System.out.println();
 		System.out.println(getClass() + " ==== onmenuItemAboutAction() ");
 
-		loadView("../gui/AboutView.fxml", x -> {});
+		loadView("/s23/WorkshopJavaFXJdbc/gui/AboutView.fxml", x -> {});
 	}
 
 	@Override public void initialize(URL url, ResourceBundle rb) {

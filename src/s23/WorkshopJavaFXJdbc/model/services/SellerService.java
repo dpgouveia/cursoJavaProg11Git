@@ -2,7 +2,7 @@ package s23.WorkshopJavaFXJdbc.model.services;
 
 import java.util.List;
 
-import s22.javafx.exceptions.MainException;
+import s23.WorkshopJavaFXJdbc.exceptions.MainException;
 import s23.WorkshopJavaFXJdbc.model.dao.DaoFactory;
 import s23.WorkshopJavaFXJdbc.model.dao.SellerDao;
 import s23.WorkshopJavaFXJdbc.model.entities.Seller;

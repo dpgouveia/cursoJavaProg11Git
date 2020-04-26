@@ -27,6 +27,7 @@ public class Main extends Application {
 		System.out.println();
 		System.out.println("------------------------------------------");
 		System.out.println("INICIO DO PROGRAMA.");
+		System.out.println("java.class.path: " + System.getProperty("java.class.path"));
 		
 		Locale.setDefault(Locale.US);
 		launch(args);
@@ -36,10 +37,9 @@ public class Main extends Application {
 	// métodos
 	@Override
 	public void start(Stage stage) {
-
-		try {
-
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/MainView.fxml"));
+		
+		try {		
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/s23/WorkshopJavaFXJdbc/gui/MainView.fxml"));			 
 			ScrollPane scrollPane = loader.load();
 			scrollPane.setFitToHeight(true);
 			scrollPane.setFitToWidth(true);
