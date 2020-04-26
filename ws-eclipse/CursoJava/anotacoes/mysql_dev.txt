@@ -28,3 +28,8 @@ GRANT ALL PRIVILEGES ON danieldb.* TO 'developer'@'localhost';
 DROP DATABASE coursejdbc;
 CREATE DATABASE coursejdbc;
 GRANT ALL PRIVILEGES ON coursejdbc.* TO 'developer'@'localhost';
+
+# criar base de dados (para o curso java)
+DROP DATABASE aulajpa;
+CREATE DATABASE aulajpa;
+GRANT ALL PRIVILEGES ON aulajpa.* TO 'developer'@'localhost';
