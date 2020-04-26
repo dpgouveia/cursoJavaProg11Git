@@ -20,6 +20,3 @@ if "%argument%" == "javafx-demo" (java --module-path %PATH_TO_JAVAFX% --add-modu
 
 REM Para executar a aplicacao como software no cliente
 REM java --module-path %PATH_TO_JAVAFX% --add-modules javafx.controls,javafx.fxml -cp javafxdemo.jar s23.WorkshopJavaFXJdbc.application.Main
-
-pause
-
