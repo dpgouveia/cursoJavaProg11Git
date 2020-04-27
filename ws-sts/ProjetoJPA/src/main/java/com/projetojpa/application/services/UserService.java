@@ -9,9 +9,6 @@ import com.projetojpa.application.entities.User;
 import com.projetojpa.application.repositories.UserRepository;
 
 
-//@Component
-//@Service
-//@Repository
 @Service public class UserService {
 
 	// atributos

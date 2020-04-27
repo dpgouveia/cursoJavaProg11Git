@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity public class PurchaseOrder implements Serializable {
 
 	// atributos estáticos
@@ -17,8 +20,8 @@ import javax.persistence.ManyToOne;
 
 	// atributos
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer id;
-	private Instant moment;
-	@ManyToOne @JoinColumn(name = "client_id") private User client;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") private Instant moment;
+	@ManyToOne @JoinColumn(name = "client_id") @JsonIgnore private User client;
 
 	// construtores
 	public PurchaseOrder() {
