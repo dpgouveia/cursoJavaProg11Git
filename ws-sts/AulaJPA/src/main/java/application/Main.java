@@ -23,9 +23,9 @@ public class Main {
 //			iniciarAula("aula298_exemplo99");
 //			iniciarAula("aula298_exemplo01");
 //			iniciarAula("aula298_exemplo02");
-//			iniciarAula("aula298_exemplo03");
+			iniciarAula("aula298_exemplo03");
 //			iniciarAula("aula298_exemplo04");
-			iniciarAula("aula298_exemplo05");
+//			iniciarAula("aula298_exemplo05");
 
 		} catch (HibernateException | MainException e) {
 			System.out.println("Error while executing program. Cause: " + e.getMessage());
@@ -95,7 +95,7 @@ public class Main {
 				emf = Persistence.createEntityManagerFactory("AulaJPA");
 				em = emf.createEntityManager();
 
-				pessoa = em.find(Pessoa.class, 4);
+				pessoa = em.find(Pessoa.class, 3);
 
 				System.out.println("Pessoa = " + pessoa);
 
