@@ -1,11 +1,14 @@
 package com.projetojpa.application.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity public class User implements Serializable {
 
@@ -18,6 +21,7 @@ import javax.persistence.Id;
 	private String email;
 	private String phone;
 	private String password;
+	@OneToMany(mappedBy = "client") private List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
 
 	// construtores
 	public User() {
@@ -74,6 +78,10 @@ import javax.persistence.Id;
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public List<PurchaseOrder> getOrders() {
+		return orders;
+	}
 
 	// métodos
 	@Override public int hashCode() {
@@ -101,7 +109,7 @@ import javax.persistence.Id;
 
 	@Override public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password=" + password
-				+ "]";
+				+ ", orders=" + orders + "]";
 	}
 
 }
