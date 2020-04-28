@@ -10,8 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-
-@Entity public class Category implements Serializable {
+@Entity public class Product implements Serializable {
 
 	// atributos estáticos
 	private static final long serialVersionUID = 1L;
@@ -19,21 +18,25 @@ import javax.persistence.Transient;
 	// atributos
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer id;
 	private String name;
-	@Transient private Set<Product> products = new HashSet<Product>();
+	private String description;
+	private Double price;
+	private String imgUrl;
+	@Transient private Set<Category> categories = new HashSet<Category>();
 
-	// construtores
-	public Category() {
+	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Category(Integer id, String name) {
+	
+	public Product(Integer id, String name, String description, Double price, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.imgUrl = imgUrl;
 	}
 
-	// getters e setters
 	public Integer getId() {
 		return id;
 	}
@@ -49,12 +52,35 @@ import javax.persistence.Transient;
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Set<Product> getProducts() {
-		return products;
+
+	public String getDescription() {
+		return description;
 	}
 
-	// métodos
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	
 	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -69,7 +95,7 @@ import javax.persistence.Transient;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -79,7 +105,8 @@ import javax.persistence.Transient;
 	}
 
 	@Override public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", imgUrl=" + imgUrl + ", catory=" + categories + "]";
 	}
 
 }

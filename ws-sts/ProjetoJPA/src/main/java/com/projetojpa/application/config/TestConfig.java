@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.projetojpa.application.entities.Category;
+import com.projetojpa.application.entities.Product;
 import com.projetojpa.application.entities.PurchaseOrder;
 import com.projetojpa.application.entities.User;
 import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 import com.projetojpa.application.repositories.CategoryRepository;
+import com.projetojpa.application.repositories.ProductRepository;
 import com.projetojpa.application.repositories.PurchaseOrderRepository;
 import com.projetojpa.application.repositories.UserRepository;
 
@@ -22,6 +24,7 @@ import com.projetojpa.application.repositories.UserRepository;
 	@Autowired private UserRepository userRepository;
 	@Autowired private PurchaseOrderRepository purchaseOrderRepository;
 	@Autowired private CategoryRepository categoryRepository;
+	@Autowired private ProductRepository productRepository;
 
 	// métodos
 	@Override public void run(String... args) throws Exception {
@@ -37,9 +40,16 @@ import com.projetojpa.application.repositories.UserRepository;
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
 		
+		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		purchaseOrderRepository.saveAll(Arrays.asList(po1, po2, po3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
 	}
 	

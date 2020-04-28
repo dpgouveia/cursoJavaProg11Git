@@ -1,0 +1,28 @@
+package com.projetojpa.application.resources;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.projetojpa.application.entities.Product;
+import com.projetojpa.application.services.ProductService;
+
+@RestController @RequestMapping(value = "/products") public class ProductResource {
+	
+	// atributos
+	@Autowired private ProductService service;
+	
+	// métodos
+	@GetMapping public ResponseEntity<List<Product>> findAll() {
+		return ResponseEntity.ok().body(service.findAll());
+	}
+	
+	@GetMapping(value = "/{id}") public ResponseEntity<Product> findById(@PathVariable Integer id) {
+		return ResponseEntity.ok().body(service.findById(id));
+	}
+}
