@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 
 @Entity public class PurchaseOrder implements Serializable {
 
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	// atributos
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer id;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") private Instant moment;
+	private Integer purchaseOrderStatus;
 	@ManyToOne @JoinColumn(name = "client_id") @JsonIgnore private User client;
 
 	// construtores
@@ -29,10 +31,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		// TODO Auto-generated constructor stub
 	}
 
-	public PurchaseOrder(Integer id, Instant moment, User client) {
+	public PurchaseOrder(Integer id, Instant moment, PurchaseOrderStatus status, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		setStatus(status);
 		this.client = client;
 	}
 
@@ -52,6 +55,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
+	
+	public PurchaseOrderStatus getStatus() {
+		return PurchaseOrderStatus.valueof(purchaseOrderStatus);
+	}
+
+	public void setStatus(PurchaseOrderStatus status) {
+		if(status != null) {
+			this.purchaseOrderStatus = status.getCode();	
+		}
+	}
+
 
 	public User getClient() {
 		return client;
