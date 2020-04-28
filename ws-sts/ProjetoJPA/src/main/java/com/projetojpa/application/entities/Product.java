@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity public class Product implements Serializable {
 
@@ -21,7 +23,7 @@ import javax.persistence.Transient;
 	private String description;
 	private Double price;
 	private String imgUrl;
-	@Transient private Set<Category> categories = new HashSet<Category>();
+	@ManyToMany(mappedBy = "products") @JsonIgnore private Set<Category> categories = new HashSet<Category>();
 
 	public Product() {
 		super();
