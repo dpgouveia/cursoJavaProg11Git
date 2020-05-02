@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projetojpa.application.entities.pk.OrderItemPK;
 
 @Entity public class OrderItem implements Serializable {
@@ -13,7 +14,7 @@ import com.projetojpa.application.entities.pk.OrderItemPK;
 	private static final long serialVersionUID = 1L;
 	
 	// atributos
-	@EmbeddedId private OrderItemPK id;
+	@EmbeddedId private OrderItemPK id = new OrderItemPK();
 	private Integer quantity;
 	private Double price;
 
@@ -40,7 +41,7 @@ import com.projetojpa.application.entities.pk.OrderItemPK;
 		this.quantity = quantity;
 	}
 	
-	public PurchaseOrder getPurchaseOrder() {
+	@JsonIgnore public PurchaseOrder getPurchaseOrder() {
 		return id.getOrder();
 	}
 	

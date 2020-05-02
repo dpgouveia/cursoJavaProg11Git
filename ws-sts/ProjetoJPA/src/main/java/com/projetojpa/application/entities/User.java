@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity public class User implements Serializable {
 
 	// atirbutos estáticos
@@ -21,7 +23,7 @@ import javax.persistence.OneToMany;
 	private String email;
 	private String phone;
 	private String password;
-	@OneToMany(mappedBy = "client") private List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
+	@OneToMany(mappedBy = "client") @JsonIgnore private List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
 
 	// construtores
 	public User() {

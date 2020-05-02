@@ -2,6 +2,8 @@ package com.projetojpa.application.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 
 @Entity public class PurchaseOrder implements Serializable {
@@ -23,7 +25,8 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer id;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") private Instant moment;
 	private Integer purchaseOrderStatus;
-	@ManyToOne @JoinColumn(name = "client_id") @JsonIgnore private User client;
+	@ManyToOne @JoinColumn(name = "client_id") private User client;
+	@OneToMany(mappedBy = "id.purchaseOrder") private Set<OrderItem> items = new HashSet<OrderItem>();
 
 	// construtores
 	public PurchaseOrder() {
@@ -66,13 +69,16 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 		}
 	}
 
-
 	public User getClient() {
 		return client;
 	}
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 
 	// métodos

@@ -15,16 +15,16 @@ import com.projetojpa.application.entities.PurchaseOrder;
 	private static final long serialVersionUID = 1L;
 	
 	// atributos
-	@ManyToOne @JoinColumn(name = "purchaseorder_id") private PurchaseOrder order;
+	@ManyToOne @JoinColumn(name = "purchaseorder_id") private PurchaseOrder purchaseOrder;
 	@ManyToOne @JoinColumn(name = "product_id") private Product product;
 
 	// getters e setters
 	public PurchaseOrder getOrder() {
-		return order;
+		return purchaseOrder;
 	}
 
 	public void setOrder(PurchaseOrder order) {
-		this.order = order;
+		this.purchaseOrder = order;
 	}
 
 	public Product getProduct() {
@@ -36,7 +36,7 @@ import com.projetojpa.application.entities.PurchaseOrder;
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
+		result = prime * result + ((purchaseOrder == null) ? 0 : purchaseOrder.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		return result;
 	}
@@ -50,10 +50,10 @@ import com.projetojpa.application.entities.PurchaseOrder;
 		if (getClass() != obj.getClass())
 			return false;
 		OrderItemPK other = (OrderItemPK) obj;
-		if (order == null) {
-			if (other.order != null)
+		if (purchaseOrder == null) {
+			if (other.purchaseOrder != null)
 				return false;
-		} else if (!order.equals(other.order))
+		} else if (!purchaseOrder.equals(other.purchaseOrder))
 			return false;
 		if (product == null) {
 			if (other.product != null)
