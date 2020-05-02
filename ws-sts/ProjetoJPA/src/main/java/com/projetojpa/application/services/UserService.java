@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.projetojpa.application.entities.User;
 import com.projetojpa.application.repositories.UserRepository;
+import com.projetojpa.application.services.exceptions.ResourceNotFoundException;
 
 
 @Service public class UserService {
@@ -20,7 +21,7 @@ import com.projetojpa.application.repositories.UserRepository;
 	}
 	
 	public User findById(Integer id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User user) {
