@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity public class Category implements Serializable {
 
 	// atributos estáticos
@@ -23,7 +25,7 @@ import javax.persistence.ManyToMany;
 	private String name;
 	@ManyToMany
 	@JoinTable(name = "tbl_product_category", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private Set<Product> products = new HashSet<Product>();
+	@JsonIgnore private Set<Product> products = new HashSet<Product>();
 
 	// construtores
 	public Category() {

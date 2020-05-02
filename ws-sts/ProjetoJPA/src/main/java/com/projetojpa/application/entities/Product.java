@@ -3,12 +3,14 @@ package com.projetojpa.application.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,7 +25,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	private String description;
 	private Double price;
 	private String imgUrl;
-	@ManyToMany(mappedBy = "products") @JsonIgnore private Set<Category> categories = new HashSet<Category>();
+	@ManyToMany(mappedBy = "products") private Set<Category> categories = new HashSet<Category>();
+	@OneToMany(mappedBy = "id.product") private Set<PurchaseOrderProduct> purchaseOrders = new HashSet<PurchaseOrderProduct>();
 
 	public Product() {
 		super();
@@ -81,6 +84,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 	public Set<Category> getCategories() {
 		return categories;
+	}
+	
+	@JsonIgnore public Set<PurchaseOrder> getPurchaseOrders() {
+		return purchaseOrders.stream().map(pop -> pop.getPurchaseOrder()).collect(Collectors.toSet());
 	}
 	
 	@Override public int hashCode() {

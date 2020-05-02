@@ -29,7 +29,7 @@ import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 		this.quantity = quantity;
 		this.price = price;
 		id.setProduct(product);
-		id.setOrder(purchaseOrder);
+		id.setPurchaseOrder(purchaseOrder);
 	}
 
 	// getters e setters
@@ -42,11 +42,11 @@ import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 	}
 	
 	@JsonIgnore public PurchaseOrder getPurchaseOrder() {
-		return id.getOrder();
+		return id.getPurchaseOrder();
 	}
 	
 	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-		id.setOrder(purchaseOrder);
+		id.setPurchaseOrder(purchaseOrder);
 	}
 	
 	public Product getProduct() {

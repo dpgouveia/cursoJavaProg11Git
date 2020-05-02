@@ -19,11 +19,11 @@ import com.projetojpa.application.entities.PurchaseOrder;
 	@ManyToOne @JoinColumn(name = "product_id") private Product product;
 
 	// getters e setters
-	public PurchaseOrder getOrder() {
+	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
 	}
 
-	public void setOrder(PurchaseOrder order) {
+	public void setPurchaseOrder(PurchaseOrder order) {
 		this.purchaseOrder = order;
 	}
 
