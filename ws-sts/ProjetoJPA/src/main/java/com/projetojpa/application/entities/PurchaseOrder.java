@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
@@ -27,6 +29,7 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 	private Integer purchaseOrderStatus;
 	@ManyToOne @JoinColumn(name = "client_id") private User client;
 	@OneToMany(mappedBy = "id.purchaseOrder") private Set<PurchaseOrderProduct> items = new HashSet<PurchaseOrderProduct>();
+	@OneToOne(mappedBy = "purchaseOrder", cascade = CascadeType.ALL) private Payment payment;
 
 	// construtores
 	public PurchaseOrder() {
@@ -79,6 +82,14 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 	
 	public Set<PurchaseOrderProduct> getItems() {
 		return items;
+	}
+	
+	public Payment getPayment() {
+		return payment;
+	}
+	
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	// métodos

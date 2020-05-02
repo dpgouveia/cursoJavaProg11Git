@@ -9,14 +9,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.projetojpa.application.entities.Category;
-import com.projetojpa.application.entities.PurchaseOrderProduct;
+import com.projetojpa.application.entities.Payment;
 import com.projetojpa.application.entities.Product;
 import com.projetojpa.application.entities.PurchaseOrder;
+import com.projetojpa.application.entities.PurchaseOrderProduct;
 import com.projetojpa.application.entities.User;
 import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 import com.projetojpa.application.repositories.CategoryRepository;
-import com.projetojpa.application.repositories.PurchaseOrderProductRepository;
 import com.projetojpa.application.repositories.ProductRepository;
+import com.projetojpa.application.repositories.PurchaseOrderProductRepository;
 import com.projetojpa.application.repositories.PurchaseOrderRepository;
 import com.projetojpa.application.repositories.UserRepository;
 
@@ -76,6 +77,12 @@ import com.projetojpa.application.repositories.UserRepository;
 		PurchaseOrderProduct poi3 = new PurchaseOrderProduct(p3, po2, 2, p3.getPrice());
 		PurchaseOrderProduct poi4 = new PurchaseOrderProduct(p5, po3, 2, p5.getPrice());
 		purchaseOrderProductRepository.saveAll(Arrays.asList(poi1, poi2, poi3, poi4));
+		
+		Payment pay01 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), po1);
+		po1.setPayment(pay01);
+		purchaseOrderRepository.save(po1);
+		
+		
 		
 	}
 	
