@@ -27,5 +27,8 @@ import com.projetojpa.application.repositories.UserRepository;
 		return repository.save(user);
 	}
 	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
 	
 }
