@@ -26,7 +26,7 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") private Instant moment;
 	private Integer purchaseOrderStatus;
 	@ManyToOne @JoinColumn(name = "client_id") private User client;
-	@OneToMany(mappedBy = "id.purchaseOrder") private Set<OrderItem> items = new HashSet<OrderItem>();
+	@OneToMany(mappedBy = "id.purchaseOrder") private Set<PurchaseOrderProduct> items = new HashSet<PurchaseOrderProduct>();
 
 	// construtores
 	public PurchaseOrder() {
@@ -77,7 +77,7 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 		this.client = client;
 	}
 	
-	public Set<OrderItem> getItems() {
+	public Set<PurchaseOrderProduct> getItems() {
 		return items;
 	}
 

@@ -6,25 +6,25 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projetojpa.application.entities.pk.OrderItemPK;
+import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 
-@Entity public class OrderItem implements Serializable {
+@Entity public class PurchaseOrderProduct implements Serializable {
 
 	// atributos estáticos
 	private static final long serialVersionUID = 1L;
 	
 	// atributos
-	@EmbeddedId private OrderItemPK id = new OrderItemPK();
+	@EmbeddedId private PurchaseOrderProductPK id = new PurchaseOrderProductPK();
 	private Integer quantity;
 	private Double price;
 
 	// construtores
-	public OrderItem() {
+	public PurchaseOrderProduct() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderItem(Product product, PurchaseOrder purchaseOrder, Integer quantity, Double price) {
+	public PurchaseOrderProduct(Product product, PurchaseOrder purchaseOrder, Integer quantity, Double price) {
 		super();
 		this.quantity = quantity;
 		this.price = price;
@@ -74,7 +74,7 @@ import com.projetojpa.application.entities.pk.OrderItemPK;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderItem other = (OrderItem) obj;
+		PurchaseOrderProduct other = (PurchaseOrderProduct) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

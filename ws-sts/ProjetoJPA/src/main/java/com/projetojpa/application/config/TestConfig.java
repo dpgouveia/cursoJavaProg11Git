@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.projetojpa.application.entities.Category;
-import com.projetojpa.application.entities.OrderItem;
+import com.projetojpa.application.entities.PurchaseOrderProduct;
 import com.projetojpa.application.entities.Product;
 import com.projetojpa.application.entities.PurchaseOrder;
 import com.projetojpa.application.entities.User;
 import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 import com.projetojpa.application.repositories.CategoryRepository;
-import com.projetojpa.application.repositories.OrderItemRepository;
+import com.projetojpa.application.repositories.PurchaseOrderProductRepository;
 import com.projetojpa.application.repositories.ProductRepository;
 import com.projetojpa.application.repositories.PurchaseOrderRepository;
 import com.projetojpa.application.repositories.UserRepository;
@@ -27,7 +27,7 @@ import com.projetojpa.application.repositories.UserRepository;
 	@Autowired private PurchaseOrderRepository purchaseOrderRepository;
 	@Autowired private CategoryRepository categoryRepository;
 	@Autowired private ProductRepository productRepository;
-	@Autowired private OrderItemRepository orderItemRepository;
+	@Autowired private PurchaseOrderProductRepository purchaseOrderProductRepository;
 
 	// métodos
 	@Override public void run(String... args) throws Exception {
@@ -71,11 +71,11 @@ import com.projetojpa.application.repositories.UserRepository;
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
-		OrderItem oi1 = new OrderItem(p1, po1, 2, p1.getPrice());
-		OrderItem oi2 = new OrderItem(p3, po1, 1, p3.getPrice());
-		OrderItem oi3 = new OrderItem(p3, po2, 2, p3.getPrice());
-		OrderItem oi4 = new OrderItem(p5, po3, 2, p5.getPrice());
-		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		PurchaseOrderProduct poi1 = new PurchaseOrderProduct(p1, po1, 2, p1.getPrice());
+		PurchaseOrderProduct poi2 = new PurchaseOrderProduct(p3, po1, 1, p3.getPrice());
+		PurchaseOrderProduct poi3 = new PurchaseOrderProduct(p3, po2, 2, p3.getPrice());
+		PurchaseOrderProduct poi4 = new PurchaseOrderProduct(p5, po3, 2, p5.getPrice());
+		purchaseOrderProductRepository.saveAll(Arrays.asList(poi1, poi2, poi3, poi4));
 		
 	}
 	

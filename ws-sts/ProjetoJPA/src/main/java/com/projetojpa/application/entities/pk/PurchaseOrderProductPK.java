@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import com.projetojpa.application.entities.Product;
 import com.projetojpa.application.entities.PurchaseOrder;
 
-@Embeddable public class OrderItemPK implements Serializable {
+@Embeddable public class PurchaseOrderProductPK implements Serializable {
 
 	// atributos estáticos
 	private static final long serialVersionUID = 1L;
@@ -49,7 +49,7 @@ import com.projetojpa.application.entities.PurchaseOrder;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderItemPK other = (OrderItemPK) obj;
+		PurchaseOrderProductPK other = (PurchaseOrderProductPK) obj;
 		if (purchaseOrder == null) {
 			if (other.purchaseOrder != null)
 				return false;

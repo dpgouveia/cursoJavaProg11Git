@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projetojpa.application.entities.OrderItem;
-import com.projetojpa.application.services.OrderItemService;
+import com.projetojpa.application.entities.PurchaseOrderProduct;
+import com.projetojpa.application.services.PurchaseOrderProductService;
 
-@RestController @RequestMapping(value = "/orderitems") public class OrderItemResource {
+@RestController @RequestMapping(value = "/purchaseorderproducts/") public class PurchaseOrderProductResource {
 
 	// atributos
-	@Autowired private OrderItemService service;
+	@Autowired private PurchaseOrderProductService service;
 	
 	// métodos
-	@GetMapping public ResponseEntity<List<OrderItem>> findAll() {
+	@GetMapping public ResponseEntity<List<PurchaseOrderProduct>> findAll() {
 		return ResponseEntity.ok().body(service.findAll());
 	}
 
