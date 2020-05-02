@@ -26,14 +26,17 @@ import com.projetojpa.application.entities.PurchaseOrder;
 	public void setPurchaseOrder(PurchaseOrder order) {
 		this.purchaseOrder = order;
 	}
+	
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 	public Product getProduct() {
 		return product;
 	}
 
 	// métodos
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((purchaseOrder == null) ? 0 : purchaseOrder.hashCode());
@@ -41,8 +44,7 @@ import com.projetojpa.application.entities.PurchaseOrder;
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
+	@Override public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -63,8 +65,4 @@ import com.projetojpa.application.entities.PurchaseOrder;
 		return true;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
 }

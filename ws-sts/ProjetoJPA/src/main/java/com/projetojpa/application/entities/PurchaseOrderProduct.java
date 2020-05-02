@@ -41,6 +41,14 @@ import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 		this.quantity = quantity;
 	}
 	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 	@JsonIgnore public PurchaseOrder getPurchaseOrder() {
 		return id.getPurchaseOrder();
 	}
@@ -57,17 +65,14 @@ import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 		id.setProduct(product);
 	}
 
-	// métodos
-	@Override
-	public int hashCode() {
+	@Override public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
+	@Override public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -82,13 +87,11 @@ import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 			return false;
 		return true;
 	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
+	
+	// Json só consegue identificar um método se ele preceder com a palavra get
+	// Desta forma o método fica: getSubTotal
+	public Double getSubTotal() {
+		return price * quantity;
 	}
 
 }

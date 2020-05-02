@@ -71,7 +71,7 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 			this.purchaseOrderStatus = status.getCode();	
 		}
 	}
-
+	
 	public User getClient() {
 		return client;
 	}
@@ -119,5 +119,9 @@ import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 	@Override public String toString() {
 		return "Order [id=" + id + ", moment=" + moment + ", client=" + client + "]";
 	}
-
+	
+	public Double getTotal() {
+		return items.stream().map(pop -> pop.getSubTotal()).reduce(0.0 , (total, parcial) -> total + parcial);
+	}
+	
 }
