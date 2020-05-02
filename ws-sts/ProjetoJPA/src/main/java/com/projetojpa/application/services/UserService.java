@@ -23,4 +23,9 @@ import com.projetojpa.application.repositories.UserRepository;
 		return repository.findById(id).get();
 	}
 	
+	public User insert(User user) {
+		return repository.save(user);
+	}
+	
+	
 }
