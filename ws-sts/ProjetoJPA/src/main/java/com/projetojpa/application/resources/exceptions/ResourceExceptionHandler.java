@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.projetojpa.application.services.exceptions.DataValidationException;
 import com.projetojpa.application.services.exceptions.DatabaseException;
 import com.projetojpa.application.services.exceptions.ResourceNotFoundException;
 
@@ -23,6 +24,13 @@ import com.projetojpa.application.services.exceptions.ResourceNotFoundException;
 	
 	@ExceptionHandler(DatabaseException.class) public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request) {
 		String error = "Database error";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(DataValidationException.class) public ResponseEntity<StandardError> dataValidation(DataValidationException e, HttpServletRequest request) {
+		String error = "Data validation error";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
