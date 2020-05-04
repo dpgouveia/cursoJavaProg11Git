@@ -33,3 +33,15 @@ GRANT ALL PRIVILEGES ON coursejdbc.* TO 'developer'@'localhost';
 DROP DATABASE aulajpa;
 CREATE DATABASE aulajpa;
 GRANT ALL PRIVILEGES ON aulajpa.* TO 'developer'@'localhost';
+
+# criar base de dados (para o curso java)
+DROP DATABASE springboot_course;
+CREATE DATABASE springboot_course;
+GRANT ALL PRIVILEGES ON springboot_course.* TO 'developer'@'localhost';
+
+
+
+
+
+
+
