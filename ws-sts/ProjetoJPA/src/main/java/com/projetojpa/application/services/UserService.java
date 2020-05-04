@@ -3,10 +3,13 @@ package com.projetojpa.application.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.projetojpa.application.entities.User;
 import com.projetojpa.application.repositories.UserRepository;
+import com.projetojpa.application.services.exceptions.DatabaseException;
 import com.projetojpa.application.services.exceptions.ResourceNotFoundException;
 
 
@@ -29,7 +32,15 @@ import com.projetojpa.application.services.exceptions.ResourceNotFoundException;
 	}
 	
 	public void delete(Integer id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);	
+		} catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public User update(Integer id, User user) {
