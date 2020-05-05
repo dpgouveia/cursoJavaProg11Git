@@ -11,10 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity public class Category implements Serializable {
+@Entity @Table(name = "tbl_category") public class Category implements Serializable {
 
 	// atributos estáticos
 	private static final long serialVersionUID = 1L;

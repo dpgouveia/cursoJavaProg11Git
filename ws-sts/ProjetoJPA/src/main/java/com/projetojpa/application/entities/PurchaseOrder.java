@@ -14,11 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetojpa.application.entities.enums.PurchaseOrderStatus;
 
-@Entity public class PurchaseOrder implements Serializable {
+@Entity @Table(name = "tbl_purchaseorder") public class PurchaseOrder implements Serializable {
 
 	// atributos estáticos
 	private static final long serialVersionUID = 1L;

@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projetojpa.application.entities.pk.PurchaseOrderProductPK;
 
-@Entity public class PurchaseOrderProduct implements Serializable {
+@Entity @Table(name = "tbl_purchaseorder_product") public class PurchaseOrderProduct implements Serializable {
 
 	// atributos estáticos
 	private static final long serialVersionUID = 1L;
