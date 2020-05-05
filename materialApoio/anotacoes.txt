@@ -120,5 +120,26 @@ Que não é de Java mas é uma recomendação que dou!
 https://pt.stackoverflow.com/questions/55624/exception-vs-runtimeexception-quando-utilizar-um-ou-outro
 
 
+### postgresql
+# Create database
+cd C:\Users\Familia\Documents\Daniel\pgsql\bin
+initdb.exe -D ../data –-username=postgres -–auth=trust
 
+# Start the database:
+cd C:\Users\Familia\Documents\Daniel\pgsql\bin
+pg_ctl.exe start -D ../data
+
+# Stop the database:
+cd C:\Users\Familia\Documents\Daniel\pgsql\bin
+pg_ctl.exe stop -D ../data
+
+# Change password
+cd C:\Users\Familia\Documents\Daniel\pgsql\bin
+psql.exe –-username=postgres
+ALTER USER postgres WITH PASSWORD 'postgres';
+
+# Create developer user
+cd C:\Users\Familia\Documents\Daniel\pgsql\bin
+psql.exe –-username=postgres
+CREATE USER developer WITH PASSWORD 'developer' createdb;
 
