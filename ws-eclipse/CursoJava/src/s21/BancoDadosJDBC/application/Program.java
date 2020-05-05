@@ -65,7 +65,7 @@ public class Program {
 				ResultSet rs = null;
 				try {
 					st = conn.createStatement();
-					String query = "SELECT * FROM coursejdbc.department d";
+					String query = "SELECT * FROM department d";
 					rs = st.executeQuery(query);
 
 					while (rs.next()) {
@@ -86,7 +86,7 @@ public class Program {
 
 				PreparedStatement pst = null;
 				try {
-					pst = conn.prepareStatement("INSERT INTO coursejdbc.seller " 
+					pst = conn.prepareStatement("INSERT INTO seller " 
 												+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
 												+ "VALUES "
 												+ "(?, ?, ?, ?, ?)");
@@ -114,7 +114,7 @@ public class Program {
 
 				PreparedStatement pst = null;
 				try {
-					pst = conn.prepareStatement("INSERT INTO coursejdbc.seller " 
+					pst = conn.prepareStatement("INSERT INTO seller " 
 												+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
 												+ "VALUES "
 												+ "(?, ?, ?, ?, ?)"
@@ -181,7 +181,7 @@ public class Program {
 				
 				PreparedStatement pst = null;
 				try {
-					pst = conn.prepareStatement("UPDATE coursejdbc.seller "
+					pst = conn.prepareStatement("UPDATE seller "
 												+ "SET BaseSalary = BaseSalary + ? "
 												+ "WHERE "
 												+ "(DepartmentID = ?)");
@@ -206,9 +206,9 @@ public class Program {
 				PreparedStatement pst = null;
 				try {
 					pst = conn.prepareStatement("DELETE FROM "
-												+ "coursejdbc.department d "
+												+ "department "
 												+ "WHERE " 
-												+ "d.Id = ?");
+												+ "Id = ?");
 					
 					pst.setInt(1, 5);
 					
@@ -229,9 +229,9 @@ public class Program {
 				PreparedStatement pst = null;
 				try {
 					pst = conn.prepareStatement("DELETE FROM "
-												+ "coursejdbc.department d "
+												+ "department "
 												+ "WHERE " 
-												+ "d.Id = ?");
+												+ "Id = ?");
 					
 					pst.setInt(1, 2);
 					
@@ -254,14 +254,14 @@ public class Program {
 				
 				try {
 					st = conn.createStatement();
-					int linhasAfetadas1 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 3090 WHERE DepartmentId = 1");
+					int linhasAfetadas1 = st.executeUpdate("UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 1");
 					int x = 1;
 					
 					if(x < 2) {
 						throw new SQLException(aula + ": " + "Erro FAKE!!");
 					}
 					
-					int linhasAfetadas2 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 4090 WHERE DepartmentId = 2");
+					int linhasAfetadas2 = st.executeUpdate("UPDATE seller SET BaseSalary = 4090 WHERE DepartmentId = 2");
 					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas1);
 					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas2);
 				} catch (SQLException e) {
@@ -282,13 +282,13 @@ public class Program {
 					
 					conn.setAutoCommit(false);
 					
-					int linhasAfetadas1 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 4090 WHERE DepartmentId = 1");
+					int linhasAfetadas1 = st.executeUpdate("UPDATE seller SET BaseSalary = 4090 WHERE DepartmentId = 1");
 					int x = 1;
 					
 					if(x < 2) {
 						throw new SQLException(aula + ": " + "Erro FAKE!!");
 					}
-					int linhasAfetadas2 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 5090 WHERE DepartmentId = 2");
+					int linhasAfetadas2 = st.executeUpdate("UPDATE seller SET BaseSalary = 5090 WHERE DepartmentId = 2");
 					
 					conn.commit();
 					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas1);
@@ -312,8 +312,8 @@ public class Program {
 					
 					conn.setAutoCommit(false);
 					
-					int linhasAfetadas1 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 5090 WHERE DepartmentId = 1");
-					int linhasAfetadas2 = st.executeUpdate("UPDATE coursejdbc.seller SET BaseSalary = 6090 WHERE DepartmentId = 2");
+					int linhasAfetadas1 = st.executeUpdate("UPDATE seller SET BaseSalary = 5090 WHERE DepartmentId = 1");
+					int linhasAfetadas2 = st.executeUpdate("UPDATE seller SET BaseSalary = 6090 WHERE DepartmentId = 2");
 					
 					conn.commit();
 					System.out.println("Linhas atualizadas da tabela pela query: " + linhasAfetadas1);
