@@ -143,3 +143,12 @@ cd C:\Users\Familia\Documents\Daniel\pgsql\bin
 psql.exe –-username=postgres
 CREATE USER developer WITH PASSWORD 'developer' createdb;
 
+
+#### mongodb
+set MONGODB_PATH=C:\Users\Familia\Documents\Daniel\mongodb
+set PATH=%MONGODB_PATH%\bin;%PATH%
+
+mongod --dbpath %MONGODB_PATH%\data\db
+
+
+
