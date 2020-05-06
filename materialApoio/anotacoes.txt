@@ -151,4 +151,45 @@ set PATH=%MONGODB_PATH%\bin;%PATH%
 mongod --dbpath %MONGODB_PATH%\data\db
 
 
+#### import data into mongodb
+[
+    {
+        "id": "5eb22c791d043d28b81c88ce",
+        "name": "Daniel",
+        "email": "daniel@gmail.com"
+    },
+    {
+        "id": "5eb22c861d043d28b81c88cf",
+        "name": "Kélia",
+        "email": "kelia@gmail.com"
+    },
+    {
+        "id": "5eb22c921d043d28b81c88d0",
+        "name": "João",
+        "email": "joao@gmail.com"
+    },
+    {
+        "id": "5eb22c9c1d043d28b81c88d1",
+        "name": "Kelia",
+        "email": "keila@gmail.com"
+    },
+    {
+        "id": "5eb22ca71d043d28b81c88d2",
+        "name": "Zeus",
+        "email": "zeus@gmail.com"
+    },
+    {
+        "id": "5eb22cb11d043d28b81c88d3",
+        "name": "Sapeca",
+        "email": "sapeca@gmail.com"
+    },
+    {
+        "id": "5eb22cbd1d043d28b81c88d4",
+        "name": "Diana",
+        "email": "diana@gmail.com"
+    }
+]
+
+
+
 
