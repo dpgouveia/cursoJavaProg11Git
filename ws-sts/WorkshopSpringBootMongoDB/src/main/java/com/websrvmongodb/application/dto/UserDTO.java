@@ -2,15 +2,12 @@ package com.websrvmongodb.application.dto;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
-
 import com.websrvmongodb.application.domain.User;
 
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	private String id;
 	private String name;
 	private String email;
@@ -26,7 +23,7 @@ public class UserDTO implements Serializable {
 		this.name = name;
 		this.email = email;
 	}
-	
+
 	public UserDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
@@ -56,5 +53,5 @@ public class UserDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 }
