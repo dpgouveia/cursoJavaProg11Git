@@ -33,14 +33,34 @@ public class UserService {
 
 	public User insert(User user) {
 
-		if (user == null) {
-			throw new UserServiceException("User Object IS NULL!", HttpStatus.NO_CONTENT);
+		if (user == null || user.getId() != null) {
+			throw new UserServiceException("Invalid User Object data for insert() operation!", HttpStatus.NO_CONTENT);
 		}
 
-		if (user.getId() != null) {
-			throw new UserServiceException("User Object ID IS NOT NULL!", HttpStatus.NO_CONTENT);
-		}
+		validateData(user);
+		return repository.save(user);
+	}
 
+	public void delete(String id) {
+		findById(id);
+		repository.deleteById(id);
+	}
+
+	public User update(String id, User source) {
+		User target = findById(id);
+
+		validateData(source);
+		updateData(target, source);
+		return repository.save(target);
+	}
+
+	private void updateData(User target, User source) {
+		target.setId(source.getId());
+		target.setName(source.getName());
+		target.setEmail(source.getEmail());
+	}
+
+	private void validateData(User user) {
 		if (user.getName() == null || user.getName().trim().isBlank() || user.getName().trim().isEmpty()) {
 			throw new UserServiceException("User name in Object IS NULL OR EMPTY!", HttpStatus.NO_CONTENT);
 		}
@@ -48,13 +68,6 @@ public class UserService {
 		if (user.getEmail() == null || user.getEmail().trim().isBlank() || user.getEmail().trim().isEmpty()) {
 			throw new UserServiceException("User Email in Object IS NULL OR EMPTY!", HttpStatus.NO_CONTENT);
 		}
-
-		return repository.save(user);
-	}
-
-	public void delete(String id) {
-		findById(id);
-		repository.deleteById(id);
 	}
 
 	public User fromDTO(UserDTO userDTO) {
