@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.websrvmongodb.application.domain.User;
 import com.websrvmongodb.application.dto.UserDTO;
 import com.websrvmongodb.application.repositories.UserRepository;
-import com.websrvmongodb.application.services.exceptions.ResourceException;
+import com.websrvmongodb.application.services.exceptions.UserServiceException;
 
 @Service
 public class UserService {
@@ -24,37 +24,37 @@ public class UserService {
 	public User findById(String id) {
 
 		if (id == null) {
-			throw new ResourceException("Object ID IS NULL!", HttpStatus.NO_CONTENT);
+			throw new UserServiceException("Object ID IS NULL!", HttpStatus.NO_CONTENT);
 		}
 
 		return repository.findById(id)
-				.orElseThrow(() -> new ResourceException("Object ID NOT IN DATABASE", HttpStatus.NOT_FOUND));
+				.orElseThrow(() -> new UserServiceException("Object ID NOT FOUND IN DATABASE", HttpStatus.NOT_FOUND));
 	}
 
 	public User insert(User user) {
 
 		if (user == null) {
-			throw new ResourceException("User Object IS NULL!", HttpStatus.NO_CONTENT);
+			throw new UserServiceException("User Object IS NULL!", HttpStatus.NO_CONTENT);
 		}
 
 		if (user.getId() != null) {
-			throw new ResourceException("User Object ID EXISTS IN DATABASE!", HttpStatus.FOUND);
+			throw new UserServiceException("User Object ID IS NOT NULL!", HttpStatus.NO_CONTENT);
 		}
 
 		if (user.getName() == null || user.getName().trim().isBlank() || user.getName().trim().isEmpty()) {
-			throw new ResourceException("User name in Object IS NULL OR EMPTY!", HttpStatus.NO_CONTENT);
+			throw new UserServiceException("User name in Object IS NULL OR EMPTY!", HttpStatus.NO_CONTENT);
 		}
 
 		if (user.getEmail() == null || user.getEmail().trim().isBlank() || user.getEmail().trim().isEmpty()) {
-			throw new ResourceException("User Email in Object IS NULL OR EMPTY!", HttpStatus.NO_CONTENT);
+			throw new UserServiceException("User Email in Object IS NULL OR EMPTY!", HttpStatus.NO_CONTENT);
 		}
 
-		try {
-			return repository.save(user);
-		} catch (RuntimeException e) {
-			throw new ResourceException("Error caused by: " + e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
-		}
+		return repository.save(user);
+	}
 
+	public void delete(String id) {
+		findById(id);
+		repository.deleteById(id);
 	}
 
 	public User fromDTO(UserDTO userDTO) {

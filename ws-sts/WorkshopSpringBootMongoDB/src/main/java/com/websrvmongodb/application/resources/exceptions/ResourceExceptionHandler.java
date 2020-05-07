@@ -9,13 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.websrvmongodb.application.services.exceptions.ResourceException;
+import com.websrvmongodb.application.services.exceptions.UserServiceException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-	@ExceptionHandler(ResourceException.class)
-	public ResponseEntity<StandardError> resource(ResourceException e, HttpServletRequest request) {
+	@ExceptionHandler(UserServiceException.class)
+	public ResponseEntity<StandardError> userService(UserServiceException e, HttpServletRequest request) {
 		String error = e.getClass().toString();
 		HttpStatus status = e.getStatus();
 		String path = request.getRequestURI();
