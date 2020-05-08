@@ -1,5 +1,6 @@
 package com.websrvmongodb.application.services;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,14 @@ public class PostService {
 		return repository.findById(id)
 				.orElseThrow(() -> new PostServiceException("Object NOT FOUND in database", HttpStatus.NOT_FOUND));
 	}
-	
+
 	public List<Post> findByTitle(String titleSearch) {
 //		return repository.findByTitleContainingIgnoreCase(titleSearch);
 		return repository.searchTitle(titleSearch);
 	}
 	
+	public List<Post> fullSearch(String text, Instant minDate, Instant maxDate) {
+		return repository.fullSearch(text, minDate, maxDate);
+	}
+
 }
