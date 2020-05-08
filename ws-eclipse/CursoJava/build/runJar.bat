@@ -1,10 +1,10 @@
 @echo off
-REM set JAVA_HOME=C:\Users\Familia\Documents\Daniel\eclipse\jre
-set JAVA_HOME=C:\Users\BRDPG1\Documents\Programas\eclipse\jre
+set JAVA_HOME=C:\Users\Familia\Documents\Daniel\eclipse\jre
+REM set JAVA_HOME=C:\Users\BRDPG1\Documents\Programas\eclipse\jre
 REM set JAVA_HOME=%CD%\jre
 
-REM set PATH_TO_JAVAFX=C:\Users\Familia\Documents\Daniel\eclipse\java-libs\javafx-sdk\lib
-set PATH_TO_JAVAFX=C:\Users\BRDPG1\Documents\Programas\eclipse\java-libs\javafx-sdk\lib
+set PATH_TO_JAVAFX=C:\Users\Familia\Documents\Daniel\eclipse\java-libs\javafx-sdk\lib
+REM set PATH_TO_JAVAFX=C:\Users\BRDPG1\Documents\Programas\eclipse\java-libs\javafx-sdk\lib
 REM set PATH_TO_JAVAFX=%CD%\javafx-sdk\lib
 
 set PATH=%JAVA_HOME%\bin;%PATH%

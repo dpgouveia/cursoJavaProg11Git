@@ -41,8 +41,17 @@ public class Program {
 					chessMatch.performChessMove(source, target);
 
 					if (chessMatch.getPromoted() != null) {
-						System.out.print("Enter piece for promotion (B/N/R/Q): ");
-						String type = MyUtils.readString(input);
+
+						String type = "";
+						boolean invalidType = true;
+						while (invalidType) {
+							System.out.print("Enter piece for promotion (B/N/R/Q): ");
+							type = MyUtils.readString(input).trim().toUpperCase();
+							if (type.charAt(0) == 'B' || type.charAt(0) == 'N' || type.charAt(0) == 'R'
+									|| type.charAt(0) == 'Q') {
+								invalidType = false;
+							}
+						}
 						chessMatch.replacePromotedPiece(type);
 					}
 
