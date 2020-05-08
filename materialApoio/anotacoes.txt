@@ -191,5 +191,66 @@ mongod --dbpath %MONGODB_PATH%\data\db
 ]
 
 
+#####
+##### CURSOS ADICIONAIS
+#####
+#####
+Aula bônus: cupons para outros cursos
+Obrigado pela confiança e parabéns pelo interesse e dedicação nos estudos!
+
+Conheça nossos outros cursos:
+
+
+
+FORMAÇÃO EXCEL
+Curso completo de Excel do básico ao avançado:
+
+https://www.udemy.com/course/excel-curso-completo/?referralCode=AA459C76854E8CE7A10C
+
+
+
+ANÁLISE&PROJETO ORIENTADO A OBJETOS
+Curso modelagem conceitual de dados com UML:
+
+https://www.udemy.com/course/uml-diagrama-de-classes/?referralCode=92AD0C31CB4FB588D70E
+
+
+
+PROGRAMAÇÃO PARA INICIANTES
+Curso completo de Lógica de Programação
+
+https://www.udemy.com/course/curso-algoritmos-logica-de-programacao/?referralCode=D1472DB453C216DCD76B
+
+
+
+FORMAÇÃO C#
+Curso C# primeiros passos (lógica de programação)
+
+https://www.udemy.com/course/logica-de-programacao-csharp/?referralCode=363276B3142738261980
+
+
+
+Curso completo de programação C#:
+
+https://www.udemy.com/course/programacao-orientada-a-objetos-csharp/?referralCode=B57070460505DDF39D26
+
+
+
+FORMAÇÃO JAVA
+Curso Java primeiros passos (lógica de programação)
+
+https://www.udemy.com/course/java-curso-logica-de-programacao/?referralCode=88902E097B2ED419B8F5
+
+
+
+Curso completo de programação Java:
+
+https://www.udemy.com/course/java-curso-completo/?referralCode=A388A1DFDDE7A1740B85
+
+
+
+Curso de desenvolvimento com Spring Boot e Java:
+
+https://www.udemy.com/course/spring-boot-ionic/?referralCode=0176B5CE015DD1B35CD6
 
 
